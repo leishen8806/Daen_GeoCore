@@ -1,0 +1,5 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-A-01,PRE-P01,FIX-ID-P01,Place,"identity=FIX-ID-P01; name=Central Post Office; address=Phnom Penh; current_representation=true",P01-E1,public-source,REAL,
+RUN-A-01,PRE-P02,FIX-ID-P02,Place,"identity=FIX-ID-P02; name=Royal Palace of Cambodia; script=Latin; address=Phnom Penh; current_representation=true",P02-E1,public-source,REAL,
+RUN-A-01,POST-P01,FIX-ID-P01,Place,"identity=FIX-ID-P01; name=Cambodia Post Central Post Office; address=Phnom Penh; representation=English; current_representation=true",P01-E2,public-source,REAL,RUN-A-01:PRE-P01
+RUN-A-01,POST-P02,FIX-ID-P02,Place,"identity=FIX-ID-P02; name=ព្រះបរមរាជវាំង; script=Khmer; address=Phnom Penh; representation=Khmer; current_representation=true",P02-E2,public-source,REAL,RUN-A-01:PRE-P02
