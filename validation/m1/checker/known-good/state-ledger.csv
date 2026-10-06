@@ -1,0 +1,6 @@
+# VALIDATION FIXTURE — NOT A SPECIFICATION, NOT A DATABASE SCHEMA, NOT AN API CONTRACT.
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+good,1,P01,Place,identity=alpha; lifecycle=active; ref=P01,src:P01,unknown,synthetic,
+good,2,P01,Current DAEN Representation,identity=alpha; current_representation=true; ref=P01,src:P01,unknown,synthetic,
+good,3,P01,Correction,identity=alpha; ref=P01,src:P01,unknown,synthetic,good:2
+good,4,P01,Place,identity=alpha; lifecycle=closure; resolution=terminal:closed; ref=P01,src:P01,unknown,synthetic,

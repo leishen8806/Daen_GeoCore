@@ -50,8 +50,8 @@ These items are intentionally unresolved. They must not be silently decided in a
 
 | Item | Deferred to | Reason |
 |---|---|---|
-| Execution medium | Later controlled execution decision | Phase 04 must not select technology or implementation medium |
-| Synthetic-mark recording mechanism | M1 execution preparation | Synthetic cases must be clearly marked; recording mechanism is not frozen |
+| Execution medium | Resolved in Phase 04B-1 | Markdown + CSV fixture medium; checker runtime remains TBD |
+| Synthetic-mark recording mechanism | Resolved in Phase 04B-1 | Every future state-ledger entry carries an explicit real/public or synthetic mark |
 | Actual corpus Place selection | M1 corpus preparation | Humans select actual public Places later; this definition uses slots only |
 | GeoID format | Later domain and architecture work | M1 validates semantics, not identifier encoding |
 | Access Point handle | Later domain and API design | M1 validates modelability, not handle format |
@@ -60,6 +60,7 @@ These items are intentionally unresolved. They must not be silently decided in a
 | Quality scales | Later quality policy | `unknown` is valid for M1; numeric scales are not frozen |
 | Source trust ranking | Later governance policy | M1 tests attribution, not a ranking system |
 | Numeric tolerances | Later validation design | No numeric tolerance is justified by the frozen M1 definition |
+| Checker runtime | Resolved in Phase 04B-2 | Python 3 standard library only; checker remains disposable |
 
 ## Future Consumer Validation Phase
 

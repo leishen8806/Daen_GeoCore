@@ -87,6 +87,30 @@ The controlled Product Constitution revision is recorded below.
 
 **Source:** `Phase 04 Human Constitutional Decision — Validation Layer Separation`
 
+## Phase 04B Human Decisions — Validation Medium
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| Validation medium | Markdown for human judgment and evidence; CSV for corpus and logically append-only validation state | `CONFIRMED` |
+| Disposable checker | A future disposable local checker is approved in principle; source code and runtime remain deferred | `CONFIRMED` |
+| Known-bad fixtures | Known-bad Markdown specifications are required before checker implementation | `CONFIRMED` |
+| Dedicated area | Validation artifacts live under `validation/m1/` | `CONFIRMED` |
+| Synthetic marking | Every future state-ledger entry explicitly marks real/public or synthetic; synthetic assertions attached to real Places remain synthetic at entry level | `CONFIRMED` |
+| Opaque local labels | Corpus labels such as P01–P20 are local labels and do not imply GeoID format | `CONFIRMED` |
+| Snapshot / void / rerun | Execution errors are handled by void plus rerun; valid ledger history is logically append-only | `CONFIRMED` |
+| No-specification rule | Validation fixtures MUST NOT become API, database, schema or architecture precedent | `CONFIRMED` |
+| Evidence retention | Human evidence, execution records and friction references are retained for the validation run | `CONFIRMED` |
+| Manual authority | Manual Domain Model review has authority over checker output | `CONFIRMED` |
+
+## Phase 04B-2 Human Decisions — Disposable Checker
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| Checker runtime | Python 3 standard library only | `CONFIRMED` |
+| Checker scope | Structural/mechanical validation only; no domain judgment | `CONFIRMED` |
+| Self-test evidence | Known-good must pass and every known-bad fixture must trigger its intended rule | `CONFIRMED` |
+| Domain ownership | Domain judgment remains human-owned | `CONFIRMED` |
+
 ## Conflict resolution
 
 The earlier source material contained an organization-operations positioning. Phase 01 isolated it from the active Geo Core baseline. This Phase 02 Constitution keeps the location-infrastructure identity and does not import that historical positioning.
