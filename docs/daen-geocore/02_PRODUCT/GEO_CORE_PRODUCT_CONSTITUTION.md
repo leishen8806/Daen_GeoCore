@@ -75,7 +75,9 @@ The following is product rationale, not market validation — `RECOMMENDED`.
 
 Real-world places can have multiple names, address expressions, external references, coordinate quality levels and access points. A map center may not match the practical access point. Places can move, close, be duplicated or require correction. Multiple systems may otherwise store the same place independently, while an external reference may change when a provider changes.
 
-Geo Core exists to establish a stable, referable, traceable and correctable location-facts layer. Whether a customer will pay for a particular capability, and which real workflow should be used first, must be validated through M1 evidence.
+Geo Core exists to establish a stable, referable, traceable and correctable location-facts layer. Whether a real consumer will adopt or pay for a capability, and which real consumer workflow should be validated first, are external validation questions. They MUST NOT be inferred from M1 Internal Validation and MUST be validated through a later Consumer Validation phase.
+
+M1 Internal Validation provides evidence only about Geo Core model coherence and operability; it MUST NOT be treated as evidence of customer demand, adoption, willingness to pay or real-workflow fit.
 
 ## 4. Primary Consumers
 
