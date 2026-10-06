@@ -46,6 +46,8 @@ Execute only after readiness review, in this order:
 
 The scenario-sheet wording and expected outcomes are authoritative and are not rewritten here.
 
+Execution note: `RUN-A` target conflict resolved before execution. Authoritative targets are `P01, P02` because both the frozen `scenario-sheet.md` and this frozen runbook define Scenario A as P01/P02. No scenario amendment was approved.
+
 ## Scenario-sheet immutability
 
 `validation/m1/scenario-sheet.md` is the frozen PRE-REGISTRATION artifact. During execution, expected outcomes and pre-registered scenario definitions MUST NOT change. Actual execution results MUST NOT be written back into the frozen expected-outcome definitions; they belong in execution records, run evidence, result summary and Reviewer notes. This is an execution-medium rule, not a Domain Model decision, and preserves VM-I02.
@@ -65,14 +67,14 @@ The scenario-sheet wording and expected outcomes are authoritative and are not r
 - [x] field-verification rule frozen
 - [x] P04 field evidence frozen
 - [x] checker self-test PASS
-- [ ] runbook frozen
-- [ ] synthetic case plan frozen
-- [ ] source assertion plan frozen
-- [ ] initial-state plan frozen
-- [ ] execution checklist frozen
-- [ ] manual review matrix frozen
+- [x] runbook frozen
+- [x] synthetic case plan frozen
+- [x] source assertion plan frozen
+- [x] initial-state plan frozen
+- [x] execution checklist frozen
+- [x] manual review matrix frozen
 - [x] Operator / Reviewer separation documented
 - [x] surprise cases reserved for Reviewer
-- [ ] working tree clean after readiness commit
+- [x] working tree clean after readiness commit
 
 This checklist is not complete until the preparation documents are reviewed and a later readiness commit is approved.
