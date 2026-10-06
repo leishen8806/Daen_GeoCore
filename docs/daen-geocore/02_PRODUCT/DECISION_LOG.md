@@ -135,6 +135,14 @@ The controlled Product Constitution revision is recorded below.
 
 **Reason:** M1 needs one real-world anchor but must not assume routine location maintenance requires costly manual field verification.
 
+## Phase 04D — Execution Roles
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1 execution roles | Codex is Data Operator; Claude is Independent Reviewer; human owner + ChatGPT are the final decision layer | `CONFIRMED FOR M1 VALIDATION` |
+
+This is an M1 validation separation mechanism and does not establish permanent product governance.
+
 ## Conflict resolution
 
 The earlier source material contained an organization-operations positioning. Phase 01 isolated it from the active Geo Core baseline. This Phase 02 Constitution keeps the location-infrastructure identity and does not import that historical positioning.

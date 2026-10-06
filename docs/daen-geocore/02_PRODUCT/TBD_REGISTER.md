@@ -53,7 +53,7 @@ These items are intentionally unresolved. They must not be silently decided in a
 | Execution medium | Resolved in Phase 04B-1 | Markdown + CSV fixture medium; checker runtime remains TBD |
 | Synthetic-mark recording mechanism | Resolved in Phase 04B-1 | Every future state-ledger entry carries an explicit real/public or synthetic mark |
 | Actual corpus Place selection | Resolved in Phase 04C | Exact P01–P20 corpus is pre-registered; no GeoIDs or execution results are created |
-| Field verification results | Pending Phase 04C execution | P04 is mandatory for M1; P09/P10/P11 are optional; no other field verification is required |
+| Scenario D evaluation of frozen P04 field evidence | PENDING M1 EXECUTION | P04 field evidence already exists and is frozen; M1 must evaluate it against the Access Point model |
 | P13 correct coordinate | Later validation and governance | Public sources conflict; pre-registration does not select the correct coordinate |
 | GeoID format | Later domain and architecture work | M1 validates semantics, not identifier encoding |
 | Access Point handle | Later domain and API design | M1 validates modelability, not handle format |
