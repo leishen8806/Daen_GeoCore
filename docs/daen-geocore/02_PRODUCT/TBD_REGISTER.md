@@ -52,7 +52,9 @@ These items are intentionally unresolved. They must not be silently decided in a
 |---|---|---|
 | Execution medium | Resolved in Phase 04B-1 | Markdown + CSV fixture medium; checker runtime remains TBD |
 | Synthetic-mark recording mechanism | Resolved in Phase 04B-1 | Every future state-ledger entry carries an explicit real/public or synthetic mark |
-| Actual corpus Place selection | M1 corpus preparation | Humans select actual public Places later; this definition uses slots only |
+| Actual corpus Place selection | Resolved in Phase 04C | Exact P01–P20 corpus is pre-registered; no GeoIDs or execution results are created |
+| Field verification results | Pending Phase 04C execution | Five-place shortlist is recorded; no field verification has been performed |
+| P13 correct coordinate | Later validation and governance | Public sources conflict; pre-registration does not select the correct coordinate |
 | GeoID format | Later domain and architecture work | M1 validates semantics, not identifier encoding |
 | Access Point handle | Later domain and API design | M1 validates modelability, not handle format |
 | Merge survivor policy | Later governance policy | M1 tests both survivor directions without selecting a policy |

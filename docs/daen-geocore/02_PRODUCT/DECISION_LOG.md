@@ -111,6 +111,17 @@ The controlled Product Constitution revision is recorded below.
 | Self-test evidence | Known-good must pass and every known-bad fixture must trigger its intended rule | `CONFIRMED` |
 | Domain ownership | Domain judgment remains human-owned | `CONFIRMED` |
 
+## Phase 04C M1 Corpus Selection — CONFIRMED
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| Corpus composition | 12 real public Places and 8 explicitly synthetic cases | `CONFIRMED` |
+| Approved corpus | P01–P20 are pre-registered exactly as listed in `validation/m1/corpus-register.csv` | `CONFIRMED` |
+| Field-verification shortlist | P04 exact AEON usable access point; P09 Royal Phnom Penh Hospital access point; P10 Aquation compound access point; P11 PPSEZ access point; P13 Calmette coordinate discrepancy | `PENDING EXECUTION` |
+| P20 rationale | Former White Building is selected as the historical Place because public demolition evidence supports lifecycle testing; occupant/business closure is not substituted for Place closure | `CONFIRMED` |
+| P09 rationale | Royal Phnom Penh Hospital is selected so P09 and the distinct Calmette coordinate-conflict case P13 remain separate real Places | `CONFIRMED` |
+| Execution boundary | A–J expected outcomes, B1–B11, checker rules and frozen scenarios remain unchanged; no results, friction entries or GO decision are created | `CONFIRMED` |
+
 ## Conflict resolution
 
 The earlier source material contained an organization-operations positioning. Phase 01 isolated it from the active Geo Core baseline. This Phase 02 Constitution keeps the location-infrastructure identity and does not import that historical positioning.

@@ -1,22 +1,22 @@
 # VALIDATION FIXTURE — NOT A SPECIFICATION, NOT A DATABASE SCHEMA, NOT AN API CONTRACT.
 local_corpus_slot,real_synthetic_classification,source_note,field_verification_status,scenario_coverage
-P01,,,,
-P02,,,,
-P03,,,,
-P04,,,,
-P05,,,,
-P06,,,,
-P07,,,,
-P08,,,,
-P09,,,,
-P10,,,,
-P11,,,,
-P12,,,,
-P13,,,,
-P14,,,,
-P15,,,,
-P16,,,,
-P17,,,,
-P18,,,,
-P19,,,,
-P20,,,,
+P01,REAL,Cambodia Post Central Post Office,NOT REQUIRED,"A; B; F"
+P02,REAL,Royal Palace of Cambodia,NOT REQUIRED,"A; B; C; J"
+P03,REAL,Raffles Hotel Le Royal Phnom Penh,NOT REQUIRED,"A; B; F; I"
+P04,REAL,AEON Mall Phnom Penh,SHOULD — exact usable AEON Mall access point,"D; E"
+P05,SYNTHETIC,Synthetic Mall Unit A,NOT REQUIRED,"D; E"
+P06,SYNTHETIC,Synthetic Mall Unit B,NOT REQUIRED,"D; E"
+P07,REAL,Royal University of Phnom Penh Main Campus,NOT REQUIRED,"A; B; J"
+P08,REAL,Hun Sen Library RUPP,NOT REQUIRED,"A; J"
+P09,REAL,Royal Phnom Penh Hospital,SHOULD — Royal Phnom Penh Hospital access point,"D; F"
+P10,REAL,Aquation Diamond Island Office Park,SHOULD — Aquation compound access point,"D; E; J"
+P11,REAL,Royal Group Phnom Penh Special Economic Zone,SHOULD — PPSEZ access point,"D; J"
+P12,SYNTHETIC,Synthetic coarse-located Place,NOT REQUIRED,"B; J"
+P13,REAL,Calmette Hospital coordinate-conflict case,SHOULD — Calmette coordinate discrepancy,"B; C; F"
+P14,REAL,AEON Mall Cambodia Parking Tower building,NOT REQUIRED,"B; J"
+P15,SYNTHETIC,Synthetic duplicate seed,NOT REQUIRED,G
+P16,SYNTHETIC,Synthetic duplicate of P15,NOT REQUIRED,G
+P17,SYNTHETIC,Synthetic mis-conflation,NOT REQUIRED,H
+P18,SYNTHETIC,Synthetic true division,NOT REQUIRED,H
+P19,SYNTHETIC,Synthetic occupant mistakenly modeled as Place,NOT REQUIRED,"A; J"
+P20,REAL,Former White Building Phnom Penh,NOT REQUIRED,"I; C"
