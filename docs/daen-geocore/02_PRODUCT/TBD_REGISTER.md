@@ -16,7 +16,7 @@ These items are intentionally unresolved. They must not be silently decided in a
 | Provider selection and integration | Phase 06 Architecture / later evaluation | No provider is selected |
 | API and SDK contracts | Phase 05 API | Contract principle is frozen; endpoints are not |
 | M1 business scenario and acceptance result | Phase 04 M1 PRD | No feature list is defined in Phase 02 |
-| First customer and payer | M1 validation | No market evidence in the current baseline |
+| First customer and payer | Future Consumer Validation Phase | No market evidence in the current baseline |
 | Data licensing, coverage and update operation | M1 validation / later operations design | Source and governance evidence is missing |
 | Quality thresholds and confidence semantics | Phase 03 Domain Model / M1 validation | Principle is frozen; measurements are not |
 | Service-level expectations | Later product and technical design | No operating commitment is established |
@@ -45,6 +45,39 @@ These items are intentionally unresolved. They must not be silently decided in a
 | Provider mapping policy and provider taxonomy | Later architecture | Provider independence is frozen, mapping is not |
 | API, database and architecture | Later phases | Explicitly excluded from Phase 03 |
 | M1 scenario and acceptance | Phase 04 M1 PRD | No M1 feature list is defined |
+
+## Phase 04 M1 additions
+
+| Item | Deferred to | Reason |
+|---|---|---|
+| Execution medium | Later controlled execution decision | Phase 04 must not select technology or implementation medium |
+| Synthetic-mark recording mechanism | M1 execution preparation | Synthetic cases must be clearly marked; recording mechanism is not frozen |
+| Actual corpus Place selection | M1 corpus preparation | Humans select actual public Places later; this definition uses slots only |
+| GeoID format | Later domain and architecture work | M1 validates semantics, not identifier encoding |
+| Access Point handle | Later domain and API design | M1 validates modelability, not handle format |
+| Merge survivor policy | Later governance policy | M1 tests both survivor directions without selecting a policy |
+| Correction authority | Later governance policy | M1 tests correction semantics, not authority assignment |
+| Quality scales | Later quality policy | `unknown` is valid for M1; numeric scales are not frozen |
+| Source trust ranking | Later governance policy | M1 tests attribution, not a ranking system |
+| Numeric tolerances | Later validation design | No numeric tolerance is justified by the frozen M1 definition |
+
+## Future Consumer Validation Phase
+
+Status: `Future Consumer Validation Phase — TBD`
+
+This future phase must eventually define:
+
+- confirmed real consumer;
+- real location-dependent workflow;
+- location-data context;
+- external integration boundary;
+- adoption evidence;
+- operational-value evidence;
+- willingness-to-adopt evidence;
+- willingness-to-pay evidence where relevant;
+- GO / ITERATE / STOP criteria.
+
+No phase number or design is assigned here.
 
 ## Constitution amendment dependency
 
