@@ -152,6 +152,14 @@ This is an M1 validation separation mechanism and does not establish permanent p
 
 Source: Controlled Scenario A review disposition issued with the RUN-A-02 independent review.
 
+## Phase 04D — Scenario C Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-C-ACCEPT-01 Scenario C acceptance | RUN-C-01 is accepted as `PASS` for the controlled same-Place/fact/purpose/language replacement outcome only; F1–F6 remain non-blocking; overall M1 decision remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `77a3ec351c0120855b1569e06781813c7d163a34`; review excerpt and disposition are retained under `validation/m1/reviews/`.
+
 ## Phase 04D — Scenario B Acceptance
 
 | Decision | Frozen result | Status |

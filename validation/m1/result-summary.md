@@ -14,7 +14,7 @@ Empty final-report structure. Do not fill results before execution.
 - Review record: `validation/m1/reviews/RUN-A-02-independent-review.md`.
 - Accepted evidence supports stable fixture identities for P01/P02, separation of Place, Source Assertion and Current DAEN Representation, retained assertions/history, and tested name/script variations without a new Place identity.
 - Selection coexistence, selection REAL/SYNTHETIC classification, exact source-specific attribution, provider independence and findings F1–F8 remain unresolved or limited as recorded in the review disposition.
-- Scenarios C–J: `NOT EXECUTED`.
+- Scenarios D–J: `NOT EXECUTED`.
 - Overall M1 decision: `NOT MADE`.
 
 ### Scenario B acceptance scope
@@ -35,7 +35,7 @@ Empty final-report structure. Do not fill results before execution.
 |---|---|---|---|
 | A | PASS — scoped Scenario A outcome | RUN-A-02 reviewer packet; reviewed commit `7a691dc` | F1–F8 remain dispositioned findings; no overall M1 decision |
 | B | PASS — scoped Scenario B outcome | RUN-B-01 evidence `b77b87f`; review export and disposition | F1–F7 retained as non-blocking limitations; overall M1 decision not made |
-| C | | | |
+| C | PASS — scoped Scenario C outcome | RUN-C-01 evidence `77a3ec3`; review export and disposition | F1–F6 retained as non-blocking limitations; overall M1 decision not made |
 | D | | | |
 | E | | | |
 | F | | | |

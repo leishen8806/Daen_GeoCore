@@ -72,7 +72,7 @@ These items are intentionally unresolved. They must not be silently decided in a
 | Cross-scope migration policy | Later representation policy | General migration across language or other scopes is not defined |
 | Selection scope encoding | Later validation medium / architecture | Scope representation and algorithms remain deferred |
 | Selection attribution convention | M1 convention recorded; exact production model deferred | Operator/step attribution must remain distinct from assertion provenance; no new entity or column is introduced |
-| Scenario C/F supersession behavior | Untested; later M1 execution | RUN-A-02 did not validate selection coexistence or correction behavior |
+| Scenario C/F supersession behavior | Scenario C controlled same-scope positive replacement accepted; Scenario F remains unexecuted | Cross-scope behavior, production algorithms and full correction workflow remain deferred |
 | Exact source-specific attribution for RUN-A-02 strings | Evidence limitation retained | Frozen memo support does not establish exact claim-to-URL attribution |
 
 ## Future Consumer Validation Phase

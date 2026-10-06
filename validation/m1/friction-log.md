@@ -91,3 +91,18 @@ RUN-B-01 was accepted for its scoped Scenario B outcome with no confirmed Domain
 | `RUN-B-01:F7` explicit `unknown` Quality | Accepted; informative Quality and quality-driven decisions remain untested. |
 
 These are not contemporaneous operator friction and must not be counted as repeated Domain Model friction patterns.
+
+## INDEPENDENT REVIEW FINDINGS — RUN-C-01 — NOT CONTEMPORANEOUS OPERATOR FRICTION
+
+RUN-C-01 was accepted for its controlled same-scope positive replacement outcome. No confirmed Domain Model failure was found. The six review findings remain non-blocking:
+
+| Finding | Disposition |
+|---|---|
+| `RUN-C-01:F1` Place-context labels | Retrospective mappings added in the disposition; no new web verification claimed. |
+| `RUN-C-01:F2` selector aliases | Retrospective alias index added; not a historical definition claim. |
+| `RUN-C-01:F3` commit citation | Correct commit distinction recorded; historical source-map citation unchanged. |
+| `RUN-C-01:F4` correction rationale | Retained as prose-only limitation; no Correction workflow or Scenario F execution. |
+| `RUN-C-01:F5` scope/effective-state encoding | Retained as validation-medium convention; historical flags unchanged. |
+| `RUN-C-01:F6` checker scope | Reference-type, scope and effective-state checks remain manual. |
+
+These are independent-review findings, not contemporaneous operator friction or confirmed Domain Model failures.
