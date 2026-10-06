@@ -6,12 +6,23 @@ Empty final-report structure. Do not fill results before execution.
 
 ## M1 run summary
 
+### Scenario A acceptance scope
+
+- RUN-A-01: `FAIL` (historical operator evidence; original evidence retained unchanged).
+- RUN-A-02: `PASS` for the pre-registered Scenario A stable-identity outcome only.
+- Reviewed operator evidence: `7a691dc62541bfeefb66bbb7284bbfafb16fa223`.
+- Review record: `validation/m1/reviews/RUN-A-02-independent-review.md`.
+- Accepted evidence supports stable fixture identities for P01/P02, separation of Place, Source Assertion and Current DAEN Representation, retained assertions/history, and tested name/script variations without a new Place identity.
+- Selection coexistence, selection REAL/SYNTHETIC classification, exact source-specific attribution, provider independence and findings F1–F8 remain unresolved or limited as recorded in the review disposition.
+- Scenarios B–J: `NOT EXECUTED`.
+- Overall M1 decision: `NOT MADE`.
+
 
 ## Scenario A–J result table
 
 | Scenario | Result | Evidence references | Reviewer notes |
 |---|---|---|---|
-| A | | | |
+| A | PASS — scoped Scenario A outcome | RUN-A-02 reviewer packet; reviewed commit `7a691dc` | F1–F8 remain dispositioned findings; no overall M1 decision |
 | B | | | |
 | C | | | |
 | D | | | |

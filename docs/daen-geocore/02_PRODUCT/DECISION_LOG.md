@@ -143,6 +143,15 @@ The controlled Product Constitution revision is recorded below.
 
 This is an M1 validation separation mechanism and does not establish permanent product governance.
 
+## H20 — Current Representation Selection Scope Clarification
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| Selection scope and supersession | Representation-level supersession requires the same Place, represented fact or purpose, and explicitly equivalent scope; another language does not by itself invalidate an existing language scope; supporting Source Assertions remain retained | `CONFIRMED PROSPECTIVE CLARIFICATION` |
+| RUN-A-02 relationship | This clarification does not repair historical RUN-A-02 evidence and does not expand its narrow Scenario A PASS scope; it is not empirically validated by adding the text | `RECORDED` |
+
+Source: Controlled Scenario A review disposition issued with the RUN-A-02 independent review.
+
 ## Conflict resolution
 
 The earlier source material contained an organization-operations positioning. Phase 01 isolated it from the active Geo Core baseline. This Phase 02 Constitution keeps the location-infrastructure identity and does not import that historical positioning.

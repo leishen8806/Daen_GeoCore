@@ -64,6 +64,17 @@ These items are intentionally unresolved. They must not be silently decided in a
 | Numeric tolerances | Later validation design | No numeric tolerance is justified by the frozen M1 definition |
 | Checker runtime | Resolved in Phase 04B-2 | Python 3 standard library only; checker remains disposable |
 
+## Phase 04D Scenario A review additions
+
+| Item | Status / deferred to | Reason |
+|---|---|---|
+| Representation selection scope wording | Resolved prospectively in Phase 04D | Same-Place, represented fact/purpose and explicitly equivalent scope are required for ordinary selection supersession |
+| Cross-scope migration policy | Later representation policy | General migration across language or other scopes is not defined |
+| Selection scope encoding | Later validation medium / architecture | Scope representation and algorithms remain deferred |
+| Selection attribution convention | M1 convention recorded; exact production model deferred | Operator/step attribution must remain distinct from assertion provenance; no new entity or column is introduced |
+| Scenario C/F supersession behavior | Untested; later M1 execution | RUN-A-02 did not validate selection coexistence or correction behavior |
+| Exact source-specific attribution for RUN-A-02 strings | Evidence limitation retained | Frozen memo support does not establish exact claim-to-URL attribution |
+
 ## Future Consumer Validation Phase
 
 Status: `Future Consumer Validation Phase — TBD`

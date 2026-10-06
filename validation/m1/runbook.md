@@ -78,3 +78,15 @@ Execution note: `RUN-A` target conflict resolved before execution. Authoritative
 - [x] working tree clean after readiness commit
 
 This checklist is not complete until the preparation documents are reviewed and a later readiness commit is approved.
+
+## M1 Fixture Conventions — Prospective
+
+- Public Source Assertions supported by frozen evidence may remain `REAL`, with their evidence limitations.
+- Fixture-created initial selections are `SYNTHETIC`.
+- Controlled later selection operations are `SYNTHETIC`.
+- A synthetic operation on a real Place does not make the physical Place or its supported public assertions synthetic.
+- When language is relevant, name-selection scope MUST be explicit. An omitted language is unspecified; it is not automatically English or all languages. Historical runs are not retroactively changed.
+- Source provenance and operator/step selection attribution are distinct. Existing run/step references and Markdown execution records are sufficient; no new entity, column or parser rule is introduced.
+- Evidence supported by a frozen research memo is distinct from evidence confirmed in an exact original source. The former MUST NOT be promoted into the latter.
+
+These are M1 evidence conventions, not a production event taxonomy.
