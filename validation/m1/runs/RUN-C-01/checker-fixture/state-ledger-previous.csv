@@ -1,0 +1,10 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-C-01,PRE-P04-PLACE,FIX-ID-P04,Place,"locus=AEON Mall Phnom Penh; identity=FIX-ID-P04",C-PLACE-P04,unknown,REAL,
+RUN-C-01,PRE-P04-SA-OLD,FIX-ID-P04-SA-OLD,Source Assertion,"ref=FIX-ID-P04; fact=name; purpose=display-name; language=en; value=AEON Mall Phnom Pen; instant=TEST-C0",SYN-C-P04-OLD,unknown,SYNTHETIC,
+RUN-C-01,PRE-P04-SEL-OLD,FIX-ID-P04-SEL-OLD,Current DAEN Representation,"ref=FIX-ID-P04-SA-OLD; fact=name; purpose=display-name; language=en; current_representation=true; selection=initial; selector=Codex/RUN-C-01/STEP-C-P04-OLD",SYN-C-P04-OLD,unknown,SYNTHETIC,
+RUN-C-01,PRE-P14-PLACE,FIX-ID-P14,Place,"locus=AEON Mall Cambodia Parking Tower building; identity=FIX-ID-P14",C-PLACE-P14,unknown,REAL,
+RUN-C-01,PRE-P14-SA-OLD,FIX-ID-P14-SA-OLD,Source Assertion,"ref=FIX-ID-P14; fact=name; purpose=display-name; language=en; value=AEON Mall Cambodia Parking Twer building; instant=TEST-C0",SYN-C-P14-OLD,unknown,SYNTHETIC,
+RUN-C-01,PRE-P14-SEL-OLD,FIX-ID-P14-SEL-OLD,Current DAEN Representation,"ref=FIX-ID-P14-SA-OLD; fact=name; purpose=display-name; language=en; current_representation=true; selection=initial; selector=Codex/RUN-C-01/STEP-C-P14-OLD",SYN-C-P14-OLD,unknown,SYNTHETIC,
+RUN-C-01,PRE-P16-PLACE,FIX-ID-P16,Place,"locus=SYNTHETIC P15/P16 duplicate-of-P15 intended locus; identity=FIX-ID-P16",C-PLACE-P16,unknown,SYNTHETIC,
+RUN-C-01,PRE-P16-SA-OLD,FIX-ID-P16-SA-OLD,Source Assertion,"ref=FIX-ID-P16; fact=name; purpose=display-name; language=en; value=SYNTHETIC P15/P16 Test Premies; instant=TEST-C0",SYN-C-P16-OLD,unknown,SYNTHETIC,
+RUN-C-01,PRE-P16-SEL-OLD,FIX-ID-P16-SEL-OLD,Current DAEN Representation,"ref=FIX-ID-P16-SA-OLD; fact=name; purpose=display-name; language=en; current_representation=true; selection=initial; selector=Codex/RUN-C-01/STEP-C-P16-OLD",SYN-C-P16-OLD,unknown,SYNTHETIC,
