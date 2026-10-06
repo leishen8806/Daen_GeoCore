@@ -117,10 +117,23 @@ The controlled Product Constitution revision is recorded below.
 |---|---|---|
 | Corpus composition | 12 real public Places and 8 explicitly synthetic cases | `CONFIRMED` |
 | Approved corpus | P01–P20 are pre-registered exactly as listed in `validation/m1/corpus-register.csv` | `CONFIRMED` |
-| Field-verification shortlist | P04 exact AEON usable access point; P09 Royal Phnom Penh Hospital access point; P10 Aquation compound access point; P11 PPSEZ access point; P13 Calmette coordinate discrepancy | `PENDING EXECUTION` |
+| Field-verification scope | P04 is the one mandatory real field case; P09, P10 and P11 are optional; P13 remains an unresolved public-source conflict with no M1 field requirement | `CONFIRMED` |
 | P20 rationale | Former White Building is selected as the historical Place because public demolition evidence supports lifecycle testing; occupant/business closure is not substituted for Place closure | `CONFIRMED` |
 | P09 rationale | Royal Phnom Penh Hospital is selected so P09 and the distinct Calmette coordinate-conflict case P13 remain separate real Places | `CONFIRMED` |
 | Execution boundary | A–J expected outcomes, B1–B11, checker rules and frozen scenarios remain unchanged; no results, friction entries or GO decision are created | `CONFIRMED` |
+
+## Phase 04C — Field Verification Scope Reduced
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| Field verification scope | M1 requires at least one real public Place with field-verified evidence that an Access Point can differ from a general Place reference / Selected Coordinate | `CONFIRMED` |
+| Mandatory real field case | P04 — AEON Mall Phnom Penh; minimal public/reference location evidence, observed usable public Access Point, coordinate/map pin if available, and YES/NO/UNCERTAIN difference assessment | `CONFIRMED` |
+| Optional field cases | P09, P10 and P11 remain valid public corpus Places; field verification is optional and not required for M1 | `CONFIRMED` |
+| Synthetic Access cases | P05/P06 and the frozen synthetic or controlled Access Point cases continue to test model expressiveness without claiming real-world usefulness | `CONFIRMED` |
+| P13 | Calmette remains `PUBLIC-SOURCE CONFLICT — UNRESOLVED`; no correct coordinate is forced and no field verification is required for M1 | `CONFIRMED` |
+| Operational observation | Data Maintenance Friction may be recorded during M1; it is not a Domain Model invariant and does not automatically cause `RETURN TO DOMAIN MODEL` | `CONFIRMED` |
+
+**Reason:** M1 needs one real-world anchor but must not assume routine location maintenance requires costly manual field verification.
 
 ## Conflict resolution
 

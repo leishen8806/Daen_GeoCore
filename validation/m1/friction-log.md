@@ -23,6 +23,23 @@ Empty log template. Do not populate entries before M1 execution.
 - Implementation question
 - Out-of-scope business concept
 
+## Operational observation — Data Maintenance Friction
+
+During M1, reviewers SHOULD record when obtaining or correcting a usable location fact requires:
+
+- field verification;
+- specialist judgment;
+- repeated manual research;
+- multiple user actions.
+
+This is an operational observation, not a Domain Model invariant. It MUST NOT automatically cause `RETURN TO DOMAIN MODEL`.
+
+If field verification appears necessary for routine Place maintenance, record:
+
+`OPERATIONAL WARNING — LOCATION DATA MAINTENANCE COST MAY NOT SCALE`
+
+Do not design future contribution UX in this phase.
+
 ## Resolution types
 
 - frozen rule cited
