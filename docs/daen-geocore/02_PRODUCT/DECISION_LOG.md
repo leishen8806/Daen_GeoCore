@@ -152,6 +152,14 @@ This is an M1 validation separation mechanism and does not establish permanent p
 
 Source: Controlled Scenario A review disposition issued with the RUN-A-02 independent review.
 
+## Phase 04D — Scenario B Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-B-ACCEPT-01 Scenario B acceptance | RUN-B-01 is accepted as `PASS` for the frozen Scenario B outcome only; F1–F7 remain recorded as non-blocking limitations; overall M1 decision remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `b77b87f75a759a62fe64f42ada4d1b0180cd61fc`; review export and disposition are retained under `validation/m1/reviews/`.
+
 ## Conflict resolution
 
 The earlier source material contained an organization-operations positioning. Phase 01 isolated it from the active Geo Core baseline. This Phase 02 Constitution keeps the location-infrastructure identity and does not import that historical positioning.

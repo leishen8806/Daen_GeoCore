@@ -75,3 +75,19 @@ Do not design future contribution UX in this phase.
 | F8 — `locus=` is name-derived rather than an independent locator | RUN-A-02; `PRE-P01-PLACE` / `PRE-P02-PLACE` | Implementation question | Evidence limitation accepted for Scenario A narrow scope. No new locator concept added. |
 
 All rows above were discovered at independent review stage. They are not claims about private operator reasoning and do not automatically imply a Domain Model failure.
+
+## INDEPENDENT REVIEW FINDINGS — NOT CONTEMPORANEOUS OPERATOR FRICTION
+
+RUN-B-01 was accepted for its scoped Scenario B outcome with no confirmed Domain Model friction. The following review findings are retained as non-blocking evidence, reporting or validation-medium limitations only:
+
+| Finding | Disposition |
+|---|---|
+| `RUN-B-01:F1` repeated P03 assertion | Retain raw evidence; do not treat the repeat as independent corroboration. |
+| `RUN-B-01:F2` traceability slip | Additive citation erratum only; frozen inputs and scenario sheet remain unchanged. |
+| `RUN-B-01:F3` composite P04 provenance | Accept record-level attribution; do not claim finer original-source attribution. |
+| `RUN-B-01:F4` observed-entrance coordinate | Carry forward to Scenario D precheck; frozen D targets remain P05/P06/P07. |
+| `RUN-B-01:F5` free-text fixture markers | Validation notation only; not domain states or production semantics. |
+| `RUN-B-01:F6` P17 background linkage | Retain `inputs.md` and ledger as one evidence package. |
+| `RUN-B-01:F7` explicit `unknown` Quality | Accepted; informative Quality and quality-driven decisions remain untested. |
+
+These are not contemporaneous operator friction and must not be counted as repeated Domain Model friction patterns.
