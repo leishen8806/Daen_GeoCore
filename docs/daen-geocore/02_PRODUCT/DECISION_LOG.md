@@ -200,6 +200,14 @@ Evidence: `005a25f116e93d331920a0d922fc61cc58b8bbde`; input freeze `8d7ab92a515a
 
 Source: `validation/m1/errata/SCENARIO-G-TARGET-ERRATUM.md`.
 
+## Phase 04D — Scenario G Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-G-ACCEPT-01 | RUN-G-01 is accepted as `PASS` for the controlled synthetic Merge outcome only; P15/P16 effective targets, both isolated survivor directions, explicit Resolution Link/Succession direction, retained history and no survivor policy are supported; F1–F5 remain non-blocking; overall M1 decision remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `424c15fad6a6f0a3aa58404d2daa1bf1e6bb3459`; input freeze `626556e86441836b00d356ee9cf7f9471b360541`; target erratum `eac2d7561a1b46096e2106e2201da3b7c6dd0788`. The original G erratum remains unchanged.
+
 ## Conflict resolution
 
 The earlier source material contained an organization-operations positioning. Phase 01 isolated it from the active Geo Core baseline. This Phase 02 Constitution keeps the location-infrastructure identity and does not import that historical positioning.

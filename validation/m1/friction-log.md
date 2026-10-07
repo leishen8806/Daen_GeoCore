@@ -107,6 +107,20 @@ RUN-C-01 was accepted for its controlled same-scope positive replacement outcome
 
 These are independent-review findings, not contemporaneous operator friction or confirmed Domain Model failures.
 
+## INDEPENDENT REVIEW FINDINGS — RUN-G-01 — NOT CONTEMPORANEOUS OPERATOR FRICTION
+
+RUN-G-01 was accepted for its controlled synthetic Merge outcome. The five findings remain non-blocking:
+
+| Finding | Classification | Disposition |
+|---|---|---|
+| `RUN-G-01:F1` same-Place premise not represented as a ledger row | `EVIDENCE LIMITATION`, Low | Frozen in input evidence; no historical ledger row added. |
+| `RUN-G-01:F2` retirement not written on Place row | `VALIDATION MEDIUM ISSUE`, Low | Derived from Resolution Link, identities, direction and Succession; no production status field. |
+| `RUN-G-01:F3` validation markers are not production mechanisms | `VALIDATION MEDIUM ISSUE`, Low | Markers retained as validation assertions; checker unchanged. |
+| `RUN-G-01:F4` alternative-world isolation | `VALIDATION MEDIUM ISSUE`, Low | Subcases MUST NEVER be concatenated into one effective history. |
+| `RUN-G-01:F5` traceability references | `REPORTING / TRACEABILITY ISSUE`, Low | Commit distinctions recorded additively; historical source map unchanged. |
+
+The original P08/P09 issue remains separately classified as `VALIDATION PREREGISTRATION / TARGET-SELECTION DEFECT`, not Domain Model friction.
+
 ## INDEPENDENT REVIEW FINDINGS — RUN-F-01 — NOT CONTEMPORANEOUS OPERATOR FRICTION
 
 RUN-F-01 was accepted for its controlled Source Assertion correction outcome with no confirmed Domain Model failure. The five findings remain non-blocking:

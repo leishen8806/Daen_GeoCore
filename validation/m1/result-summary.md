@@ -17,6 +17,18 @@ Empty final-report structure. Do not fill results before execution.
 - Scenarios G–J: `NOT EXECUTED`.
 - Overall M1 decision: `NOT MADE`.
 
+### Scenario G acceptance scope
+
+- RUN-G-01: `PASS` for the controlled synthetic Merge outcome only.
+- Target erratum: `validation/m1/errata/SCENARIO-G-TARGET-ERRATUM.md` (`eac2d7561a1b46096e2106e2201da3b7c6dd0788`).
+- Input freeze: `626556e86441836b00d356ee9cf7f9471b360541`.
+- Evidence commit: `424c15fad6a6f0a3aa58404d2daa1bf1e6bb3459`.
+- Review export: `validation/m1/reviews/RUN-G-01-independent-review-export.md`.
+- Disposition: `validation/m1/reviews/RUN-G-01-disposition.md`.
+- P15/P16 same-locus premise and both isolated survivor directions were tested; no survivor policy was invented.
+- F1–F5 remain non-blocking limitations. Scenarios H–J remain unexecuted.
+- Overall M1 decision: `NOT MADE`.
+
 ### Scenario B acceptance scope
 
 - RUN-B-01: `PASS` for the frozen Scenario B outcome only.
@@ -62,7 +74,7 @@ Empty final-report structure. Do not fill results before execution.
 | D | PASS — scoped Scenario D outcome | RUN-D-01 evidence `281d2f0`; review export and disposition | F1–F6 retained as non-blocking limitations; overall M1 decision not made |
 | E | PASS — scoped Scenario E outcome | RUN-E-01 evidence `1388f7b3`; review export and disposition | F1–F6 retained as non-blocking limitations; overall M1 decision not made |
 | F | PASS — scoped Scenario F outcome | RUN-F-01 evidence `005a25f`; review export and disposition | F1–F5 retained as non-blocking limitations; overall M1 decision not made |
-| G | | | |
+| G | PASS — scoped Scenario G outcome | RUN-G-01 evidence `424c15f`; erratum, review export and disposition | F1–F5 retained as non-blocking limitations; overall M1 decision not made |
 | H | | | |
 | I | | | |
 | J | | | |
