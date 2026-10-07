@@ -83,17 +83,17 @@ Empty final-report structure. Do not fill results before execution.
 
 | Invariant | Result | Evidence references | Reviewer notes |
 |---|---|---|---|
-| B1 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
-| B2 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
-| B3 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
-| B4 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
-| B5 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
-| B6 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
-| B7 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
-| B8 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
-| B9 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
-| B10 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
-| B11 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
+| B1 | PASS | RUN-G-01 merge; RUN-H-01 split; RUN-I-01 lifecycle | No identity reuse established within M1 scope |
+| B2 | PASS | RUN-A-02; RUN-C-01; RUN-F-01 | Representation and correction changes preserve identity/history |
+| B3 | PASS | RUN-G-01; RUN-H-01; RUN-I-01 closure/T2; RUN-B3-WITHDRAWAL-01 T1 | B3 closed after authorized bounded iteration |
+| B4 | PASS | RUN-C-01; RUN-A-02; SURPRISE-03 | Current representation changes remain non-destructive |
+| B5 | PASS | RUN-B-01; RUN-F-01; RUN-H-01; RUN-I-01 | Attribution/history evidence retained within stated limits |
+| B6 | PASS | RUN-D-01; RUN-P04-AP-01 | Synthetic and one real anchor support separation |
+| B7 | PASS | RUN-E-01 | Shared Access Point representation supported |
+| B8 | PASS | RUN-F-01; RUN-C-01 | Supersession preserves material history |
+| B9 | PASS | RUN-C-01; RUN-G-01; RUN-H-01; RUN-I-01; SURPRISE-03 | Traceability supported with stated selection limits |
+| B10 | PASS | RUN-B-01; RUN-C-01; Current Representation rows; explicit Quality fields | Quality is explicit; `unknown` remains valid |
+| B11 | PASS | A–J corpus and execution; RUN-J-01 negative control | No business dependency required |
 
 ## Model Friction summary
 
@@ -182,3 +182,29 @@ I:F3 is resolved prospectively for M1 domain semantics. Final-Gate Round 2 has n
 - B11 PASS
 
 Overall M1 remains `NOT COMPLETE`. The sole blocker is direct Place-GeoID withdrawal resolvability evidence.
+
+
+## Final M1 Decision
+
+`GO`
+
+`M1 INTERNAL VALIDATION COMPLETE`
+
+`READY FOR PHASE 05 — API DEFINITION`
+
+B3 changed from FAIL in Round 1 to PASS after the authorized bounded T1 iteration. The four falsification criteria were not triggered.
+
+### Final model-friction groups
+
+1. RUN-H-01:F1 — cross-subject Source Assertion reassociation.
+2. RUN-I-01:F2 — demolition-to-closure terminology.
+3. RUN-I-01:F3 — withdrawal target scope, resolved prospectively for M1 semantics.
+4. SURPRISE-01:F1 — Extent history semantics.
+5. SURPRISE-02:F1 — containment currentness after closure.
+6. SURPRISE-03:F1 — selection authority / best-known rationale under conflict.
+
+Maximum repeated same-pattern count = `1`; falsification threshold NOT triggered.
+
+### Validation limitations
+
+Synthetic and memo-level evidence remain bounded; P04 is one real Access Point anchor; Quality is uniformly low-information `unknown`; G/H/I/J use controlled errata; exact Surprise fixtures were Human-designed; the complete Round-2 review export was not supplied verbatim; and reviewer independence was not fully achieved.

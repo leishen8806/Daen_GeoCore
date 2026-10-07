@@ -104,3 +104,26 @@ Each unresolved item remains `TBD` until the relevant phase produces evidence an
 | Source Assertion subject reassociation / cross-subject supersession semantics | Phase 05 API Definition / later domain-policy clarification | RUN-H-01:F1 demonstrates one accepted fixture interpretation, but general cross-subject supersession semantics are not frozen. This is a narrow TBD, not a production requirement already decided. |
 
 | Withdrawal target scope / Place-GeoID versus historical-record withdrawal semantics | Phase 05 API Definition / later domain-policy clarification | RESOLVED FOR M1 DOMAIN SEMANTICS: T1 Place identity/record withdrawal and T2 historical reference/Source Assertion withdrawal are distinct. Lifecycle taxonomy, authority/removal workflow and API representation remain TBD. |
+
+
+## Phase 05 API Definition Carry-Forward Guardrails
+
+The following remain unresolved and MUST NOT be silently frozen as settled domain policy by API Definition:
+
+- cross-subject Source Assertion reassociation / supersession;
+- lifecycle taxonomy;
+- demolition/rebuild identity policy;
+- demolition → closure mapping;
+- withdrawal authority;
+- legal/privacy/security removal workflow;
+- Extent history representation;
+- containment currentness;
+- selection authority / conflict rationale;
+- merge survivor selection;
+- Quality scales;
+- source trust/ranking;
+- temporal/as-of semantics;
+- GeoID encoding;
+- resolver implementation.
+
+Withdrawal T1/T2 target scope is `RESOLVED FOR M1 DOMAIN SEMANTICS`; API representation remains unresolved.
