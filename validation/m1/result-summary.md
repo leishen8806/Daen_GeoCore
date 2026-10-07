@@ -76,7 +76,7 @@ Empty final-report structure. Do not fill results before execution.
 | F | PASS — scoped Scenario F outcome | RUN-F-01 evidence `005a25f`; review export and disposition | F1–F5 retained as non-blocking limitations; overall M1 decision not made |
 | G | PASS — scoped Scenario G outcome | RUN-G-01 evidence `424c15f`; erratum, review export and disposition | F1–F5 retained as non-blocking limitations; overall M1 decision not made |
 | H | PASS — scoped Scenario H outcome | RUN-H-01 evidence `9bc78b8`; review export and disposition | F1–F7 retained as non-blocking findings; overall M1 decision not made |
-| I | | | |
+| I | PASS — scoped Scenario I outcome | RUN-I-01 evidence `b311f5a`; review export and disposition | Reading B accepted; F1–F7 retained; final B3 coverage remains; overall M1 decision not made |
 | J | | | |
 
 ## B1–B11 invariant table
@@ -124,3 +124,14 @@ Empty final-report structure. Do not fill results before execution.
 - P17 mis-conflation retained the original identity and created a distinct Locus-B identity; P18 true division retained a historical parent and created two distinct children with historical resolution.
 - F1–F7 remain recorded as non-blocking findings. I–J remain `NOT EXECUTED`.
 - Overall M1 decision: `NOT MADE`.
+
+### Scenario I acceptance scope
+
+- RUN-I-01: PASS for the controlled closure / historical-reference-withdrawal outcome only.
+- Target erratum: alidation/m1/errata/SCENARIO-I-TARGET-ERRATUM.md (13af031692b8f8e57085fc1ccd6c6ab39f2b87d8).
+- Input freeze: 67957e1067066ca7f4947eef5e23e3462fef87f9.
+- Evidence: 311f5aff4e3258f591b2d9ec86fc907e9c40cd2.
+- Review export: alidation/m1/reviews/RUN-I-01-independent-review-export.md.
+- Disposition: alidation/m1/reviews/RUN-I-01-disposition.md.
+- Reading B is accepted: historical-reference withdrawal does not withdraw the underlying P03 Place identity.
+- F1–F7 remain recorded; J remains NOT EXECUTED; overall M1 decision remains NOT MADE.

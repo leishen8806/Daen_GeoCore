@@ -180,3 +180,25 @@ RUN-H-01 was accepted for its controlled synthetic Split outcome. These findings
 | `RUN-H-01:F7` earlier corpus-plan discrepancy | `REPORTING / TRACEABILITY ISSUE`, Low | Historical discrepancy recorded; historical corpus plan unchanged. |
 
 These are independent-review findings, not contemporaneous operator friction or confirmed global Domain Model failures.
+
+## INDEPENDENT REVIEW FINDINGS — RUN-I-01 — NOT CONTEMPORANEOUS OPERATOR FRICTION
+
+RUN-I-01 was accepted for its controlled closure / historical-reference-withdrawal outcome. The findings remain non-blocking:
+
+| Finding | Classification | Disposition |
+|---|---|---|
+| `RUN-I-01:F1` self-referential closure Resolution Link | `VALIDATION MEDIUM ISSUE`, Low | Validation notation only; no production Resolution Link design or lifecycle/status field. |
+| `RUN-I-01:F2` demolition-to-closure terminology | `MODEL FRICTION`, Low, bounded | Accepted for this fixture; lifecycle states/transitions remain deferred. |
+| `RUN-I-01:F3` withdrawal target scope / Reading B | `MODEL FRICTION`, Low-Medium, terminology | Historical-reference withdrawal accepted; Place-GeoID withdrawal remains TBD and must be revisited at final B3 gate. |
+| `RUN-I-01:F4` status markers | `VALIDATION MEDIUM ISSUE`, Low | Free-text validation notation only; no production enum. |
+| `RUN-I-01:F5` input-freeze/invariant traceability | `REPORTING / TRACEABILITY ISSUE`, Low | Retrospective references recorded; historical source map unchanged. |
+| `RUN-I-01:F6` demolition-year attribution | `EVIDENCE LIMITATION`, Low | Memo-level evidence retained without stronger attribution. |
+| `RUN-I-01:F7` corpus-role drift | `REPORTING / TRACEABILITY ISSUE`, Low | Historical observations retained; planning files unchanged. |
+
+### Model-friction tally
+
+Confirmed model-friction findings currently include RUN-H-01:F1, RUN-I-01:F2 and RUN-I-01:F3.
+
+`THREE MODEL FRICTION FINDINGS TOTAL, BUT NO REPEATED SAME-PATTERN FRICTION ACROSS THREE DISTINCT PLACES HAS BEEN ESTABLISHED.`
+
+The frozen repeated-friction falsification rule is not triggered merely by count=3. No overall M1 decision is made.

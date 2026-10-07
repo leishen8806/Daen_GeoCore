@@ -235,3 +235,11 @@ Evidence: `9bc78b883fbe026477634227614134ca2a122944`; input freeze `a0424803269f
 | M1-I-ERRATUM-01 | Historical Scenario I targets P12/P13 conflict with later 04C corpus-role assignment. Effective targets are P20 for physical Place closure and P03 for historical-reference withdrawal. Original artifacts remain unchanged. This is a validation-design correction only and does not amend the Domain Model. Scenario I is not yet accepted. | `CONFIRMED FOR M1 VALIDATION` |
 
 Source: `validation/m1/errata/SCENARIO-I-TARGET-ERRATUM.md`.
+
+## Phase 04D — Scenario I Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-I-ACCEPT-01 Scenario I acceptance | RUN-I-01 is accepted as `PASS` for the controlled closure / historical-reference-withdrawal outcome only; Reading B is consciously accepted, P20 physical closure and P03 historical-reference withdrawal are supported, F1–F7 remain non-blocking, final B3 withdrawal coverage remains for the final gate, and overall M1 remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `b311f5aff4e3258f591b2d9ec86fc907e9c40cd2`; input freeze `67957e1067066ca7f4947eef5e23e3462fef87f9`; target erratum `13af031692b8f8e57085fc1ccd6c6ab39f2b87d8`; review export and disposition are retained under `validation/m1/reviews/`.
