@@ -227,3 +227,11 @@ The earlier source material contained an organization-operations positioning. Ph
 | M1-H-ACCEPT-01 Scenario H acceptance | RUN-H-01 is accepted as `PASS` for the controlled synthetic Split outcome only; P17/P18 effective targets, retained original/history identities, distinct resulting identities and historical resolution are supported; F1–F7 remain non-blocking; overall M1 decision remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
 
 Evidence: `9bc78b883fbe026477634227614134ca2a122944`; input freeze `a0424803269f11805a46f5d2453b0c3fba90c44a`; target erratum `6b572bc5ba03f275d25a21f727515128326a7d73`; review export and disposition are retained under `validation/m1/reviews/`.
+
+## Phase 04D — Scenario I Target Erratum
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-I-ERRATUM-01 | Historical Scenario I targets P12/P13 conflict with later 04C corpus-role assignment. Effective targets are P20 for physical Place closure and P03 for historical-reference withdrawal. Original artifacts remain unchanged. This is a validation-design correction only and does not amend the Domain Model. Scenario I is not yet accepted. | `CONFIRMED FOR M1 VALIDATION` |
+
+Source: `validation/m1/errata/SCENARIO-I-TARGET-ERRATUM.md`.
