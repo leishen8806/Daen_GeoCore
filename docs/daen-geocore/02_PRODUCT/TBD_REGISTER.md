@@ -168,3 +168,10 @@ Still unresolved: error-body JSON schema; authorization/privacy HTTP behavior; G
 Resolved at Phase 05: resource/API exposure boundary; typed-reference semantics; exact Place resolution; Source Assertion read/write semantics; Current Representation read/selection semantics; Access Point read-only public semantics; Extent read boundary and write gate; Correction intent; minimal Containment read contract; Provenance/Quality boundary; mutation/error semantics; idempotency/concurrency semantics; MutationBasisToken semantics; HTTP status categories; and 18 canonical endpoints.
 
 All still-protected TBDs remain carried forward without semantic change.
+
+
+## Phase 06 Technical Architecture Guardrails
+
+Phase 06 may design around but must not decide protected Domain/API items: cross-subject reassociation; lifecycle taxonomy; demolition/rebuild and demolition→closure; withdrawal authority/removal; Extent semantics; containment currentness/multi-parent; selection authority; selected-value derivation; source ranking; Quality scale; merge survivor policy; same-Place algorithm; generic Place creation; AP write/lifecycle/subject semantics; temporal/as-of; richer scope equivalence; merge reversal/reopen/un-withdraw; auth/privacy semantics.
+
+06A Human Freeze additionally requires explicit expected workload, expected growth, availability expectations, deployment region/data-residency constraints, budget/operational constraints, and team stack/operations capability. These assumptions must not be invented by the architecture agent.

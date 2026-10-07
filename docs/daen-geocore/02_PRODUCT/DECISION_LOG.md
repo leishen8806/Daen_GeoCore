@@ -421,3 +421,10 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 |---|---|---|
 | PHASE-05-FINAL-GATE-GO-01 | Phase 05 API Definition Final Gate = GO; F1–F5 closed; required conceptual/API-definition deliverables complete; no Domain contradiction; Phase 06 Technical Architecture authorized. OpenAPI, implementation, DB/provider/auth/privacy and market validation are not implied. | CONFIRMED |
 | PHASE-05-COMPLETE-01 | Phase 05 API Definition is complete at the conceptual contract and endpoint-mapping level. | CONFIRMED |
+
+
+## Phase 06 Technical Architecture Entry Gate
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-06-TECH-ENTRY-GATE-FREEZE-01 | Phase 06 Entry Gate frozen; no technology, DB or framework selected; no Domain/API TBD resolved; 06A Requirements & Quality Attributes authorized. | CONFIRMED |
