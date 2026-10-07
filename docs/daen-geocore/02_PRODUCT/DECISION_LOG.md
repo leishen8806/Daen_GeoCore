@@ -192,6 +192,14 @@ Evidence: `1388f7b33ac96352625b56ce0535c3cc740f2f6`; review export and dispositi
 
 Evidence: `005a25f116e93d331920a0d922fc61cc58b8bbde`; input freeze `8d7ab92a515ad3bed899af35c15cb94227535f5e`; review export and disposition are retained under `validation/m1/reviews/`. This does not establish production correction authority, real-world truth, Current DAEN Representation behavior or general Succession taxonomy.
 
+## Phase 04D — Scenario G Target Erratum
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-G-ERRATUM-01 | Original G targets P08/P09 are defective for the Merge test; effective execution targets P15/P16 are approved prospectively. Original artifacts remain unchanged. This is a validation-design correction, not a Phase 03 Domain Model amendment. G has not executed or passed. | `CONFIRMED FOR M1 VALIDATION` |
+
+Source: `validation/m1/errata/SCENARIO-G-TARGET-ERRATUM.md`.
+
 ## Conflict resolution
 
 The earlier source material contained an organization-operations positioning. Phase 01 isolated it from the active Geo Core baseline. This Phase 02 Constitution keeps the location-infrastructure identity and does not import that historical positioning.
