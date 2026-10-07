@@ -288,3 +288,11 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | Decision | Frozen result | Status |
 |---|---|---|
 | M1-WITHDRAWAL-TARGET-CLARIFICATION-01 | Final Gate Round 1 exposed the B3 evidence gap. T1 Place identity/Place record withdrawal and T2 historical reference/Source Assertion withdrawal are distinct. Constitution and invariant 2 are unchanged; no lifecycle taxonomy is defined; one bounded synthetic T1 validation is authorized. | CONFIRMED FOR M1 VALIDATION |
+
+
+## B3 Withdrawal Iteration Acceptance and Final-Gate Round 2 Scope
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-B3-WITHDRAWAL-ACCEPT-01 | Authorized T1/T2 clarification accepted; RUN-B3-WITHDRAWAL-01 PASS; B3 PASS; I:F3 resolved prospectively for M1 domain semantics; no new fundamental concept; Final-Gate Round 2 authorized but not yet decided. | CONFIRMED |
+| M1-FINAL-GATE-ROUND-2-SCOPE-01 | Round 2 reopens only B3, RUN-I-01:F3 / withdrawal target scope, and whether the bounded clarification creates a new blocking problem. All other Round-1 judgments, limitations, safe-to-defer findings and Phase-05 guardrails are inherited unchanged. | CONFIRMED |

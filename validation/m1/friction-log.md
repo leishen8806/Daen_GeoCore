@@ -241,3 +241,10 @@ Confirmed model-friction groups: RUN-H-01:F1; RUN-I-01:F2; RUN-I-01:F3; SURPRISE
 ### RUN-I-01:F3 prospective clarification
 
 `RUN-I-01:F3` — clarified prospectively by `M1-WITHDRAWAL-TARGET-CLARIFICATION-01`. Historical Scenario I evidence remains unchanged.
+
+
+### B3 bounded re-review disposition
+
+`RUN-I-01:F3 — RESOLVED PROSPECTIVELY FOR M1 DOMAIN SEMANTICS`
+
+`B3R:F4 — REPORTING / TRACEABILITY ISSUE — Low — non-blocking`: `Authorized` in the frozen source-map/action provenance means Human authorization of the synthetic validation action only. It does not define production, legal or governance withdrawal authority; authority remains TBD.

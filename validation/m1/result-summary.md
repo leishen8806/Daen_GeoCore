@@ -83,17 +83,17 @@ Empty final-report structure. Do not fill results before execution.
 
 | Invariant | Result | Evidence references | Reviewer notes |
 |---|---|---|---|
-| B1 | | | |
-| B2 | | | |
-| B3 | | | |
-| B4 | | | |
-| B5 | | | |
-| B6 | | | |
-| B7 | | | |
-| B8 | | | |
-| B9 | | | |
-| B10 | | | |
-| B11 | | | |
+| B1 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
+| B2 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
+| B3 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
+| B4 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
+| B5 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
+| B6 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
+| B7 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
+| B8 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
+| B9 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
+| B10 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
+| B11 | PASS | Final-Gate Round 2 candidate evidence | Inherited or bounded evidence accepted; overall M1 gate not yet decided |
 
 ## Model Friction summary
 
@@ -159,6 +159,12 @@ Empty final-report structure. Do not fill results before execution.
 - Six total confirmed MODEL FRICTION findings are recorded; no same specific pattern repeats across >=3 distinct Places.
 - Overall M1 remains `NOT MADE`. Final Gate has not occurred.
 
+
+## B3 bounded iteration acceptance
+
+B3 changed from FAIL in Final-Gate Round 1 to PASS after the authorized bounded iteration. Evidence covers G merge, H split, I closure, Scenario I T2 historical-reference withdrawal, and RUN-B3-WITHDRAWAL-01 T1 Place-identity withdrawal.
+
+I:F3 is resolved prospectively for M1 domain semantics. Final-Gate Round 2 has not yet been decided.
 
 ## M1 Final Gate Round 1
 
