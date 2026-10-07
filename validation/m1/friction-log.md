@@ -107,6 +107,21 @@ RUN-C-01 was accepted for its controlled same-scope positive replacement outcome
 
 These are independent-review findings, not contemporaneous operator friction or confirmed Domain Model failures.
 
+## INDEPENDENT REVIEW FINDINGS — RUN-E-01 — NOT CONTEMPORANEOUS OPERATOR FRICTION
+
+RUN-E-01 was accepted for its scoped controlled synthetic shared-Access-Point outcome with no confirmed Domain Model friction. The following findings remain non-blocking validation, evidence or traceability limitations only:
+
+| Finding | Classification | Disposition |
+|---|---|---|
+| `RUN-E-01:F1` excluded pickup/drop-off term in a negative fixture marker | `VALIDATION MEDIUM ISSUE`, Low | Marker is validation notation only; `business_pickup_dropoff=false` must not become a future schema/API/domain field. |
+| `RUN-E-01:F2` subject/provenance label conflation | `VALIDATION MEDIUM ISSUE`, Low | Understandable in this run but not a preferred future convention; raw run retained. |
+| `RUN-E-01:F3` P08 containment context | `EVIDENCE LIMITATION`, Low | One-AP/two-Place representation accepted; independence from containment is not established. |
+| `RUN-E-01:F4` P05/P06/P07 scenario traceability discrepancy | `REPORTING / TRACEABILITY ISSUE`, Low | Complete note retained; frozen scenario sheet and runbook govern; no frozen-file repair. |
+| `RUN-E-01:F5` missing input-freeze SHA in source map | `REPORTING / TRACEABILITY ISSUE`, Low | Post-review mapping records `a966670b5026331c6399c2bed4c67660071223e3`; historical source map unchanged. |
+| `RUN-E-01:F6` forward-looking P08/G interaction | `EVIDENCE LIMITATION`, Low, forward-looking | Carry to G precheck; E does not constrain G merge or AP behavior. |
+
+These are independent-review findings, not contemporaneous operator friction or confirmed Domain Model failures.
+
 ## INDEPENDENT REVIEW FINDINGS — RUN-D-01 — NOT CONTEMPORANEOUS OPERATOR FRICTION
 
 RUN-D-01 was accepted for its scoped synthetic Access Point outcome. No observable domain question was identified. The six findings remain non-blocking:

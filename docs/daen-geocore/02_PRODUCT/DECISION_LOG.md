@@ -176,6 +176,14 @@ Evidence: `281d2f02b945519491376f64aa54afa23b6523a7`; review export and disposit
 
 Evidence: `b77b87f75a759a62fe64f42ada4d1b0180cd61fc`; review export and disposition are retained under `validation/m1/reviews/`.
 
+## Phase 04D — Scenario E Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-E-ACCEPT-01 Scenario E acceptance | RUN-E-01 is accepted as `PASS` for the frozen controlled synthetic shared-Access-Point outcome only; F1–F6 remain non-blocking; overall M1 decision remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `1388f7b33ac96352625b56ce0535c3cc740f2f6`; review export and disposition are retained under `validation/m1/reviews/`. The acceptance does not establish real RUPP/Hun Sen Library access, AP identity continuity, AP correction/lifecycle, Scenario G behavior or P04 Access Point resolution.
+
 ## Conflict resolution
 
 The earlier source material contained an organization-operations positioning. Phase 01 isolated it from the active Geo Core baseline. This Phase 02 Constitution keeps the location-infrastructure identity and does not import that historical positioning.
