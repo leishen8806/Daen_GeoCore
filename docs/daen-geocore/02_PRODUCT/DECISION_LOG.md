@@ -208,6 +208,14 @@ Source: `validation/m1/errata/SCENARIO-G-TARGET-ERRATUM.md`.
 
 Evidence: `424c15fad6a6f0a3aa58404d2daa1bf1e6bb3459`; input freeze `626556e86441836b00d356ee9cf7f9471b360541`; target erratum `eac2d7561a1b46096e2106e2201da3b7c6dd0788`. The original G erratum remains unchanged.
 
+## Phase 04D — Scenario H Target Erratum
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-H-ERRATUM-01 | Original H targets P10/P11 are defective for split testing; effective execution targets P17/P18 are approved prospectively. Original artifacts remain unchanged. This is a validation-design correction, not a Phase 03 Domain Model amendment. H has not executed or been accepted. | `CONFIRMED FOR M1 VALIDATION` |
+
+Source: `validation/m1/errata/SCENARIO-H-TARGET-ERRATUM.md`.
+
 ## Conflict resolution
 
 The earlier source material contained an organization-operations positioning. Phase 01 isolated it from the active Geo Core baseline. This Phase 02 Constitution keeps the location-infrastructure identity and does not import that historical positioning.
