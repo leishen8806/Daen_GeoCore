@@ -236,3 +236,8 @@ The confirmed MODEL FRICTION tally remains RUN-H-01:F1, RUN-I-01:F2 and RUN-I-01
 ### Human pattern-equivalence tally
 
 Confirmed model-friction groups: RUN-H-01:F1; RUN-I-01:F2; RUN-I-01:F3; SURPRISE-01:F1; SURPRISE-02:F1; SURPRISE-03:F1. Under the human convention, these are six distinct groups; maximum repeated same-pattern count is 1. The >=3 distinct-Place falsification threshold is not triggered.
+
+
+### RUN-I-01:F3 prospective clarification
+
+`RUN-I-01:F3` — clarified prospectively by `M1-WITHDRAWAL-TARGET-CLARIFICATION-01`. Historical Scenario I evidence remains unchanged.

@@ -281,3 +281,10 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | Decision | Frozen result | Status |
 |---|---|---|
 | M1-FINAL-GATE-ROUND-1-ITERATE-01 | Baseline `69f56525d250d61deca3b67495f2e47ba866794d`; recommendation and Human Final Decision are ITERATE; sole blocker is B3 Place-GeoID withdrawal evidence/scope; no RETURN condition; one bounded synthetic T1 fixture is authorized. | CONFIRMED |
+
+
+## B3 Withdrawal Target Clarification
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-WITHDRAWAL-TARGET-CLARIFICATION-01 | Final Gate Round 1 exposed the B3 evidence gap. T1 Place identity/Place record withdrawal and T2 historical reference/Source Assertion withdrawal are distinct. Constitution and invariant 2 are unchanged; no lifecycle taxonomy is defined; one bounded synthetic T1 validation is authorized. | CONFIRMED FOR M1 VALIDATION |

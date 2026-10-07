@@ -279,6 +279,30 @@ Withdrawal may indicate that a record should not be used for new operations whil
 
 The Product Constitution now covers closure, merge, split and withdrawal resolvability through a controlled amendment recorded in the Decision Log and TBD Register.
 
+### Withdrawal target scope
+
+Withdrawal may apply to two distinct target scopes.
+
+#### T1 — Place identity / Place record withdrawal
+
+When a Place identity or Place record is withdrawn from new operational use:
+
+- its GeoID remains resolvable as withdrawn or historical;
+- resolvable does not mean active;
+- it is not valid for new operational use;
+- its GeoID is never reassigned or reused;
+- material history remains retained.
+
+#### T2 — Historical reference / Source Assertion withdrawal
+
+When a historical reference or Source Assertion is withdrawn:
+
+- the reference/assertion remains retained and traceable;
+- it is not valid for new operational use;
+- withdrawal of that reference/assertion does not by itself withdraw or change the underlying Place identity.
+
+This clarification does not define a lifecycle state taxonomy, withdrawal authority, legal/privacy/security removal workflow, reopening rules, API response fields, or persistence/database schema.
+
 ## 25. Containment
 
 Place MAY contain Place — `CONFIRMED` as a minimal concept.
