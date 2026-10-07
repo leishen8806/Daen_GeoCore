@@ -251,3 +251,11 @@ Evidence: `b311f5aff4e3258f591b2d9ec86fc907e9c40cd2`; input freeze `67957e106706
 | M1-J-ERRATUM-01 | Historical J targets P18/P19 conflict with later corpus roles and incomplete P19 fixture. Effective positive fixtures are REAL P07→P08 and SYNTHETIC P19→FIX-ID-J-P19-CHILD; P19 occupant proposal is supplemental negative control; P18 is excluded from RUN-J-01. This is a validation-design correction only and does not amend the Domain Model. Scenario J is not yet accepted. | `CONFIRMED FOR M1 VALIDATION` |
 
 Source: `validation/m1/errata/SCENARIO-J-TARGET-ERRATUM.md`.
+
+## Phase 04D — Scenario J Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-J-ACCEPT-01 Scenario J acceptance | RUN-J-01 is accepted as `PASS` for the controlled minimal Containment outcome only; exactly two directional Place-to-Place relationships are accepted, P19 occupant proposal is supplemental negative control only, F1–F5 remain non-blocking, A–J scenario acceptance sequence is complete, and overall M1 remains `NOT MADE` pending Final Gate | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7ee8ad447c0bc0c2da91ebca795f0`; target/fixture erratum `532332d00df38b237d214a39e5ee35f32038735f`; review export and disposition are retained under `validation/m1/reviews/`.

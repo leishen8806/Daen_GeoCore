@@ -202,3 +202,19 @@ Confirmed model-friction findings currently include RUN-H-01:F1, RUN-I-01:F2 and
 `THREE MODEL FRICTION FINDINGS TOTAL, BUT NO REPEATED SAME-PATTERN FRICTION ACROSS THREE DISTINCT PLACES HAS BEEN ESTABLISHED.`
 
 The frozen repeated-friction falsification rule is not triggered merely by count=3. No overall M1 decision is made.
+
+## INDEPENDENT REVIEW FINDINGS — RUN-J-01 — NOT CONTEMPORANEOUS OPERATOR FRICTION
+
+RUN-J-01 was accepted for its controlled minimal Containment outcome. No new MODEL FRICTION finding is introduced:
+
+| Finding | Classification | Disposition |
+|---|---|---|
+| `RUN-J-01:F1` P07→P08 memo-level attribution | `EVIDENCE LIMITATION`, Low | Do not upgrade to exact claim-to-source attribution. |
+| `RUN-J-01:F2` free-text containment direction | `VALIDATION MEDIUM ISSUE`, Low | Manual review only; no production Containment schema. |
+| `RUN-J-01:F3` P19 negative control by absence | `EVIDENCE LIMITATION`, Low | No rejected-business entity is created. |
+| `RUN-J-01:F4` synthetic child locating basis | `EVIDENCE LIMITATION`, Low | No invented address or coordinate. |
+| `RUN-J-01:F5` historical role/invariant shorthand | `REPORTING / TRACEABILITY ISSUE`, Low | Historical artifacts remain unchanged. |
+
+`RUN-J-01 introduces NO new MODEL FRICTION finding.`
+
+The confirmed MODEL FRICTION tally remains RUN-H-01:F1, RUN-I-01:F2 and RUN-I-01:F3. No repeated pattern is inferred from the total count alone.

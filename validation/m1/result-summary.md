@@ -77,7 +77,7 @@ Empty final-report structure. Do not fill results before execution.
 | G | PASS — scoped Scenario G outcome | RUN-G-01 evidence `424c15f`; erratum, review export and disposition | F1–F5 retained as non-blocking limitations; overall M1 decision not made |
 | H | PASS — scoped Scenario H outcome | RUN-H-01 evidence `9bc78b8`; review export and disposition | F1–F7 retained as non-blocking findings; overall M1 decision not made |
 | I | PASS — scoped Scenario I outcome | RUN-I-01 evidence `b311f5a`; review export and disposition | Reading B accepted; F1–F7 retained; final B3 coverage remains; overall M1 decision not made |
-| J | | | |
+| J | PASS — scoped Scenario J outcome | RUN-J-01 evidence `d1db291`; review export and disposition | F1–F5 retained as non-blocking findings; overall M1 decision not made |
 
 ## B1–B11 invariant table
 
@@ -127,11 +127,22 @@ Empty final-report structure. Do not fill results before execution.
 
 ### Scenario I acceptance scope
 
-- RUN-I-01: PASS for the controlled closure / historical-reference-withdrawal outcome only.
-- Target erratum: alidation/m1/errata/SCENARIO-I-TARGET-ERRATUM.md (13af031692b8f8e57085fc1ccd6c6ab39f2b87d8).
-- Input freeze: 67957e1067066ca7f4947eef5e23e3462fef87f9.
-- Evidence: 311f5aff4e3258f591b2d9ec86fc907e9c40cd2.
-- Review export: alidation/m1/reviews/RUN-I-01-independent-review-export.md.
-- Disposition: alidation/m1/reviews/RUN-I-01-disposition.md.
+- RUN-I-01: `PASS` for the controlled closure / historical-reference-withdrawal outcome only.
+- Target erratum: `validation/m1/errata/SCENARIO-I-TARGET-ERRATUM.md` (`13af031692b8f8e57085fc1ccd6c6ab39f2b87d8`).
+- Input freeze: `67957e1067066ca7f4947eef5e23e3462fef87f9`.
+- Evidence: `b311f5aff4e3258f591b2d9ec86fc907e9c40cd2`.
+- Review export: `validation/m1/reviews/RUN-I-01-independent-review-export.md`.
+- Disposition: `validation/m1/reviews/RUN-I-01-disposition.md`.
 - Reading B is accepted: historical-reference withdrawal does not withdraw the underlying P03 Place identity.
-- F1–F7 remain recorded; J remains NOT EXECUTED; overall M1 decision remains NOT MADE.
+- F1–F7 remain recorded; J remains `NOT EXECUTED`; overall M1 decision remains `NOT MADE`.
+
+### Scenario J acceptance scope
+
+- RUN-J-01: `PASS` for the controlled minimal Containment outcome only.
+- Target/fixture erratum: `validation/m1/errata/SCENARIO-J-TARGET-ERRATUM.md` (`532332d00df38b237d214a39e5ee35f32038735f`).
+- Input freeze: `0e47bdc6b9f7ee8ad447c0bc0c2da91ebca795f0`.
+- Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`.
+- Review export: `validation/m1/reviews/RUN-J-01-independent-review-export.md`.
+- Disposition: `validation/m1/reviews/RUN-J-01-disposition.md`.
+- Exactly two minimal containment relationships are accepted; the P19 occupant proposal is a supplemental negative control only.
+- Overall M1 decision remains `NOT MADE`.
