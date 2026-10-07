@@ -1,0 +1,4 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-B3-WITHDRAWAL-01,PRE-P12-PLACE,FIX-ID-P12,Place,locus=SYNTHETIC coarse-located Place; identity=FIX-ID-P12,B3-T1-P12-PLACE,unknown,SYNTHETIC,
+RUN-B3-WITHDRAWAL-01,PRE-P12-LOC,FIX-ID-P12-SA-LOC,Source Assertion,ref=FIX-ID-P12; fact=address; purpose=locating-basis; value=SYNTHETIC COARSE LOCATION P12,B3-T1-P12-LOC,unknown,SYNTHETIC,
+RUN-B3-WITHDRAWAL-01,POST-P12-WITHDRAW,FIX-RES-B3-P12-WITHDRAWN,Resolution Link,ref=FIX-ID-P12; lifecycle=withdrawal; relationship=withdrawal; resolution=FIX-ID-P12; historical_identity=FIX-ID-P12; historical_resolvable=true; valid_for_new_use=false; identity_reassigned=false; successor=none; correction=false; deletion=false,SYN-B3-T1-WITHDRAW-P12,unknown,SYNTHETIC,
