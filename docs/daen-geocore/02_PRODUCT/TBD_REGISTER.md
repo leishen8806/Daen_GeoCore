@@ -142,3 +142,8 @@ GeoID encoding; serialized reference forms; canonical textual normalization; Res
 ## Phase 05C Protected TBDs
 
 Access Point as Source Assertion subject; AP location-fact backing/reference; AP Current Representation/ranking; AP lifecycle; assertion-kind and value-type vocabularies; scope encoding; selected-value derivation; selection authority; conflict resolution; Extent geometry/CRS/role/reference; public Source resource; Quality scale; source ranking; temporal/as-of semantics; expansion/filter/pagination; endpoint layout; mutations/idempotency/versioning remain unresolved.
+
+
+## Phase 05D Protected TBDs
+
+Generic Place creation; all AP public mutations; Containment write; AP backing/reference/correction/removal/lifecycle; merge reversal; un-withdrawal; reopening; authorization/approval; same-Place and survivor algorithms; GeoID generation; lifecycle enum; richer scope equivalence; selection authority; selected-value derivation; Extent geometry/write; HTTP/error codes; persistence; ETag/version implementation; transaction/locking; MutationRequestRef serialization; API version mechanics remain unresolved.

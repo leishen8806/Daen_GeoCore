@@ -365,3 +365,30 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | HF-05C-15 | Provenance remains attached to exposed facts/assertions/selections/AP facts; no public Source resource. | CONFIRMED |
 | HF-05C-16 | Quality is explicit where required and `unknown` is valid; no scale or ranking is frozen. | CONFIRMED |
 | HF-05C-17 | Absence, unknown, restricted detail and historical identity remain distinct; no fabricated defaults. | CONFIRMED |
+
+
+## Phase 05D — Mutation and Error Human Freeze
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-05D-MUTATION-ERROR-FREEZE-01 | Phase 05D mutation, error, idempotency/concurrency and Provenance/Quality contracts are Human Frozen. Endpoints, OpenAPI, database schema and architecture remain out of scope. | CONFIRMED |
+| HF-05D-01 | shared attributable/non-destructive/exact/stale-safe/idempotent rules. | CONFIRMED |
+| HF-05D-02 | Source Assertion create and same-subject supersession. | CONFIRMED |
+| HF-05D-03 | explicit Correction intent. | CONFIRMED |
+| HF-05D-04 | T2 withdrawal semantics. | CONFIRMED |
+| HF-05D-05 | Selection add/replace and exact scope. | CONFIRMED |
+| HF-05D-06 | merge survivor supplied, not chosen. | CONFIRMED |
+| HF-05D-07 | MIS_CONFLATION versus TRUE_DIVISION. | CONFIRMED |
+| HF-05D-08 | closure and T1 withdrawal without lifecycle enum. | CONFIRMED |
+| HF-05D-09 | domain-specific relationship/history writes only. | CONFIRMED |
+| HF-05D-10 | all AP public mutations deferred. | CONFIRMED |
+| HF-05D-11 | generic Place creation deferred. | CONFIRMED |
+| HF-05D-12 | Extent writes only through assertion/selection. | CONFIRMED |
+| HF-05D-13 | mutation Provenance and fact Quality. | CONFIRMED |
+| HF-05D-14 | conceptual error classes and ALREADY_HOLDS. | CONFIRMED |
+| HF-05D-15 | stale-write protection. | CONFIRMED |
+| HF-05D-16 | MutationRequestRef idempotency. | CONFIRMED |
+| HF-05D-17 | logical atomicity and result categories. | CONFIRMED |
+| HF-05D-18 | no destructive public history delete. | CONFIRMED |
+| HF-05D-19 | M1–M18 invariants and 25 coherence cases. | CONFIRMED |
+| HF-05D-20 | Phase 05E must preserve unresolved policy. | CONFIRMED |
