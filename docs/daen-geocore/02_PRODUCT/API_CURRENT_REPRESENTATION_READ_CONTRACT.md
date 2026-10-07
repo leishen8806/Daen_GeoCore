@@ -9,3 +9,8 @@ Traceability is frozen, derivation is not. A selected value need not be byte-for
 Relevant retained potentially competing evidence remains discoverable. Unknown scope is not wildcard or proof of equivalence. Superseded and withdrawn evidence remains discoverable. No canonical competing-set, source-ranking or selection-authority algorithm is frozen.
 
 Selected Coordinate is never an Access Point. Current Representation may expose Provenance and Quality, with `unknown` valid.
+
+
+## Mutation basis capability
+
+Reads relevant to Selection add and replace must be able to expose an opaque MutationBasisToken, including the observed empty-current-selection basis where applicable.

@@ -392,3 +392,10 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | HF-05D-18 | no destructive public history delete. | CONFIRMED |
 | HF-05D-19 | M1–M18 invariants and 25 coherence cases. | CONFIRMED |
 | HF-05D-20 | Phase 05E must preserve unresolved policy. | CONFIRMED |
+
+
+## Phase 05E — Endpoint Map Human Freeze
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-05E-ENDPOINT-MAP-FREEZE-01 | 18-endpoint `/v1` surface frozen: 7 reads and 11 mutations, action routing via `/actions/{verb}`, separate correction, no `/representation`, Idempotency-Key with client-global scope and 7-day minimum replay horizon, MutationBasisToken, and containment read completion. | CONFIRMED |

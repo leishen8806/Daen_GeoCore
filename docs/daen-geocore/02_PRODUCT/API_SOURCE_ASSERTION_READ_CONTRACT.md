@@ -15,3 +15,8 @@ Same-subject supersession is guaranteed: old assertion remains readable and the 
 Relevant retained evidence for the same Place/fact/purpose/scope has a retrieval/traversal path. Unknown-scope assertions are not automatically scope-equivalent or silently hidden. Superseded and withdrawn evidence remains discoverable through history. No ranking or conflict-resolution algorithm is frozen.
 
 Provenance is originating source context; Quality is explicit and `unknown` is valid. No public Source resource, closed scope schema, or mutation contract is defined.
+
+
+## Mutation basis capability
+
+Reads relevant to supersede and correct must be able to expose an opaque MutationBasisToken. It is a concurrency basis only and has no resource or Domain identity.

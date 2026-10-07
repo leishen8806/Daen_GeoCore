@@ -147,3 +147,8 @@ Access Point as Source Assertion subject; AP location-fact backing/reference; AP
 ## Phase 05D Protected TBDs
 
 Generic Place creation; all AP public mutations; Containment write; AP backing/reference/correction/removal/lifecycle; merge reversal; un-withdrawal; reopening; authorization/approval; same-Place and survivor algorithms; GeoID generation; lifecycle enum; richer scope equivalence; selection authority; selected-value derivation; Extent geometry/write; HTTP/error codes; persistence; ETag/version implementation; transaction/locking; MutationRequestRef serialization; API version mechanics remain unresolved.
+
+
+## Phase 05E Protected TBDs
+
+Auth/privacy mechanics; OpenAPI field schemas; pagination/filter syntax; GeoID/reference encoding; MutationBasisToken transport; idempotency storage; database/transactions/cache; and all previously protected Domain TBDs remain unresolved.
