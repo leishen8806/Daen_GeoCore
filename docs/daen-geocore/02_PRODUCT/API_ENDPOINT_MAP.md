@@ -8,7 +8,13 @@ Major path: `/v1`. Action routing uses `/actions/{verb}`. This map contains exac
 
 | Method / operation | Idempotency-Key | MutationBasisToken | Expected success |
 |---|---|---|---|
-| all 7 GET reads | No | n/a | 200 |
+| GET `/v1/places/{placeRef}` | No | n/a | 200 |
+| GET `/v1/places/{placeRef}/source-assertions` | No | n/a | 200 |
+| GET `/v1/places/{placeRef}/access-points` | No | n/a | 200 |
+| GET `/v1/places/{placeRef}/selections` | No | n/a | 200 |
+| GET `/v1/places/{placeRef}/containment` | No | n/a | 200 |
+| GET `/v1/source-assertions/{sourceAssertionRef}` | No | n/a | 200 |
+| GET `/v1/access-points/{accessPointRef}` | No | n/a | 200 |
 | POST `/v1/source-assertions` (create) | Yes | No | 201 |
 | POST `/v1/source-assertions/{sourceAssertionRef}/actions/supersede` | Yes | Yes | 201 |
 | POST `/v1/source-assertions/{sourceAssertionRef}/actions/correct` | Yes | Yes | 201 |
