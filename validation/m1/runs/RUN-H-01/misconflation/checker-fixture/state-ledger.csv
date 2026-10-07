@@ -1,0 +1,7 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-H-01-M,PRE-P17-PLACE,FIX-ID-P17,Place,locus=SYNTHETIC P17 Locus A; identity=FIX-ID-P17,H-PLACE-P17,unknown,SYNTHETIC,
+RUN-H-01-M,PRE-P17-SA-L1,FIX-ID-P17-SA-L1,Source Assertion,ref=FIX-ID-P17; fact=address; purpose=place-address; value=SYNTHETIC ONLY — P17 Locus A,SYN-H-P17-L1,unknown,SYNTHETIC,
+RUN-H-01-M,PRE-P17-SA-L2-OLD,FIX-ID-P17-SA-L2-OLD,Source Assertion,ref=FIX-ID-P17; fact=address; purpose=place-address; value=SYNTHETIC ONLY — P17 Locus B,SYN-H-P17-L2-OLD,unknown,SYNTHETIC,
+RUN-H-01-M,POST-P17-B-PLACE,FIX-ID-H-P17-B,Place,locus=SYNTHETIC P17 Locus B; identity=FIX-ID-H-P17-B,SYN-H-P17-B-PLACE,unknown,SYNTHETIC,
+RUN-H-01-M,POST-P17-B-SA-L2,FIX-ID-H-P17-B-SA-L2,Source Assertion,ref=FIX-ID-H-P17-B; fact=address; purpose=place-address; value=SYNTHETIC ONLY — P17 Locus B,SYN-H-P17-L2-NEW,unknown,SYNTHETIC,RUN-H-01-M:PRE-P17-SA-L2-OLD
+RUN-H-01-M,POST-RES-P17-B,FIX-RES-H-MIS-P17-B,Resolution Link,ref=FIX-ID-P17; relationship=mis-conflation-separation; original_identity=FIX-ID-P17; original_locus=P17-Locus-A; separated_identity=FIX-ID-H-P17-B; separated_locus=P17-Locus-B; original_identity_continues=true; new_identity_created=true; history_preserved=true,SYN-H-RES-P17,unknown,SYNTHETIC,

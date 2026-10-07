@@ -1,0 +1,6 @@
+Runtime: Python 3.15.0a2
+Command: python validation/m1/checker/check_m1.py --fixture validation/m1/runs/RUN-H-01/misconflation/checker-fixture
+Exit code: 0
+--- raw stdout ---
+PASS: no supported mechanical failure found
+--- raw stderr ---
