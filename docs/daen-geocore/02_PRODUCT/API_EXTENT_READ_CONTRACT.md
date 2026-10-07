@@ -7,3 +7,6 @@ Extent appears through a Source Assertion value or Current Representation select
 Asserted Extent changes use Source Assertion supersession; selected Extent changes use Selection Record supersession. Bare Extent versioning is not promised. Overlap alone does not imply same Place, containment, conflict, merge or a new Domain relationship.
 
 Extent inherits Provenance through its host assertion/selection and explicit Quality, with `unknown` valid.
+
+
+Public mutation of a new Extent payload is gated until a geometry payload contract exists; Extent remains readable through Source Assertions and Current Representation. No ExtentRef or direct Extent endpoint is added.

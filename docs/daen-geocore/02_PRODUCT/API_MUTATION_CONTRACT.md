@@ -19,3 +19,12 @@ Resolution Link is created only by domain-specific operations; Succession is opt
 
 ## Deferred writes
 All public Access Point mutations, generic Place creation, direct Extent mutation, geometry writes, and business workflows are deferred. Split child creation is the only frozen domain-specific Place-creation outcome.
+
+
+## Extent-value mutation gate
+
+Phase 05 has not frozen an Extent geometry payload contract. Source Assertion create/supersede/correct carrying an Extent-kind value, and Selection add/replace carrying a selected Extent value, are unsupported/deferred capabilities and map to HTTP `422`. This does not resolve geometry or remove Extent reads.
+
+## Selection scope comparison
+
+A selection slot is Place + fact/purpose + explicit scope. Two scopes are the same only when both are explicit and their typed values are exact-equal under the contract. This is not serialized-string equality, normalization, aliasing, language fallback or inferred equivalence. Unknown scope is never wildcard or proof of equivalence; unknown/different/unestablished scope cannot silently replace. Add Selection requires a basis proving the exact explicit slot is empty; if occupied, return stale/conflict `409` and create no second current selection. Replace requires same Place, fact/purpose, exact-equal explicit scope, named prior SelectionRecordRef and valid basis. Richer equivalence authority remains TBD.

@@ -406,3 +406,10 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | Decision | Frozen result | Status |
 |---|---|---|
 | PHASE-05-FINAL-GATE-ROUND-1-ITERATE-01 | Baseline `e9342ba376cc2e1639a3eef1953e18067b6ecc2a`; independent recommendation and Human Decision ITERATE; no Domain contradiction; bounded work limited to F1–F5; no endpoint redesign; Phase 06 NOT authorized. | CONFIRMED |
+
+
+## Phase 05 Final-Gate Round 1 Bounded Completion
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-05-FINAL-GATE-R1-BOUNDED-COMPLETION-01 | F1–F5 completed: HTTP status categories recorded; Idempotency-Key reconciled to client-global scope and 7-day minimum; Extent-kind write gate explicit; endpoint basis/idempotency annotations added; exact explicit Selection scope equality recorded. No new endpoints, Domain Model change or OpenAPI. Phase 06 remains NOT authorized; Phase 05 Final Gate requires re-review. | CONFIRMED |

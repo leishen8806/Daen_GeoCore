@@ -152,3 +152,10 @@ Generic Place creation; all AP public mutations; Containment write; AP backing/r
 ## Phase 05E Protected TBDs
 
 Auth/privacy mechanics; OpenAPI field schemas; pagination/filter syntax; GeoID/reference encoding; MutationBasisToken transport; idempotency storage; database/transactions/cache; and all previously protected Domain TBDs remain unresolved.
+
+
+## Phase 05 Final-Gate Round 1 Bounded Completion
+
+Resolved at Phase 05 contract level: HTTP status-category mapping; Idempotency-Key transport role; client-global idempotency scope; 7-day minimum replay guarantee; endpoint per-operation basis/idempotency requirements; and exact explicit scope equality for Selection mutation.
+
+Still unresolved: error-body JSON schema; authorization/privacy HTTP behavior; GeoID/reference encoding; MutationBasisToken transport; idempotency storage; scope encoding; richer scope equivalence; Extent geometry payload; and all existing Domain TBDs.

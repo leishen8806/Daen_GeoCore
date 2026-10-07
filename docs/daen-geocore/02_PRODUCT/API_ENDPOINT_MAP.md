@@ -6,29 +6,25 @@
 
 Major path: `/v1`. Action routing uses `/actions/{verb}`. This map contains exactly 18 canonical endpoints: 7 reads and 11 mutations. No aliases are defined.
 
-| Method | Path | Class |
-|---|---|---|
-| GET | `/v1/places/{placeRef}` | read |
-| GET | `/v1/places/{placeRef}/source-assertions` | read |
-| GET | `/v1/places/{placeRef}/access-points` | read |
-| GET | `/v1/places/{placeRef}/selections` | read |
-| GET | `/v1/places/{placeRef}/containment` | read |
-| GET | `/v1/source-assertions/{sourceAssertionRef}` | read |
-| GET | `/v1/access-points/{accessPointRef}` | read |
-| POST | `/v1/source-assertions` | mutation |
-| POST | `/v1/source-assertions/{sourceAssertionRef}/actions/supersede` | mutation |
-| POST | `/v1/source-assertions/{sourceAssertionRef}/actions/correct` | mutation |
-| POST | `/v1/source-assertions/{sourceAssertionRef}/actions/withdraw` | mutation |
-| POST | `/v1/places/{placeRef}/selections` | mutation |
-| POST | `/v1/places/{placeRef}/selections/{selectionRef}/actions/replace` | mutation |
-| POST | `/v1/places/actions/merge` | mutation |
-| POST | `/v1/places/{placeRef}/actions/split-mis-conflation` | mutation |
-| POST | `/v1/places/{placeRef}/actions/split-true-division` | mutation |
-| POST | `/v1/places/{placeRef}/actions/close` | mutation |
-| POST | `/v1/places/{placeRef}/actions/withdraw` | mutation |
+| Method / operation | Idempotency-Key | MutationBasisToken | Expected success |
+|---|---|---|---|
+| all 7 GET reads | No | n/a | 200 |
+| POST `/v1/source-assertions` (create) | Yes | No | 201 |
+| POST `/v1/source-assertions/{sourceAssertionRef}/actions/supersede` | Yes | Yes | 201 |
+| POST `/v1/source-assertions/{sourceAssertionRef}/actions/correct` | Yes | Yes | 201 |
+| POST `/v1/source-assertions/{sourceAssertionRef}/actions/withdraw` (T2) | Yes | No mandatory basis | 200 |
+| POST `/v1/places/{placeRef}/selections` (add) | Yes | Yes | 201 |
+| POST `/v1/places/{placeRef}/selections/{selectionRef}/actions/replace` | Yes | Yes | 201 |
+| POST `/v1/places/actions/merge` | Yes | Yes | 200 |
+| POST `/v1/places/{placeRef}/actions/split-mis-conflation` | Yes | Yes | 201 |
+| POST `/v1/places/{placeRef}/actions/split-true-division` | Yes | Yes | 201 |
+| POST `/v1/places/{placeRef}/actions/close` | Yes | Yes | 200 |
+| POST `/v1/places/{placeRef}/actions/withdraw` (T1) | Yes | Yes | 200 |
 
 ## Forbidden/deferred routes
 
 No generic Place create; AP writes; containment writes; direct Extent writes; generic relationship, Resolution Link or Succession creation; merge reversal; reopen; un-withdraw; material-history DELETE; search/matching/reverse-geocode/provider lookup.
+
+Every material POST mutation requires `Idempotency-Key`. `/actions/` is an HTTP routing literal only and imposes no Domain or reference-token semantics; no token restriction or reserved value is defined. `/v1` freezes major-version path placement only, not compatibility, deprecation, sunset or negotiation policy. GeoID and opaque references carry no API-version semantics.
 
 Phase 05 overall remains `NOT YET FINAL-GATE DECIDED`. This map does not define OpenAPI, JSON Schema, database schema or architecture.
