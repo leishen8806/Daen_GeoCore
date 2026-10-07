@@ -304,3 +304,19 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 |---|---|---|
 | M1-FINAL-GATE-ROUND-2-GO-01 | Round-2 recommendation GO accepted by the Human Final Decision Layer; B1–B11 all PASS; B3 closed after authorized bounded iteration; no falsification criterion triggered; no fundamental new core concept; no business dependency; provenance/Quality sufficiently understandable; M1 Internal Validation complete; Phase 05 API Definition authorized. | CONFIRMED |
 | PHASE-04-M1-COMPLETE-01 | Phase 04 M1 Internal Validation is complete. Phase 03 Domain Model is stable enough to proceed to Phase 05 API Definition. This does not mean production ready, market validated, architecture frozen, API designed, or provider selected. | CONFIRMED |
+
+
+## Phase 05A — Resource Model Human Freeze
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-05A-RESOURCE-MODEL-FREEZE-01 | Phase 05A API scope and resource model are Human Frozen. No endpoints, OpenAPI, JSON Schema, database schema, architecture or provider selection is included. | CONFIRMED |
+| HF-05A-01 | API Core is Place/GeoID, Source Assertion, Current DAEN Representation, Access Point, historical identity resolution, Provenance and Quality. | CONFIRMED |
+| HF-05A-02 | Only Place has a GeoID; Source Assertion and Access Point use future opaque API references. | CONFIRMED |
+| HF-05A-03 | Current DAEN Representation is Place-associated, not a top-level resource. | CONFIRMED |
+| HF-05A-04 | Selected Coordinate is a selected fact/value, not an Access Point. | CONFIRMED |
+| HF-05A-05 | Historical resolution uses NO SILENT SUBSTITUTION. | CONFIRMED |
+| HF-05A-06 | T1/T2 withdrawal scope is exposed without deciding T2 effect on Current Representation. | CONFIRMED |
+| HF-05A-07 | Same-subject supersession is guaranteed; cross-subject supersession remains deferred. | CONFIRMED |
+| HF-05A-08 | Extent and Containment exposure remains read-only and guarded as documented. | CONFIRMED |
+| HF-05A-09 | Provenance/Quality remain explicit boundaries; reference formats and endpoint layout are Phase 05B or later. | CONFIRMED |

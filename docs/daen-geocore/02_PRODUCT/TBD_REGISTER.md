@@ -127,3 +127,8 @@ The following remain unresolved and MUST NOT be silently frozen as settled domai
 - resolver implementation.
 
 Withdrawal T1/T2 target scope is `RESOLVED FOR M1 DOMAIN SEMANTICS`; API representation remains unresolved.
+
+
+## Phase 05A API-Exposure Decisions
+
+Phase 05A freezes resource boundaries only. The following remain unresolved: Extent history; containment currentness; cross-subject supersession; selection authority; withdrawal authority; lifecycle taxonomy; reference format. API Definition MUST NOT silently freeze these as settled domain policy.
