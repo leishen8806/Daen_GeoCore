@@ -160,6 +160,14 @@ Source: Controlled Scenario A review disposition issued with the RUN-A-02 indepe
 
 Evidence: `77a3ec351c0120855b1569e06781813c7d163a34`; review excerpt and disposition are retained under `validation/m1/reviews/`.
 
+## Phase 04D — Scenario D Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-D-ACCEPT-01 Scenario D acceptance | RUN-D-01 is accepted as `PASS` for the controlled Access Point separation outcome only; F1–F6 remain non-blocking; overall M1 decision remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `281d2f02b945519491376f64aa54afa23b6523a7`; review export and disposition are retained under `validation/m1/reviews/`. P04/F4 and E/F6 follow-ups remain bounded as recorded in the disposition.
+
 ## Phase 04D — Scenario B Acceptance
 
 | Decision | Frozen result | Status |

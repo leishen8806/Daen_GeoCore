@@ -106,3 +106,18 @@ RUN-C-01 was accepted for its controlled same-scope positive replacement outcome
 | `RUN-C-01:F6` checker scope | Reference-type, scope and effective-state checks remain manual. |
 
 These are independent-review findings, not contemporaneous operator friction or confirmed Domain Model failures.
+
+## INDEPENDENT REVIEW FINDINGS — RUN-D-01 — NOT CONTEMPORANEOUS OPERATOR FRICTION
+
+RUN-D-01 was accepted for its scoped synthetic Access Point outcome. No observable domain question was identified. The six findings remain non-blocking:
+
+| Finding | Disposition |
+|---|---|
+| `RUN-D-01:F1` source-reference SHA/path | Corrected mapping recorded retrospectively; original source-map.md unchanged. |
+| `RUN-D-01:F2` selector aliases | Retrospective row-key index recorded; no historical alias definition claimed. |
+| `RUN-D-01:F3` served-place relationships | Manually checked; checker and encoding unchanged. |
+| `RUN-D-01:F4` synthetic access evidence | Accepted as synthetic fixture text; no field research required for D. |
+| `RUN-D-01:F5` P04 carry-forward | B:F4 remains unresolved; P04 was not added to D. |
+| `RUN-D-01:F6` E overlap | P05/P06 sharing does not execute E's P07 case. |
+
+These are independent-review findings, not contemporaneous operator friction or confirmed Domain Model failures.
