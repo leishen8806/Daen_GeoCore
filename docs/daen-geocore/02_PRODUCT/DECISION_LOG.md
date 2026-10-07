@@ -320,3 +320,24 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | HF-05A-07 | Same-subject supersession is guaranteed; cross-subject supersession remains deferred. | CONFIRMED |
 | HF-05A-08 | Extent and Containment exposure remains read-only and guarded as documented. | CONFIRMED |
 | HF-05A-09 | Provenance/Quality remain explicit boundaries; reference formats and endpoint layout are Phase 05B or later. | CONFIRMED |
+
+
+## Phase 05B — Identifier and Resolution Human Freeze
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-05B-IDENTIFIER-RESOLUTION-FREEZE-01 | Phase 05B identifier and resolution contracts are Human Frozen. Endpoints, OpenAPI, JSON Schema, database schema and architecture remain out of scope. | CONFIRMED |
+| HF-05B-01 | GeoID is Place-only, DAEN-controlled, stable, immutable, opaque, provider-independent, non-reassignable/non-reusable and historically resolvable. | CONFIRMED |
+| HF-05B-02 | PlaceRef is GeoID; SourceAssertionRef, AccessPointRef and SelectionRecordRef are typed opaque references; ResolutionRecordRef, CorrectionRecordRef and ContainmentRecordRef remain deferred. | CONFIRMED |
+| HF-05B-03 | Reference types use logical namespaces distinct from serialized prefixes. | CONFIRMED |
+| HF-05B-04 | Stable references never silently alias; superseded records remain inspectable. | CONFIRMED |
+| HF-05B-05 | Retained relationship/history records preserve originally recorded references. | CONFIRMED |
+| HF-05B-06 | Exact Place reads expose identity/resolution context plus optional content. | CONFIRMED |
+| HF-05B-07 | Resolution envelope can express recognition, new-use standing, relationships, history and detail availability without frozen JSON fields. | CONFIRMED |
+| HF-05B-08 | New-use standing is capability, not lifecycle enum. | CONFIRMED |
+| HF-05B-09 | Historical resolution uses NO SILENT SUBSTITUTION and exact GeoID resolution is not search. | CONFIRMED |
+| HF-05B-10 | Split, closure and T1/T2 withdrawal semantics follow the frozen bounded contracts. | CONFIRMED |
+| HF-05B-11 | Resolution Link, caller-relative view and Succession remain distinct; stored direction/vocabulary remain TBD. | CONFIRMED |
+| HF-05B-12 | Recognized historical/restricted identities are not reported as not found merely because they are non-current. | CONFIRMED |
+| HF-05B-13 | Provider references are external values only, never DAEN references or GeoIDs. | CONFIRMED |
+| HF-05B-14 | I1–I13 and all 15 coherence cases are Human Frozen, subject to protected TBDs. | CONFIRMED |

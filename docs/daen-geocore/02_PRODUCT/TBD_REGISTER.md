@@ -132,3 +132,8 @@ Withdrawal T1/T2 target scope is `RESOLVED FOR M1 DOMAIN SEMANTICS`; API represe
 ## Phase 05A API-Exposure Decisions
 
 Phase 05A freezes resource boundaries only. The following remain unresolved: Extent history; containment currentness; cross-subject supersession; selection authority; withdrawal authority; lifecycle taxonomy; reference format. API Definition MUST NOT silently freeze these as settled domain policy.
+
+
+## Phase 05B Protected TBDs
+
+GeoID encoding; serialized reference forms; canonical textual normalization; Resolution Link stored direction/type vocabulary; lifecycle taxonomy; demolition-to-closure; withdrawal authority/removal workflow; Access Point lifecycle; cross-subject assertion reassociation; selection authority; provider mapping; error codes/object; HTTP; database; cache; and version mechanics remain unresolved.
