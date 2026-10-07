@@ -243,3 +243,11 @@ Source: `validation/m1/errata/SCENARIO-I-TARGET-ERRATUM.md`.
 | M1-I-ACCEPT-01 Scenario I acceptance | RUN-I-01 is accepted as `PASS` for the controlled closure / historical-reference-withdrawal outcome only; Reading B is consciously accepted, P20 physical closure and P03 historical-reference withdrawal are supported, F1–F7 remain non-blocking, final B3 withdrawal coverage remains for the final gate, and overall M1 remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
 
 Evidence: `b311f5aff4e3258f591b2d9ec86fc907e9c40cd2`; input freeze `67957e1067066ca7f4947eef5e23e3462fef87f9`; target erratum `13af031692b8f8e57085fc1ccd6c6ab39f2b87d8`; review export and disposition are retained under `validation/m1/reviews/`.
+
+## Phase 04D — Scenario J Target / Fixture Erratum
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-J-ERRATUM-01 | Historical J targets P18/P19 conflict with later corpus roles and incomplete P19 fixture. Effective positive fixtures are REAL P07→P08 and SYNTHETIC P19→FIX-ID-J-P19-CHILD; P19 occupant proposal is supplemental negative control; P18 is excluded from RUN-J-01. This is a validation-design correction only and does not amend the Domain Model. Scenario J is not yet accepted. | `CONFIRMED FOR M1 VALIDATION` |
+
+Source: `validation/m1/errata/SCENARIO-J-TARGET-ERRATUM.md`.
