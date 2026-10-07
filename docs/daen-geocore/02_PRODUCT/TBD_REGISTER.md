@@ -159,3 +159,12 @@ Auth/privacy mechanics; OpenAPI field schemas; pagination/filter syntax; GeoID/r
 Resolved at Phase 05 contract level: HTTP status-category mapping; Idempotency-Key transport role; client-global idempotency scope; 7-day minimum replay guarantee; endpoint per-operation basis/idempotency requirements; and exact explicit scope equality for Selection mutation.
 
 Still unresolved: error-body JSON schema; authorization/privacy HTTP behavior; GeoID/reference encoding; MutationBasisToken transport; idempotency storage; scope encoding; richer scope equivalence; Extent geometry payload; and all existing Domain TBDs.
+
+
+## Phase 05 Final-Gate Status
+
+`PHASE 05 API DEFINITION = COMPLETE / GO`
+
+Resolved at Phase 05: resource/API exposure boundary; typed-reference semantics; exact Place resolution; Source Assertion read/write semantics; Current Representation read/selection semantics; Access Point read-only public semantics; Extent read boundary and write gate; Correction intent; minimal Containment read contract; Provenance/Quality boundary; mutation/error semantics; idempotency/concurrency semantics; MutationBasisToken semantics; HTTP status categories; and 18 canonical endpoints.
+
+All still-protected TBDs remain carried forward without semantic change.

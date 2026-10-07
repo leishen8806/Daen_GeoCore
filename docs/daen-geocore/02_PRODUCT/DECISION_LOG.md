@@ -413,3 +413,11 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | Decision | Frozen result | Status |
 |---|---|---|
 | PHASE-05-FINAL-GATE-R1-BOUNDED-COMPLETION-01 | F1–F5 completed: HTTP status categories recorded; Idempotency-Key reconciled to client-global scope and 7-day minimum; Extent-kind write gate explicit; endpoint basis/idempotency annotations added; exact explicit Selection scope equality recorded. No new endpoints, Domain Model change or OpenAPI. Phase 06 remains NOT authorized; Phase 05 Final Gate requires re-review. | CONFIRMED |
+
+
+## Phase 05 Final Gate GO
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-05-FINAL-GATE-GO-01 | Phase 05 API Definition Final Gate = GO; F1–F5 closed; required conceptual/API-definition deliverables complete; no Domain contradiction; Phase 06 Technical Architecture authorized. OpenAPI, implementation, DB/provider/auth/privacy and market validation are not implied. | CONFIRMED |
+| PHASE-05-COMPLETE-01 | Phase 05 API Definition is complete at the conceptual contract and endpoint-mapping level. | CONFIRMED |
