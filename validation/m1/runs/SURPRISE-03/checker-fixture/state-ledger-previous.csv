@@ -1,0 +1,5 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-SURPRISE-03,PRE-P13-PLACE,FIX-ID-P13,Place,locus=Calmette Hospital; identity=FIX-ID-P13,S03-PLACE-P13,unknown,REAL,
+RUN-SURPRISE-03,PRE-P13-COORD-A,FIX-ID-P13-SA-COORD-A,Source Assertion,ref=FIX-ID-P13; fact=coordinate; purpose=place-coordinate; value=FROZEN-P13-CONFLICTING-COORDINATE-A,S03-P13-COORD-A,unknown,REAL,
+RUN-SURPRISE-03,PRE-P13-COORD-B,FIX-ID-P13-SA-COORD-B,Source Assertion,ref=FIX-ID-P13; fact=coordinate; purpose=place-coordinate; value=FROZEN-P13-CONFLICTING-COORDINATE-B,S03-P13-COORD-B,unknown,REAL,
+RUN-SURPRISE-03,PRE-P13-NAME,FIX-ID-P13-SA-NAME,Source Assertion,ref=FIX-ID-P13; fact=name; purpose=display-name; language=en; value=Calmette Hospital,S03-P13-NAME,unknown,REAL,

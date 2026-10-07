@@ -1,0 +1,5 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-SURPRISE-02,PRE-P07-PLACE,FIX-ID-P07,Place,locus=Royal University of Phnom Penh Main Campus; identity=FIX-ID-P07,S02-P07-PLACE,unknown,REAL,
+RUN-SURPRISE-02,PRE-P08-PLACE,FIX-ID-P08,Place,locus=Hun Sen Library RUPP; identity=FIX-ID-P08,S02-P08-PLACE,unknown,REAL,
+RUN-SURPRISE-02,PRE-CONT-P07-P08,FIX-CONT-S02-P07-P08,Containment,ref=FIX-ID-P07; relationship=contains; parent=FIX-ID-P07; child=FIX-ID-P08,S02-P07-CONTAINS-P08,unknown,REAL,
+RUN-SURPRISE-02,POST-RES-P07-CLOSED,FIX-RES-S02-P07-CLOSED,Resolution Link,ref=FIX-ID-P07; lifecycle=closure; relationship=closure; resolution=FIX-ID-P07; historical_resolvable=true; valid_for_new_use=false; successor=none,SYN-S02-CLOSE-P07,unknown,SYNTHETIC,
