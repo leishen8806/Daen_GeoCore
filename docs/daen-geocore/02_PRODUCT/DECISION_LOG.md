@@ -341,3 +341,27 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | HF-05B-12 | Recognized historical/restricted identities are not reported as not found merely because they are non-current. | CONFIRMED |
 | HF-05B-13 | Provider references are external values only, never DAEN references or GeoIDs. | CONFIRMED |
 | HF-05B-14 | I1–I13 and all 15 coherence cases are Human Frozen, subject to protected TBDs. | CONFIRMED |
+
+
+## Phase 05C — Read Contracts Human Freeze
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-05C-READ-CONTRACTS-FREEZE-01 | Phase 05C Source Assertion, Current DAEN Representation, Access Point and Extent read contracts are Human Frozen. No endpoints, OpenAPI, JSON Schema, database schema, mutations or architecture are defined. | CONFIRMED |
+| HF-05C-01 | Public Source Assertion subject is PlaceRef only; unresolved-location exposure and AP-as-assertion-subject remain deferred. | CONFIRMED |
+| HF-05C-02 | Source Assertion content is open fact/purpose, typed value, scope, Provenance, Quality and history without closed vocabularies. | CONFIRMED |
+| HF-05C-03 | Original assertion content is immutable; correction creates a new assertion; superseded differs from withdrawn. | CONFIRMED |
+| HF-05C-04 | Same-subject supersession is guaranteed; cross-subject relations are historical/traceability context only. | CONFIRMED |
+| HF-05C-05 | Current Representation is Place-associated, selected, traceable and not absolute truth. | CONFIRMED |
+| HF-05C-06 | Material Selection Records are immutable and use stable opaque SelectionRecordRef. | CONFIRMED |
+| HF-05C-07 | Selected-value traceability is frozen; derivation/normalization algorithms are not. | CONFIRMED |
+| HF-05C-08 | Competing evidence is discoverable without ranking or canonical conflict-set logic. | CONFIRMED |
+| HF-05C-09 | Access Point reads expose served Places, attributable facts, Provenance and Quality without AP ranking/defaults. | CONFIRMED |
+| HF-05C-10 | Access Point attributable location fact is an API read boundary, not a new Domain concept or reference type. | CONFIRMED |
+| HF-05C-11 | AP location multiplicity may be zero, one or several; no Place-coordinate fallback. | CONFIRMED |
+| HF-05C-12 | AP↔Place is many-to-many capable with explicitly recorded history only. | CONFIRMED |
+| HF-05C-13 | Extent is read-only, non-top-level and exposed through assertion/selection values. | CONFIRMED |
+| HF-05C-14 | Extent geometry/role/overlap semantics remain deferred; overlap alone implies no relation. | CONFIRMED |
+| HF-05C-15 | Provenance remains attached to exposed facts/assertions/selections/AP facts; no public Source resource. | CONFIRMED |
+| HF-05C-16 | Quality is explicit where required and `unknown` is valid; no scale or ranking is frozen. | CONFIRMED |
+| HF-05C-17 | Absence, unknown, restricted detail and historical identity remain distinct; no fabricated defaults. | CONFIRMED |

@@ -137,3 +137,8 @@ Phase 05A freezes resource boundaries only. The following remain unresolved: Ext
 ## Phase 05B Protected TBDs
 
 GeoID encoding; serialized reference forms; canonical textual normalization; Resolution Link stored direction/type vocabulary; lifecycle taxonomy; demolition-to-closure; withdrawal authority/removal workflow; Access Point lifecycle; cross-subject assertion reassociation; selection authority; provider mapping; error codes/object; HTTP; database; cache; and version mechanics remain unresolved.
+
+
+## Phase 05C Protected TBDs
+
+Access Point as Source Assertion subject; AP location-fact backing/reference; AP Current Representation/ranking; AP lifecycle; assertion-kind and value-type vocabularies; scope encoding; selected-value derivation; selection authority; conflict resolution; Extent geometry/CRS/role/reference; public Source resource; Quality scale; source ranking; temporal/as-of semantics; expansion/filter/pagination; endpoint layout; mutations/idempotency/versioning remain unresolved.
