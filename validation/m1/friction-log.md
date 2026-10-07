@@ -164,3 +164,19 @@ RUN-D-01 was accepted for its scoped synthetic Access Point outcome. No observab
 | `RUN-D-01:F6` E overlap | P05/P06 sharing does not execute E's P07 case. |
 
 These are independent-review findings, not contemporaneous operator friction or confirmed Domain Model failures.
+
+## INDEPENDENT REVIEW FINDINGS — RUN-H-01 — NOT CONTEMPORANEOUS OPERATOR FRICTION
+
+RUN-H-01 was accepted for its controlled synthetic Split outcome. These findings are retained as non-blocking review, validation-medium, evidence or traceability limitations:
+
+| Finding | Classification | Disposition |
+|---|---|---|
+| `RUN-H-01:F1` cross-subject Source Assertion supersession | `MODEL FRICTION — LOW — SINGLE INSTANCE — NON-BLOCKING` | Accepted for this fixture only; no Domain Model amendment; narrow cross-subject reassociation/supersession TBD deferred to Phase 05/later policy. |
+| `RUN-H-01:F2` historical parent status derived from relationships | `VALIDATION MEDIUM ISSUE`, Low | No production parent status field added. |
+| `RUN-H-01:F3` one-to-many split notation not mechanically checked | `VALIDATION MEDIUM ISSUE`, Low | No production `split_group`/`result_count` schema added. |
+| `RUN-H-01:F4` split premise frozen outside ledger | `EVIDENCE LIMITATION`, Low | Retained; no retrospective premise rows added. |
+| `RUN-H-01:F5` 20-to-23 bookkeeping across isolated subcases | `EVIDENCE LIMITATION`, Low | Corrected wording: conceptual capacity only; no materialized 23-Place state. |
+| `RUN-H-01:F6` input-freeze and invariant shorthand traceability | `REPORTING / TRACEABILITY ISSUE`, Low | Retrospective references recorded; historical source map unchanged. |
+| `RUN-H-01:F7` earlier corpus-plan discrepancy | `REPORTING / TRACEABILITY ISSUE`, Low | Historical discrepancy recorded; historical corpus plan unchanged. |
+
+These are independent-review findings, not contemporaneous operator friction or confirmed global Domain Model failures.

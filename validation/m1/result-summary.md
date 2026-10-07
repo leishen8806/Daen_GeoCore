@@ -75,7 +75,7 @@ Empty final-report structure. Do not fill results before execution.
 | E | PASS — scoped Scenario E outcome | RUN-E-01 evidence `1388f7b3`; review export and disposition | F1–F6 retained as non-blocking limitations; overall M1 decision not made |
 | F | PASS — scoped Scenario F outcome | RUN-F-01 evidence `005a25f`; review export and disposition | F1–F5 retained as non-blocking limitations; overall M1 decision not made |
 | G | PASS — scoped Scenario G outcome | RUN-G-01 evidence `424c15f`; erratum, review export and disposition | F1–F5 retained as non-blocking limitations; overall M1 decision not made |
-| H | | | |
+| H | PASS — scoped Scenario H outcome | RUN-H-01 evidence `9bc78b8`; review export and disposition | F1–F7 retained as non-blocking findings; overall M1 decision not made |
 | I | | | |
 | J | | | |
 
@@ -112,3 +112,15 @@ Empty final-report structure. Do not fill results before execution.
 - **Reviewer:**
 - **Date:**
 - **Decision:**
+
+### Scenario H acceptance scope
+
+- RUN-H-01: `PASS` for the controlled synthetic Split outcome only.
+- Target erratum: `validation/m1/errata/SCENARIO-H-TARGET-ERRATUM.md` (`6b572bc5ba03f275d25a21f727515128326a7d73`).
+- Input freeze: `a0424803269f11805a46f5d2453b0c3fba90c44a`.
+- Evidence: `9bc78b883fbe026477634227614134ca2a122944`.
+- Review export: `validation/m1/reviews/RUN-H-01-independent-review-export.md`.
+- Disposition: `validation/m1/reviews/RUN-H-01-disposition.md`.
+- P17 mis-conflation retained the original identity and created a distinct Locus-B identity; P18 true division retained a historical parent and created two distinct children with historical resolution.
+- F1–F7 remain recorded as non-blocking findings. I–J remain `NOT EXECUTED`.
+- Overall M1 decision: `NOT MADE`.

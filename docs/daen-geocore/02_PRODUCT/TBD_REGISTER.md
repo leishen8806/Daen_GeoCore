@@ -100,3 +100,5 @@ No phase number or design is assigned here.
 The controlled Product Constitution revision is recorded in `GEO_CORE_PRODUCT_CONSTITUTION.md` and confirmed in `DECISION_LOG.md`.
 
 Each unresolved item remains `TBD` until the relevant phase produces evidence and a reviewable decision.
+
+| Source Assertion subject reassociation / cross-subject supersession semantics | Phase 05 API Definition / later domain-policy clarification | RUN-H-01:F1 demonstrates one accepted fixture interpretation, but general cross-subject supersession semantics are not frozen. This is a narrow TBD, not a production requirement already decided. |
