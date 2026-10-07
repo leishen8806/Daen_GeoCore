@@ -265,3 +265,12 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | Decision | Frozen result | Status |
 |---|---|---|
 | M1-SURPRISE-FREEZE-01 | At baseline `75b3769264e8e35eec1d8cc595ed1b52144df489`, the independent Reviewer selected SURPRISE-01 (P05/P06 Extent overlap), SURPRISE-02 (P07/P08 containment × closure) and SURPRISE-03 (P13 conflicted selection). The cases create zero new Place identities and are frozen before operator execution. | `CONFIRMED FOR M1 VALIDATION` |
+
+
+## Phase 04D — Bounded Completion Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-BOUNDED-COMPLETION-ACCEPT-01 | P04 real anchor accepted; three Reviewer-selected surprise cases accepted; surprise requirement satisfied; S01/S02/S03 model friction recorded as non-blocking; pattern-equivalence and capacity-accounting decisions recorded separately; overall M1 remains NOT MADE; Final Gate has NOT occurred. | CONFIRMED FOR M1 VALIDATION |
+| M1-FRICTION-PATTERN-EQUIVALENCE-01 | Same pattern means a substantially equivalent missing semantic rule or ambiguity requiring substantially the same clarification or repair; broad category or shared TBD root alone is insufficient. Six specific groups currently have maximum repeated count 1. | CONFIRMED |
+| M1-VALIDATION-CAPACITY-ACCOUNTING-01 | 20 initial Places / maximum 23 after split-created Places applies to registered corpus and isolated validation-world capacity. H exercises 20→23; J run-local child is not corpus P21; surprise cases create zero Places; P04 AP is not a Place. | CONFIRMED |

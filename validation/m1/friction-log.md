@@ -218,3 +218,21 @@ RUN-J-01 was accepted for its controlled minimal Containment outcome. No new MOD
 `RUN-J-01 introduces NO new MODEL FRICTION finding.`
 
 The confirmed MODEL FRICTION tally remains RUN-H-01:F1, RUN-I-01:F2 and RUN-I-01:F3. No repeated pattern is inferred from the total count alone.
+
+
+## Bounded Completion Acceptance Findings
+
+| Finding | Classification | Disposition |
+|---|---|---|
+| RUN-P04-AP-01:F1–F4 | Non-blocking review / evidence limitations | P04 bounded real anchor accepted; no production or global AP claim. |
+| SURPRISE-01:F1 | MODEL FRICTION — LOW — NON-BLOCKING | Extent record/history semantics; no Domain Model amendment. |
+| SURPRISE-01:F2–F3 | Evidence / traceability limitations | Retained without reopening the fixture. |
+| SURPRISE-02:F1 | MODEL FRICTION — LOW-MEDIUM — NON-BLOCKING | Containment currentness after lifecycle event; no status field or amendment. |
+| SURPRISE-02:F2–F3 | Evidence / traceability limitations | Retained. |
+| SURPRISE-03:F1 | MODEL FRICTION — LOW — NON-BLOCKING | Selection authority / best-known rationale under unresolved conflict; no ranking or amendment. |
+| SURPRISE-03:F2–F3 | Evidence / traceability limitations | Retained. |
+| BOUNDED:F1 | REPORTING / TRACEABILITY ISSUE — LOW-MEDIUM — NON-BLOCKING | Reviewer selected questions/dimensions; Human selected concrete fixtures. No rerun required. |
+
+### Human pattern-equivalence tally
+
+Confirmed model-friction groups: RUN-H-01:F1; RUN-I-01:F2; RUN-I-01:F3; SURPRISE-01:F1; SURPRISE-02:F1; SURPRISE-03:F1. Under the human convention, these are six distinct groups; maximum repeated same-pattern count is 1. The >=3 distinct-Place falsification threshold is not triggered.

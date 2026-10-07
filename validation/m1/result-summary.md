@@ -14,7 +14,7 @@ Empty final-report structure. Do not fill results before execution.
 - Review record: `validation/m1/reviews/RUN-A-02-independent-review.md`.
 - Accepted evidence supports stable fixture identities for P01/P02, separation of Place, Source Assertion and Current DAEN Representation, retained assertions/history, and tested name/script variations without a new Place identity.
 - Selection coexistence, selection REAL/SYNTHETIC classification, exact source-specific attribution, provider independence and findings F1–F8 remain unresolved or limited as recorded in the review disposition.
-- Scenarios G–J: `NOT EXECUTED`.
+- At the time of this scenario acceptance, later scenarios had not yet executed; see the current A–J result table for final execution status.
 - Overall M1 decision: `NOT MADE`.
 
 ### Scenario G acceptance scope
@@ -60,7 +60,7 @@ Empty final-report structure. Do not fill results before execution.
 - Disposition: `validation/m1/reviews/RUN-F-01-disposition.md`.
 - Three wrong fixture Source Assertions were superseded; OLD history, attribution, Correction records and Place identities remain preserved.
 - F1–F5 remain non-blocking limitations. Production authority, real-world truth, Current DAEN Representation behavior and general Succession taxonomy are not established.
-- Scenarios G–J: `NOT EXECUTED`.
+- At the time of this scenario acceptance, later scenarios had not yet executed; see the current A–J result table for final execution status.
 - Overall M1 decision: `NOT MADE`.
 
 
@@ -146,3 +146,15 @@ Empty final-report structure. Do not fill results before execution.
 - Disposition: `validation/m1/reviews/RUN-J-01-disposition.md`.
 - Exactly two minimal containment relationships are accepted; the P19 occupant proposal is a supplemental negative control only.
 - Overall M1 decision remains `NOT MADE`.
+
+
+## Bounded M1 Completion Acceptance
+
+- RUN-P04-AP-01: `PASS` — bounded real Access Point anchor evaluation only.
+- `P04 REAL ANCHOR SATISFIED`.
+- SURPRISE-01: `PASS`.
+- SURPRISE-02: `PASS`.
+- SURPRISE-03: `PASS`.
+- `SURPRISE CASE REQUIREMENT SATISFIED`.
+- Six total confirmed MODEL FRICTION findings are recorded; no same specific pattern repeats across >=3 distinct Places.
+- Overall M1 remains `NOT MADE`. Final Gate has not occurred.
