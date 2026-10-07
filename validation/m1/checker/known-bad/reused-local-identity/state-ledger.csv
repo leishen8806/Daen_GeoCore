@@ -1,0 +1,3 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+bad,1,P01,Place,identity=alpha; ref=P01,src:P01,unknown,synthetic,
+bad,2,P01,Place,identity=beta; ref=P01,src:P01,unknown,synthetic,

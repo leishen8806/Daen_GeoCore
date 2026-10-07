@@ -1,0 +1,7 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-G-01,PRE-P15-PLACE,FIX-ID-P15,Place,"locus=synthetic P15 intended locus; identity=FIX-ID-P15",G-PLACE-P15,unknown,SYNTHETIC,
+RUN-G-01,PRE-P15-SA-RECORD,FIX-ID-P15-SA-RECORD,Source Assertion,"ref=FIX-ID-P15; fact=provider-reference; purpose=external-location-reference; value=SYN-G-P15-SOURCE-RECORD-001",SYN-G-P15-RECORD,unknown,SYNTHETIC,
+RUN-G-01,PRE-P16-PLACE,FIX-ID-P16,Place,"locus=synthetic P15/P16 same intended locus; identity=FIX-ID-P16",G-PLACE-P16,unknown,SYNTHETIC,
+RUN-G-01,PRE-P16-SA-RECORD,FIX-ID-P16-SA-RECORD,Source Assertion,"ref=FIX-ID-P16; fact=provider-reference; purpose=external-location-reference; value=SYN-G-P16-SOURCE-RECORD-002",SYN-G-P16-RECORD,unknown,SYNTHETIC,
+RUN-G-01,POST-RES-G-B,FIX-RES-G-B-P15-TO-P16,Resolution Link,"ref=FIX-ID-P15; relationship=merge; retired_identity=FIX-ID-P15; survivor_identity=FIX-ID-P16; resolution_from=FIX-ID-P15; resolution_to=FIX-ID-P16; retired_resolvable=true; survivor_basis=test-direction-only; survivor_policy=not-defined",SYN-G-MERGE-B,unknown,SYNTHETIC,
+RUN-G-01,POST-SUCC-G-B,FIX-SUCC-G-B-P15-TO-P16,Succession,"ref=FIX-RES-G-B-P15-TO-P16; predecessor=FIX-ID-P15; successor=FIX-ID-P16; relationship=merge; history_preserved=true",SYN-G-SUCC-B,unknown,SYNTHETIC,

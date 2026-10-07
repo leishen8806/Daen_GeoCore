@@ -1,0 +1,4 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-I-01-C,PRE-P20-PLACE,FIX-ID-P20,Place,locus=Former White Building Phnom Penh; identity=FIX-ID-P20,I-PLACE-P20,unknown,REAL,
+RUN-I-01-C,POST-P20-SA-DEMOLITION,FIX-ID-P20-SA-DEMOLITION,Source Assertion,ref=FIX-ID-P20; fact=physical-status; purpose=place-lifecycle-evidence; value=demolished in 2017,PUB-I-P20-DEMOLITION,unknown,REAL,
+RUN-I-01-C,POST-RES-P20-CLOSED,FIX-RES-I-P20-CLOSED,Resolution Link,ref=FIX-ID-P20; lifecycle=closure; relationship=closure; resolution=FIX-ID-P20; historical_identity=FIX-ID-P20; physical_status=demolished; historical_resolvable=true; valid_for_new_use=false; identity_reassigned=false; successor=none,SYN-I-CLOSE-P20,unknown,SYNTHETIC,

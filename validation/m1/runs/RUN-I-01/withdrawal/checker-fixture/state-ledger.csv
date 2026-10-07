@@ -1,0 +1,4 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-I-01-W,PRE-P03-PLACE,FIX-ID-P03,Place,locus=Raffles Hotel Le Royal Phnom Penh; identity=FIX-ID-P03,I-PLACE-P03,unknown,REAL,
+RUN-I-01-W,PRE-P03-SA-REF-HIST,FIX-ID-P03-SA-REF-HIST,Source Assertion,ref=FIX-ID-P03; fact=provider-reference; purpose=external-location-reference; value=SYN-I-P03-HISTORICAL-REFERENCE-001,SYN-I-P03-REF-HIST,unknown,SYNTHETIC,
+RUN-I-01-W,POST-RES-P03-WITHDRAWN-REF,FIX-RES-I-P03-WITHDRAWN-REF,Resolution Link,ref=FIX-ID-P03-SA-REF-HIST; relationship=reference-withdrawal; withdrawn_subject=FIX-ID-P03-SA-REF-HIST; target_place=FIX-ID-P03; resolution_to=FIX-ID-P03; historically_traceable=true; valid_for_new_use=false; place_identity_unchanged=true; place_lifecycle_unchanged=true; replacement=none; correction=false; deletion=false,SYN-I-WITHDRAW-P03,unknown,SYNTHETIC,

@@ -153,6 +153,18 @@ The representation may include a Selected Coordinate, selected address expressio
 
 “Canonical Selection” is not the preferred Phase 03 term. Legacy Constitution wording “canonical representation” maps to Current DAEN Representation without changing the frozen meaning.
 
+### 11.1 Selection scope and supersession
+
+For Current DAEN Representation selections, ordinary supersession MUST target a prior selection for the same Place, the same represented fact or purpose, and an explicitly equivalent scope.
+
+Adding a representation in another language MUST NOT, by itself, invalidate a representation or Source Assertion in an existing language scope.
+
+A superseding selection MUST NOT erase or automatically invalidate its supporting Source Assertions.
+
+Missing scope information MUST NOT be silently treated as a known language, a wildcard, or proof of scope equivalence. Unresolved scope equivalence must be reported before claiming a replacement.
+
+This clarification applies to representation-selection semantics. It does not redefine Source Assertion correction, GeoID continuity, Place merge/split, or identity succession. General cross-scope migration policy, scope encoding and selection algorithms remain deferred.
+
 ## 12. Address Semantics
 
 Address is a location expression about a Place. Multiple language forms and address expressions may refer to one Place. Address is not Place identity.
@@ -217,6 +229,8 @@ new Source Assertion or representation
 
 Correction authority, review process, controlled removal and security rules are `TBD`.
 
+Representation-level succession is subject to the selection-scope clarification in §11; this does not redefine correction semantics.
+
 ## 20. Place Lifecycle
 
 Place lifecycle concerns the physical or geographic status of the locus, not the operating status of an occupant or business.
@@ -265,6 +279,30 @@ Withdrawal may indicate that a record should not be used for new operations whil
 
 The Product Constitution now covers closure, merge, split and withdrawal resolvability through a controlled amendment recorded in the Decision Log and TBD Register.
 
+### Withdrawal target scope
+
+Withdrawal may apply to two distinct target scopes.
+
+#### T1 — Place identity / Place record withdrawal
+
+When a Place identity or Place record is withdrawn from new operational use:
+
+- its GeoID remains resolvable as withdrawn or historical;
+- resolvable does not mean active;
+- it is not valid for new operational use;
+- its GeoID is never reassigned or reused;
+- material history remains retained.
+
+#### T2 — Historical reference / Source Assertion withdrawal
+
+When a historical reference or Source Assertion is withdrawn:
+
+- the reference/assertion remains retained and traceable;
+- it is not valid for new operational use;
+- withdrawal of that reference/assertion does not by itself withdraw or change the underlying Place identity.
+
+This clarification does not define a lifecycle state taxonomy, withdrawal authority, legal/privacy/security removal workflow, reopening rules, API response fields, or persistence/database schema.
+
 ## 25. Containment
 
 Place MAY contain Place — `CONFIRMED` as a minimal concept.
@@ -276,6 +314,8 @@ Containment remains one relationship only. Physical, functional, administrative 
 Succession records that a Place identity or representation has been superseded by later identities or representations. It supports non-destructive history for merge, split, withdrawal and material correction.
 
 The exact succession types and lifecycle transitions are `TBD`.
+
+Representation-level succession is subject to the selection-scope clarification in §11; general succession types remain `TBD`.
 
 ## 27. Domain Invariants
 

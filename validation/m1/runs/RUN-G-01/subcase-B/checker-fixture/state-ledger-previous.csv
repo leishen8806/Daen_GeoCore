@@ -1,0 +1,5 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-G-01,PRE-P15-PLACE,FIX-ID-P15,Place,"locus=synthetic P15 intended locus; identity=FIX-ID-P15",G-PLACE-P15,unknown,SYNTHETIC,
+RUN-G-01,PRE-P15-SA-RECORD,FIX-ID-P15-SA-RECORD,Source Assertion,"ref=FIX-ID-P15; fact=provider-reference; purpose=external-location-reference; value=SYN-G-P15-SOURCE-RECORD-001",SYN-G-P15-RECORD,unknown,SYNTHETIC,
+RUN-G-01,PRE-P16-PLACE,FIX-ID-P16,Place,"locus=synthetic P15/P16 same intended locus; identity=FIX-ID-P16",G-PLACE-P16,unknown,SYNTHETIC,
+RUN-G-01,PRE-P16-SA-RECORD,FIX-ID-P16-SA-RECORD,Source Assertion,"ref=FIX-ID-P16; fact=provider-reference; purpose=external-location-reference; value=SYN-G-P16-SOURCE-RECORD-002",SYN-G-P16-RECORD,unknown,SYNTHETIC,

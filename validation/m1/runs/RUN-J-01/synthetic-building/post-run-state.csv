@@ -1,0 +1,4 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-J-01-S,PRE-P19-PLACE,FIX-ID-P19,Place,locus=SYNTHETIC P19 Building; identity=FIX-ID-P19,J-PLACE-P19,unknown,SYNTHETIC,
+RUN-J-01-S,PRE-P19-CHILD-PLACE,FIX-ID-J-P19-CHILD,Place,locus=SYNTHETIC P19 Child Premises; identity=FIX-ID-J-P19-CHILD,SYN-J-P19-CHILD-PLACE,unknown,SYNTHETIC,
+RUN-J-01-S,POST-CONT-P19-CHILD,FIX-CONT-J-P19-CHILD,Containment,ref=FIX-ID-P19; relationship=contains; parent=FIX-ID-P19; child=FIX-ID-J-P19-CHILD,SYN-J-P19-CONTAINS-CHILD,unknown,SYNTHETIC,

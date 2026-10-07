@@ -87,6 +87,220 @@ The controlled Product Constitution revision is recorded below.
 
 **Source:** `Phase 04 Human Constitutional Decision — Validation Layer Separation`
 
+## Phase 04B Human Decisions — Validation Medium
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| Validation medium | Markdown for human judgment and evidence; CSV for corpus and logically append-only validation state | `CONFIRMED` |
+| Disposable checker | A future disposable local checker is approved in principle; source code and runtime remain deferred | `CONFIRMED` |
+| Known-bad fixtures | Known-bad Markdown specifications are required before checker implementation | `CONFIRMED` |
+| Dedicated area | Validation artifacts live under `validation/m1/` | `CONFIRMED` |
+| Synthetic marking | Every future state-ledger entry explicitly marks real/public or synthetic; synthetic assertions attached to real Places remain synthetic at entry level | `CONFIRMED` |
+| Opaque local labels | Corpus labels such as P01–P20 are local labels and do not imply GeoID format | `CONFIRMED` |
+| Snapshot / void / rerun | Execution errors are handled by void plus rerun; valid ledger history is logically append-only | `CONFIRMED` |
+| No-specification rule | Validation fixtures MUST NOT become API, database, schema or architecture precedent | `CONFIRMED` |
+| Evidence retention | Human evidence, execution records and friction references are retained for the validation run | `CONFIRMED` |
+| Manual authority | Manual Domain Model review has authority over checker output | `CONFIRMED` |
+
+## Phase 04B-2 Human Decisions — Disposable Checker
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| Checker runtime | Python 3 standard library only | `CONFIRMED` |
+| Checker scope | Structural/mechanical validation only; no domain judgment | `CONFIRMED` |
+| Self-test evidence | Known-good must pass and every known-bad fixture must trigger its intended rule | `CONFIRMED` |
+| Domain ownership | Domain judgment remains human-owned | `CONFIRMED` |
+
+## Phase 04C M1 Corpus Selection — CONFIRMED
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| Corpus composition | 12 real public Places and 8 explicitly synthetic cases | `CONFIRMED` |
+| Approved corpus | P01–P20 are pre-registered exactly as listed in `validation/m1/corpus-register.csv` | `CONFIRMED` |
+| Field-verification scope | P04 is the one mandatory real field case; P09, P10 and P11 are optional; P13 remains an unresolved public-source conflict with no M1 field requirement | `CONFIRMED` |
+| P20 rationale | Former White Building is selected as the historical Place because public demolition evidence supports lifecycle testing; occupant/business closure is not substituted for Place closure | `CONFIRMED` |
+| P09 rationale | Royal Phnom Penh Hospital is selected so P09 and the distinct Calmette coordinate-conflict case P13 remain separate real Places | `CONFIRMED` |
+| Execution boundary | A–J expected outcomes, B1–B11, checker rules and frozen scenarios remain unchanged; no results, friction entries or GO decision are created | `CONFIRMED` |
+
+## Phase 04C — Field Verification Scope Reduced
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| Field verification scope | M1 requires at least one real public Place with field-verified evidence that an Access Point can differ from a general Place reference / Selected Coordinate | `CONFIRMED` |
+| Mandatory real field case | P04 — AEON Mall Phnom Penh; minimal public/reference location evidence, observed usable public Access Point, coordinate/map pin if available, and YES/NO/UNCERTAIN difference assessment | `CONFIRMED` |
+| Optional field cases | P09, P10 and P11 remain valid public corpus Places; field verification is optional and not required for M1 | `CONFIRMED` |
+| Synthetic Access cases | P05/P06 and the frozen synthetic or controlled Access Point cases continue to test model expressiveness without claiming real-world usefulness | `CONFIRMED` |
+| P13 | Calmette remains `PUBLIC-SOURCE CONFLICT — UNRESOLVED`; no correct coordinate is forced and no field verification is required for M1 | `CONFIRMED` |
+| Operational observation | Data Maintenance Friction may be recorded during M1; it is not a Domain Model invariant and does not automatically cause `RETURN TO DOMAIN MODEL` | `CONFIRMED` |
+
+**Reason:** M1 needs one real-world anchor but must not assume routine location maintenance requires costly manual field verification.
+
+## Phase 04D — Execution Roles
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1 execution roles | Codex is Data Operator; Claude is Independent Reviewer; human owner + ChatGPT are the final decision layer | `CONFIRMED FOR M1 VALIDATION` |
+
+This is an M1 validation separation mechanism and does not establish permanent product governance.
+
+## H20 — Current Representation Selection Scope Clarification
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| Selection scope and supersession | Representation-level supersession requires the same Place, represented fact or purpose, and explicitly equivalent scope; another language does not by itself invalidate an existing language scope; supporting Source Assertions remain retained | `CONFIRMED PROSPECTIVE CLARIFICATION` |
+| RUN-A-02 relationship | This clarification does not repair historical RUN-A-02 evidence and does not expand its narrow Scenario A PASS scope; it is not empirically validated by adding the text | `RECORDED` |
+
+Source: Controlled Scenario A review disposition issued with the RUN-A-02 independent review.
+
+## Phase 04D — Scenario C Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-C-ACCEPT-01 Scenario C acceptance | RUN-C-01 is accepted as `PASS` for the controlled same-Place/fact/purpose/language replacement outcome only; F1–F6 remain non-blocking; overall M1 decision remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `77a3ec351c0120855b1569e06781813c7d163a34`; review excerpt and disposition are retained under `validation/m1/reviews/`.
+
+## Phase 04D — Scenario D Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-D-ACCEPT-01 Scenario D acceptance | RUN-D-01 is accepted as `PASS` for the controlled Access Point separation outcome only; F1–F6 remain non-blocking; overall M1 decision remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `281d2f02b945519491376f64aa54afa23b6523a7`; review export and disposition are retained under `validation/m1/reviews/`. P04/F4 and E/F6 follow-ups remain bounded as recorded in the disposition.
+
+## Phase 04D — Scenario B Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-B-ACCEPT-01 Scenario B acceptance | RUN-B-01 is accepted as `PASS` for the frozen Scenario B outcome only; F1–F7 remain recorded as non-blocking limitations; overall M1 decision remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `b77b87f75a759a62fe64f42ada4d1b0180cd61fc`; review export and disposition are retained under `validation/m1/reviews/`.
+
+## Phase 04D — Scenario E Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-E-ACCEPT-01 Scenario E acceptance | RUN-E-01 is accepted as `PASS` for the frozen controlled synthetic shared-Access-Point outcome only; F1–F6 remain non-blocking; overall M1 decision remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `1388f7b33ac96352625b56ce0535c3cc740f2f6`; review export and disposition are retained under `validation/m1/reviews/`. The acceptance does not establish real RUPP/Hun Sen Library access, AP identity continuity, AP correction/lifecycle, Scenario G behavior or P04 Access Point resolution.
+
+## Phase 04D — Scenario F Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-F-ACCEPT-01 Scenario F acceptance | RUN-F-01 is accepted as `PASS` for the frozen controlled Source Assertion correction outcome only; F1–F5 remain non-blocking; overall M1 decision remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `005a25f116e93d331920a0d922fc61cc58b8bbde`; input freeze `8d7ab92a515ad3bed899af35c15cb94227535f5e`; review export and disposition are retained under `validation/m1/reviews/`. This does not establish production correction authority, real-world truth, Current DAEN Representation behavior or general Succession taxonomy.
+
+## Phase 04D — Scenario G Target Erratum
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-G-ERRATUM-01 | Original G targets P08/P09 are defective for the Merge test; effective execution targets P15/P16 are approved prospectively. Original artifacts remain unchanged. This is a validation-design correction, not a Phase 03 Domain Model amendment. G has not executed or passed. | `CONFIRMED FOR M1 VALIDATION` |
+
+Source: `validation/m1/errata/SCENARIO-G-TARGET-ERRATUM.md`.
+
+## Phase 04D — Scenario G Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-G-ACCEPT-01 | RUN-G-01 is accepted as `PASS` for the controlled synthetic Merge outcome only; P15/P16 effective targets, both isolated survivor directions, explicit Resolution Link/Succession direction, retained history and no survivor policy are supported; F1–F5 remain non-blocking; overall M1 decision remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `424c15fad6a6f0a3aa58404d2daa1bf1e6bb3459`; input freeze `626556e86441836b00d356ee9cf7f9471b360541`; target erratum `eac2d7561a1b46096e2106e2201da3b7c6dd0788`. The original G erratum remains unchanged.
+
+## Phase 04D — Scenario H Target Erratum
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-H-ERRATUM-01 | Original H targets P10/P11 are defective for split testing; effective execution targets P17/P18 are approved prospectively. Original artifacts remain unchanged. This is a validation-design correction, not a Phase 03 Domain Model amendment. H has not executed or been accepted. | `CONFIRMED FOR M1 VALIDATION` |
+
+Source: `validation/m1/errata/SCENARIO-H-TARGET-ERRATUM.md`.
+
 ## Conflict resolution
 
 The earlier source material contained an organization-operations positioning. Phase 01 isolated it from the active Geo Core baseline. This Phase 02 Constitution keeps the location-infrastructure identity and does not import that historical positioning.
+
+## Phase 04D — Scenario H Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-H-ACCEPT-01 Scenario H acceptance | RUN-H-01 is accepted as `PASS` for the controlled synthetic Split outcome only; P17/P18 effective targets, retained original/history identities, distinct resulting identities and historical resolution are supported; F1–F7 remain non-blocking; overall M1 decision remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `9bc78b883fbe026477634227614134ca2a122944`; input freeze `a0424803269f11805a46f5d2453b0c3fba90c44a`; target erratum `6b572bc5ba03f275d25a21f727515128326a7d73`; review export and disposition are retained under `validation/m1/reviews/`.
+
+## Phase 04D — Scenario I Target Erratum
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-I-ERRATUM-01 | Historical Scenario I targets P12/P13 conflict with later 04C corpus-role assignment. Effective targets are P20 for physical Place closure and P03 for historical-reference withdrawal. Original artifacts remain unchanged. This is a validation-design correction only and does not amend the Domain Model. Scenario I is not yet accepted. | `CONFIRMED FOR M1 VALIDATION` |
+
+Source: `validation/m1/errata/SCENARIO-I-TARGET-ERRATUM.md`.
+
+## Phase 04D — Scenario I Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-I-ACCEPT-01 Scenario I acceptance | RUN-I-01 is accepted as `PASS` for the controlled closure / historical-reference-withdrawal outcome only; Reading B is consciously accepted, P20 physical closure and P03 historical-reference withdrawal are supported, F1–F7 remain non-blocking, final B3 withdrawal coverage remains for the final gate, and overall M1 remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `b311f5aff4e3258f591b2d9ec86fc907e9c40cd2`; input freeze `67957e1067066ca7f4947eef5e23e3462fef87f9`; target erratum `13af031692b8f8e57085fc1ccd6c6ab39f2b87d8`; review export and disposition are retained under `validation/m1/reviews/`.
+
+## Phase 04D — Scenario J Target / Fixture Erratum
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-J-ERRATUM-01 | Historical J targets P18/P19 conflict with later corpus roles and incomplete P19 fixture. Effective positive fixtures are REAL P07→P08 and SYNTHETIC P19→FIX-ID-J-P19-CHILD; P19 occupant proposal is supplemental negative control; P18 is excluded from RUN-J-01. This is a validation-design correction only and does not amend the Domain Model. Scenario J is not yet accepted. | `CONFIRMED FOR M1 VALIDATION` |
+
+Source: `validation/m1/errata/SCENARIO-J-TARGET-ERRATUM.md`.
+
+## Phase 04D — Scenario J Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-J-ACCEPT-01 Scenario J acceptance | RUN-J-01 is accepted as `PASS` for the controlled minimal Containment outcome only; exactly two directional Place-to-Place relationships are accepted, P19 occupant proposal is supplemental negative control only, F1–F5 remain non-blocking, A–J scenario acceptance sequence is complete, and overall M1 remains `NOT MADE` pending Final Gate | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7ee8ad447c0bc0c2da91ebca795f0`; target/fixture erratum `532332d00df38b237d214a39e5ee35f32038735f`; review export and disposition are retained under `validation/m1/reviews/`.
+
+## Phase 04D — Reviewer-Selected Surprise Cases
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-SURPRISE-FREEZE-01 | At baseline `75b3769264e8e35eec1d8cc595ed1b52144df489`, the independent Reviewer selected SURPRISE-01 (P05/P06 Extent overlap), SURPRISE-02 (P07/P08 containment × closure) and SURPRISE-03 (P13 conflicted selection). The cases create zero new Place identities and are frozen before operator execution. | `CONFIRMED FOR M1 VALIDATION` |
+
+
+## Phase 04D — Bounded Completion Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-BOUNDED-COMPLETION-ACCEPT-01 | P04 real anchor accepted; three Reviewer-selected surprise cases accepted; surprise requirement satisfied; S01/S02/S03 model friction recorded as non-blocking; pattern-equivalence and capacity-accounting decisions recorded separately; overall M1 remains NOT MADE; Final Gate has NOT occurred. | CONFIRMED FOR M1 VALIDATION |
+| M1-FRICTION-PATTERN-EQUIVALENCE-01 | Same pattern means a substantially equivalent missing semantic rule or ambiguity requiring substantially the same clarification or repair; broad category or shared TBD root alone is insufficient. Six specific groups currently have maximum repeated count 1. | CONFIRMED |
+| M1-VALIDATION-CAPACITY-ACCOUNTING-01 | 20 initial Places / maximum 23 after split-created Places applies to registered corpus and isolated validation-world capacity. H exercises 20→23; J run-local child is not corpus P21; surprise cases create zero Places; P04 AP is not a Place. | CONFIRMED |
+
+
+## Final Gate Round 1 — B3 Iteration Authorization
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-FINAL-GATE-ROUND-1-ITERATE-01 | Baseline `69f56525d250d61deca3b67495f2e47ba866794d`; recommendation and Human Final Decision are ITERATE; sole blocker is B3 Place-GeoID withdrawal evidence/scope; no RETURN condition; one bounded synthetic T1 fixture is authorized. | CONFIRMED |
+
+
+## B3 Withdrawal Target Clarification
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-WITHDRAWAL-TARGET-CLARIFICATION-01 | Final Gate Round 1 exposed the B3 evidence gap. T1 Place identity/Place record withdrawal and T2 historical reference/Source Assertion withdrawal are distinct. Constitution and invariant 2 are unchanged; no lifecycle taxonomy is defined; one bounded synthetic T1 validation is authorized. | CONFIRMED FOR M1 VALIDATION |
+
+
+## B3 Withdrawal Iteration Acceptance and Final-Gate Round 2 Scope
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-B3-WITHDRAWAL-ACCEPT-01 | Authorized T1/T2 clarification accepted; RUN-B3-WITHDRAWAL-01 PASS; B3 PASS; I:F3 resolved prospectively for M1 domain semantics; no new fundamental concept; Final-Gate Round 2 authorized but not yet decided. | CONFIRMED |
+| M1-FINAL-GATE-ROUND-2-SCOPE-01 | Round 2 reopens only B3, RUN-I-01:F3 / withdrawal target scope, and whether the bounded clarification creates a new blocking problem. All other Round-1 judgments, limitations, safe-to-defer findings and Phase-05 guardrails are inherited unchanged. | CONFIRMED |
+
+
+## Final Gate Round 2 — M1 GO
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-FINAL-GATE-ROUND-2-GO-01 | Round-2 recommendation GO accepted by the Human Final Decision Layer; B1–B11 all PASS; B3 closed after authorized bounded iteration; no falsification criterion triggered; no fundamental new core concept; no business dependency; provenance/Quality sufficiently understandable; M1 Internal Validation complete; Phase 05 API Definition authorized. | CONFIRMED |
+| PHASE-04-M1-COMPLETE-01 | Phase 04 M1 Internal Validation is complete. Phase 03 Domain Model is stable enough to proceed to Phase 05 API Definition. This does not mean production ready, market validated, architecture frozen, API designed, or provider selected. | CONFIRMED |
