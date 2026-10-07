@@ -184,6 +184,14 @@ Evidence: `b77b87f75a759a62fe64f42ada4d1b0180cd61fc`; review export and disposit
 
 Evidence: `1388f7b33ac96352625b56ce0535c3cc740f2f6`; review export and disposition are retained under `validation/m1/reviews/`. The acceptance does not establish real RUPP/Hun Sen Library access, AP identity continuity, AP correction/lifecycle, Scenario G behavior or P04 Access Point resolution.
 
+## Phase 04D — Scenario F Acceptance
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| M1-F-ACCEPT-01 Scenario F acceptance | RUN-F-01 is accepted as `PASS` for the frozen controlled Source Assertion correction outcome only; F1–F5 remain non-blocking; overall M1 decision remains `NOT MADE` | `CONFIRMED FOR M1 VALIDATION` |
+
+Evidence: `005a25f116e93d331920a0d922fc61cc58b8bbde`; input freeze `8d7ab92a515ad3bed899af35c15cb94227535f5e`; review export and disposition are retained under `validation/m1/reviews/`. This does not establish production correction authority, real-world truth, Current DAEN Representation behavior or general Succession taxonomy.
+
 ## Conflict resolution
 
 The earlier source material contained an organization-operations positioning. Phase 01 isolated it from the active Geo Core baseline. This Phase 02 Constitution keeps the location-infrastructure identity and does not import that historical positioning.

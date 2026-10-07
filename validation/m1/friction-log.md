@@ -107,6 +107,20 @@ RUN-C-01 was accepted for its controlled same-scope positive replacement outcome
 
 These are independent-review findings, not contemporaneous operator friction or confirmed Domain Model failures.
 
+## INDEPENDENT REVIEW FINDINGS — RUN-F-01 — NOT CONTEMPORANEOUS OPERATOR FRICTION
+
+RUN-F-01 was accepted for its controlled Source Assertion correction outcome with no confirmed Domain Model failure. The five findings remain non-blocking:
+
+| Finding | Classification | Disposition |
+|---|---|---|
+| `RUN-F-01:F1` input-freeze traceability | `REPORTING / TRACEABILITY ISSUE`, Low | Record E baseline, F input freeze and F evidence commit distinction; historical source-map.md unchanged. |
+| `RUN-F-01:F2` duplicate OLD/REVISED relation encoding | `VALIDATION MEDIUM ISSUE`, Low | Retain as disposable notation; supersedes_reference remains the correction carrier; checker unchanged. |
+| `RUN-F-01:F3` Correction/Succession terminology boundary | `EVIDENCE LIMITATION`, Low | §19 supports Source Assertion correction; §26 leaves Succession types TBD; no Domain Model failure or amendment. |
+| `RUN-F-01:F4` invariant-number shorthand ambiguity | `REPORTING / TRACEABILITY ISSUE`, Low | Additive mapping to M1-B2/B5/B8 and relevant Domain Model correction/history requirement; frozen sheet unchanged. |
+| `RUN-F-01:F5` fixture-declared wrong facts | `EVIDENCE LIMITATION`, Low | F tests correction representation, not error detection, source ranking or real-world truth. |
+
+These are independent-review findings, not contemporaneous operator friction or confirmed Domain Model failures.
+
 ## INDEPENDENT REVIEW FINDINGS — RUN-E-01 — NOT CONTEMPORANEOUS OPERATOR FRICTION
 
 RUN-E-01 was accepted for its scoped controlled synthetic shared-Access-Point outcome with no confirmed Domain Model friction. The following findings remain non-blocking validation, evidence or traceability limitations only:

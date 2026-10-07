@@ -14,7 +14,7 @@ Empty final-report structure. Do not fill results before execution.
 - Review record: `validation/m1/reviews/RUN-A-02-independent-review.md`.
 - Accepted evidence supports stable fixture identities for P01/P02, separation of Place, Source Assertion and Current DAEN Representation, retained assertions/history, and tested name/script variations without a new Place identity.
 - Selection coexistence, selection REAL/SYNTHETIC classification, exact source-specific attribution, provider independence and findings F1–F8 remain unresolved or limited as recorded in the review disposition.
-- Scenarios F–J: `NOT EXECUTED`.
+- Scenarios G–J: `NOT EXECUTED`.
 - Overall M1 decision: `NOT MADE`.
 
 ### Scenario B acceptance scope
@@ -39,6 +39,18 @@ Empty final-report structure. Do not fill results before execution.
 - F1–F6 remain non-blocking review limitations. Scenario G interaction, P04 Access Point resolution and overall M1 acceptance are not established.
 - Overall M1 decision: `NOT MADE`.
 
+### Scenario F acceptance scope
+
+- RUN-F-01: `PASS` for the frozen controlled Source Assertion correction outcome only.
+- Evidence commit: `005a25f116e93d331920a0d922fc61cc58b8bbde`.
+- Input freeze: `8d7ab92a515ad3bed899af35c15cb94227535f5e`.
+- Review export: `validation/m1/reviews/RUN-F-01-independent-review-export.md`.
+- Disposition: `validation/m1/reviews/RUN-F-01-disposition.md`.
+- Three wrong fixture Source Assertions were superseded; OLD history, attribution, Correction records and Place identities remain preserved.
+- F1–F5 remain non-blocking limitations. Production authority, real-world truth, Current DAEN Representation behavior and general Succession taxonomy are not established.
+- Scenarios G–J: `NOT EXECUTED`.
+- Overall M1 decision: `NOT MADE`.
+
 
 ## Scenario A–J result table
 
@@ -49,7 +61,7 @@ Empty final-report structure. Do not fill results before execution.
 | C | PASS — scoped Scenario C outcome | RUN-C-01 evidence `77a3ec3`; review export and disposition | F1–F6 retained as non-blocking limitations; overall M1 decision not made |
 | D | PASS — scoped Scenario D outcome | RUN-D-01 evidence `281d2f0`; review export and disposition | F1–F6 retained as non-blocking limitations; overall M1 decision not made |
 | E | PASS — scoped Scenario E outcome | RUN-E-01 evidence `1388f7b3`; review export and disposition | F1–F6 retained as non-blocking limitations; overall M1 decision not made |
-| F | | | |
+| F | PASS — scoped Scenario F outcome | RUN-F-01 evidence `005a25f`; review export and disposition | F1–F5 retained as non-blocking limitations; overall M1 decision not made |
 | G | | | |
 | H | | | |
 | I | | | |
