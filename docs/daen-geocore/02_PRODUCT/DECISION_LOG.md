@@ -399,3 +399,10 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | Decision | Frozen result | Status |
 |---|---|---|
 | PHASE-05E-ENDPOINT-MAP-FREEZE-01 | 18-endpoint `/v1` surface frozen: 7 reads and 11 mutations, action routing via `/actions/{verb}`, separate correction, no `/representation`, Idempotency-Key with client-global scope and 7-day minimum replay horizon, MutationBasisToken, and containment read completion. | CONFIRMED |
+
+
+## Phase 05 Final Gate Round 1
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-05-FINAL-GATE-ROUND-1-ITERATE-01 | Baseline `e9342ba376cc2e1639a3eef1953e18067b6ecc2a`; independent recommendation and Human Decision ITERATE; no Domain contradiction; bounded work limited to F1–F5; no endpoint redesign; Phase 06 NOT authorized. | CONFIRMED |
