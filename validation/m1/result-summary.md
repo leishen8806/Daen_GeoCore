@@ -158,3 +158,21 @@ Empty final-report structure. Do not fill results before execution.
 - `SURPRISE CASE REQUIREMENT SATISFIED`.
 - Six total confirmed MODEL FRICTION findings are recorded; no same specific pattern repeats across >=3 distinct Places.
 - Overall M1 remains `NOT MADE`. Final Gate has not occurred.
+
+
+## M1 Final Gate Round 1
+
+- Decision: `ITERATE`
+- B1 PASS
+- B2 PASS
+- B3 FAIL
+- B4 PASS
+- B5 PASS
+- B6 PASS
+- B7 PASS
+- B8 PASS
+- B9 PASS
+- B10 PASS
+- B11 PASS
+
+Overall M1 remains `NOT COMPLETE`. The sole blocker is direct Place-GeoID withdrawal resolvability evidence.
