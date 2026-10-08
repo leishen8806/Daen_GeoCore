@@ -489,3 +489,11 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | Decision | Frozen result | Status |
 |---|---|---|
 | PHASE-06C-LIMITED-CONFORMANCE-GO-01 | Baseline `2492dc5a9d0ae423ac4a962696a245498f55d563`; C1–C8 PASS; Current Representation persistence and History/Audit persistence conformant; Phase 06C final accepted; no technology/product selection; no protected-TBD leak; Phase 06D authorized. | CONFIRMED |
+
+## PHASE-06D-CONCURRENCY-IDEMPOTENCY-ATOMICITY-FREEZE-01
+
+Status: `CONFIRMED`
+
+Human decision: `PHASE 06D CONCURRENCY / IDEMPOTENCY / ATOMICITY = HUMAN FROZEN`.
+
+This freeze records optimistic concurrency, MutationBasis and recovery-incarnation safety, idempotency execution and replay, local transactional atomicity, non-reuse evidence, recovery/retry behavior, target multi-region guarantees, and declared-read-set protection. It selects no technology or product and does not resolve protected Domain/API TBDs.
