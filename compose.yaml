@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: daen
+      POSTGRES_PASSWORD: daen_local
+      POSTGRES_DB: daen_geocore
+    ports:
+      - "5432:5432"
+    volumes:
+      - daen_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U daen -d daen_geocore"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  api:
+    build: .
+    environment:
+      DAEN_DATABASE_URL: postgresql+psycopg://daen:daen_local@postgres:5432/daen_geocore
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+volumes:
+  daen_pgdata:

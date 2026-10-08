@@ -28,3 +28,16 @@ DAEN / Geo Core 项目的工作区。当前内容来自对话 **「DAEN 域联�
 ### 定位差异记录
 
 「DAEN需求与规划」的助手提出了 “DAEN = AI Native Organization Operating System”，将虚拟办公室纳入组织运行平台。现有品牌稿提出的是 “Cambodia Location Infrastructure”。两者是不同的产品定位；前者目前仅为助手建议，尚未看到用户明确确认。后续引用该对话时应保留这一差异，不能据此自动覆盖 GEO Core 的位置基础设施方向。
+
+## Software implementation baseline
+
+The `impl/software-baseline` branch establishes the Phase 06E software scaffold: CPython, FastAPI/Uvicorn, Pydantic, PostgreSQL 17 with psycopg and SQLAlchemy Core, Alembic, Docker Compose, and GitHub Actions. Public Phase 05 `/v1` APIs are not implemented yet; infrastructure and provider selection remain open.
+
+```text
+uv sync
+uv run ruff format --check .
+uv run ruff check .
+uv run pyright
+uv run pytest
+docker compose up
+```
