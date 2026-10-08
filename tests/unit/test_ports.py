@@ -15,7 +15,7 @@ from daen_geocore.ports.evidence.store import (
 from daen_geocore.ports.failures import TechnicalFailureClass
 from daen_geocore.ports.persistence.commit import (
     CommitAccepted,
-    CommitTechnicalAbort,
+    CommitNotCommitted,
     CommitUnknown,
 )
 from daen_geocore.ports.recovery.gate import RecoveryIncarnation, RecoveryState
@@ -45,9 +45,9 @@ def mapping(place_token: str = "P") -> RequestReferenceRecoveryMapping:
 
 def test_commit_knowledge_and_technical_failure_separation() -> None:
     assert CommitAccepted().status == "committed"
-    assert CommitTechnicalAbort(reason="deadlock").status == "technical_abort"
-    assert CommitUnknown(reason="timeout").status == "unknown"
     failure = PortFailure("deadlock", TechnicalFailureClass.RETRYABLE_TRANSACTION_ABORT)
+    assert CommitNotCommitted(failure).status == "definitely_not_committed"
+    assert CommitUnknown(reason="timeout").status == "outcome_unknown"
     assert failure.classification is TechnicalFailureClass.RETRYABLE_TRANSACTION_ABORT
 
 
@@ -63,6 +63,15 @@ def test_uow_context_rolls_back_and_rejects_double_commit() -> None:
         with unit:
             unit.commit()
             unit.commit()
+    unit = FakeUnitOfWork(outcome=CommitNotCommitted())
+    with unit:
+        assert unit.commit().status == "definitely_not_committed"
+    assert unit.state == "closed"
+    unit = FakeUnitOfWork(outcome=CommitUnknown(reason="timeout"))
+    with unit:
+        assert unit.commit().status == "outcome_unknown"
+    assert unit.state == "unknown_closed"
+    assert isinstance(unit.last_outcome, CommitUnknown)
 
 
 def test_cd1_mapping_preserves_typed_references_and_conflicts() -> None:
@@ -83,6 +92,11 @@ def test_cd1_mapping_preserves_typed_references_and_conflicts() -> None:
         EvidenceAlreadyPresentConflict,
     )
     assert store.read_request_mapping(key).value.record.references[0] == PlaceRef("P")
+    key_two = EvidenceLookupKey("lookup-2")
+    assert isinstance(
+        store.create_request_mapping_if_absent(key_two, mapping("Q")).value, EvidenceCreated
+    )
+    assert store.read_request_mapping(key_two).value.record.references[0] == PlaceRef("Q")
 
 
 def test_reservation_and_mapping_are_distinct_records() -> None:
@@ -92,6 +106,10 @@ def test_reservation_and_mapping_are_distinct_records() -> None:
     assert isinstance(store.create_reservation_if_absent(key, reservation).value, EvidenceCreated)
     assert isinstance(store.read_reservation(key).value, EvidenceFound)
     assert store.read_reservation(key).value.record != mapping()
+    key_two = EvidenceLookupKey("lookup-2")
+    other = ReferenceReservationEvidence((PlaceRef("Q"),))
+    assert isinstance(store.create_reservation_if_absent(key_two, other).value, EvidenceCreated)
+    assert store.read_reservation(key_two).value.record == other
 
 
 def test_unavailable_store_is_error_not_absence() -> None:
@@ -103,7 +121,16 @@ def test_unavailable_store_is_error_not_absence() -> None:
     assert isinstance(store.create_request_mapping_if_absent(key, mapping()), PortError)
     assert isinstance(store.read_reservation(key), PortError)
     assert isinstance(store.read_request_mapping(key), PortError)
-    assert not isinstance(PortSuccess(EvidenceAbsent()), PortError)
+    store.available = True
+    assert isinstance(store.read_reservation(key).value, EvidenceAbsent)
+    assert isinstance(store.read_request_mapping(key).value, EvidenceAbsent)
+
+
+def test_ready_observation_requires_incarnation() -> None:
+    from daen_geocore.ports.recovery.gate import RecoveryObservation
+
+    with pytest.raises(ValueError):
+        RecoveryObservation(RecoveryState.READY)
 
 
 def test_recovery_gate_all_states_and_capabilities() -> None:

@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 
 from daen_geocore.ports.evidence.store import (
@@ -10,9 +10,12 @@ from daen_geocore.ports.evidence.store import (
     ReferenceReservationEvidence,
     RequestReferenceRecoveryMapping,
 )
+from daen_geocore.ports.failures import TechnicalFailureClass
 from daen_geocore.ports.persistence.commit import (
     CommitAccepted,
+    CommitNotCommitted,
     CommitOutcome,
+    CommitUnknown,
 )
 from daen_geocore.ports.recovery.gate import RecoveryIncarnation, RecoveryObservation, RecoveryState
 from daen_geocore.ports.result import PortError, PortFailure, PortSuccess
@@ -34,6 +37,7 @@ class FakeCommitPort:
 class FakeUnitOfWork:
     outcome: CommitOutcome = CommitAccepted()
     state: str = "new"
+    last_outcome: CommitOutcome | None = None
 
     def __enter__(self):
         self.begin()
@@ -42,7 +46,12 @@ class FakeUnitOfWork:
     def __exit__(self, exc_type, exc_value, traceback):
         if self.state == "active":
             self.rollback()
-        self.state = "closed"
+        elif self.state not in {"committed", "not_committed", "unknown", "rolled_back"}:
+            raise RuntimeError("unit of work is not active")
+        if self.state == "unknown":
+            self.state = "unknown_closed"
+        else:
+            self.state = "closed"
 
     def begin(self) -> None:
         if self.state != "new":
@@ -52,11 +61,19 @@ class FakeUnitOfWork:
     def commit(self) -> CommitOutcome:
         if self.state != "active":
             raise RuntimeError("unit of work is not active")
-        self.state = "committed"
+        self.last_outcome = self.outcome
+        if isinstance(self.outcome, CommitAccepted):
+            self.state = "committed"
+        elif isinstance(self.outcome, CommitNotCommitted):
+            self.state = "not_committed"
+        elif isinstance(self.outcome, CommitUnknown):
+            self.state = "unknown"
+        else:
+            raise TypeError("unsupported commit outcome")
         return self.outcome
 
     def rollback(self) -> None:
-        if self.state in {"committed", "closed"}:
+        if self.state in {"committed", "closed", "unknown", "unknown_closed", "not_committed"}:
             raise RuntimeError("unit of work cannot roll back")
         self.state = "rolled_back"
 
@@ -64,49 +81,49 @@ class FakeUnitOfWork:
 @dataclass
 class InMemoryEvidenceStore:
     available: bool = True
-    reservation: ReferenceReservationEvidence | None = None
-    mapping: RequestReferenceRecoveryMapping | None = None
+    reservations: dict[EvidenceLookupKey, ReferenceReservationEvidence] = field(
+        default_factory=dict
+    )
+    mappings: dict[EvidenceLookupKey, RequestReferenceRecoveryMapping] = field(default_factory=dict)
 
     def _unavailable(self):
-        return PortError(PortFailure("evidence_unavailable"))
+        return PortError(
+            PortFailure("evidence_unavailable", TechnicalFailureClass.TRANSIENT_UNAVAILABLE)
+        )
 
     def create_reservation_if_absent(self, key: EvidenceLookupKey, record):
         if not self.available:
             return self._unavailable()
-        if self.reservation is None:
-            self.reservation = record
+        existing = self.reservations.get(key)
+        if existing is None:
+            self.reservations[key] = record
             return PortSuccess(EvidenceCreated())
         return PortSuccess(
-            EvidenceAlreadyPresentSame()
-            if self.reservation == record
-            else EvidenceAlreadyPresentConflict()
+            EvidenceAlreadyPresentSame() if existing == record else EvidenceAlreadyPresentConflict()
         )
 
     def create_request_mapping_if_absent(self, key: EvidenceLookupKey, record):
         if not self.available:
             return self._unavailable()
-        if self.mapping is None:
-            self.mapping = record
+        existing = self.mappings.get(key)
+        if existing is None:
+            self.mappings[key] = record
             return PortSuccess(EvidenceCreated())
         return PortSuccess(
-            EvidenceAlreadyPresentSame()
-            if self.mapping == record
-            else EvidenceAlreadyPresentConflict()
+            EvidenceAlreadyPresentSame() if existing == record else EvidenceAlreadyPresentConflict()
         )
 
     def read_reservation(self, key: EvidenceLookupKey):
         if not self.available:
             return self._unavailable()
-        return PortSuccess(
-            EvidenceAbsent() if self.reservation is None else EvidenceFound(self.reservation)
-        )
+        record = self.reservations.get(key)
+        return PortSuccess(EvidenceAbsent() if record is None else EvidenceFound(record))
 
     def read_request_mapping(self, key: EvidenceLookupKey):
         if not self.available:
             return self._unavailable()
-        return PortSuccess(
-            EvidenceAbsent() if self.mapping is None else EvidenceFound(self.mapping)
-        )
+        record = self.mappings.get(key)
+        return PortSuccess(EvidenceAbsent() if record is None else EvidenceFound(record))
 
 
 @dataclass
@@ -119,8 +136,9 @@ class FakeRecoveryGate:
         return RecoveryObservation(self.state, self.incarnation, self.reason)
 
     def validate_before_authoritative_serving(self):
-        if self.observation().may_authoritative_serve and self.incarnation is not None:
-            return PortSuccess(self.incarnation)
+        observation = self.observation()
+        if observation.may_authoritative_serve:
+            return PortSuccess(observation.incarnation)
         return PortError(PortFailure("recovery_not_ready"))
 
 

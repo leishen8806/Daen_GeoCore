@@ -29,6 +29,10 @@ class RecoveryObservation:
     incarnation: RecoveryIncarnation | None = None
     reason: str | None = None
 
+    def __post_init__(self) -> None:
+        if self.state is RecoveryState.READY and self.incarnation is None:
+            raise ValueError("READY recovery observation requires an incarnation")
+
     @property
     def may_authoritative_serve(self) -> bool:
         return self.state is RecoveryState.READY
