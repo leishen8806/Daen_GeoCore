@@ -6,6 +6,6 @@ class RuntimeSettings(BaseSettings):
 
     environment: str = "local"
     log_level: str = "INFO"
-    database_url: str = "postgresql+psycopg://daen:daen_local@postgres:5432/daen_geocore"
+    database_url: str = ""
 
     model_config = SettingsConfigDict(env_prefix="DAEN_", extra="ignore")

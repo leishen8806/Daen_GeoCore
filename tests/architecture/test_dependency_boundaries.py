@@ -41,3 +41,11 @@ def test_dependency_boundaries() -> None:
 
     for path in (ROOT / "transport").rglob("*.py"):
         assert "infrastructure" not in imports_for(path)
+
+
+def test_postgres_infrastructure_uses_core_not_orm() -> None:
+    for path in (ROOT / "infrastructure" / "postgres").rglob("*.py"):
+        source = path.read_text(encoding="utf-8")
+        assert "sqlalchemy.orm" not in source
+        assert "DeclarativeBase" not in source
+        assert "Session" not in source
