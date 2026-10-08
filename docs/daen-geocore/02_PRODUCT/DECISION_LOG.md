@@ -445,3 +445,12 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | PHASE-05-POST-GO-CD1-INTERNAL-PLACE-PROVISIONING-01 | Internal-only provisioning of an already-decided NEW PLACE; no public endpoint; Phase 05 GO tag unchanged; permanent internal request/result binding; CD-1 resolved. | CONFIRMED |
 | PHASE-06-CD2-SPLIT-CHILD-LOCATING-BASIS-DEFECT-01 | Whether Split-created identities require locating basis in the same logical outcome remains open. | OPEN |
 | OBS-06-H14-LIFETIME-01 | Whether H14 is creation-only validity or must remain continuously true after later assertion withdrawal/supersession remains open and non-blocking for 06B. | OPEN / NON-BLOCKING |
+
+
+## CD-2 Split Child Locating-Basis Human Freeze
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-06-CD1-LIMITED-REREVIEW-GO-01 | CD-1 limited re-review = GO; internal Place provisioning contract closed. | CONFIRMED |
+| PHASE-05-POST-GO-CD2-SPLIT-CHILD-LOCATING-BASIS-01 | H14 at Split-child birth; no parent reassociation or cross-subject supersession; no automatic selection; endpoint surface and Phase 05 tag unchanged; CD-2 resolved. | CONFIRMED |
+| OBS-06-H14-LIFETIME-01 | H14 lifetime after birth remains open and non-blocking. | OPEN / NON-BLOCKING |

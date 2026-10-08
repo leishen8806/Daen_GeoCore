@@ -189,3 +189,10 @@ Phase 06 may design around but must not decide protected Domain/API items: cross
 Resolved: internal provisioning of an already-decided NEW PLACE.
 
 Still deferred: public generic Place creation; same-Place/dedup/matching; identity authority/governance; all AP, Containment and Extent writes; CD-2 Split-child locating basis; and OBS-06-H14 lifetime interpretation.
+
+
+## CD-2 Resolution and Phase 06B Gate
+
+Resolved: CD-1 internal already-decided Place provisioning; CD-2 locating basis at birth for Split-created Places.
+
+Still open: H14 lifetime after birth; same-Place/dedup; cross-subject supersession; locating-basis adequacy; identity/split authority; AP/Containment/Extent writes; and all other protected TBDs.

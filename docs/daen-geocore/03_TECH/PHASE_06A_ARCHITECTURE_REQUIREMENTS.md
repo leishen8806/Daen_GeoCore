@@ -38,7 +38,7 @@ Internal bulk ingestion is required, outside public Phase 05 mutation API, and m
 
 `CD-1 INTERNAL PLACE PROVISIONING CONTRACT = RESOLVED`
 
-Large-scale ingestion needs new Place identities while Phase 05 has no generic Place-create contract. Phase 06 must not invent same-Place, duplicate detection, public POST /places or caller-supplied GeoID semantics. CD-1 is resolved by the additive internal provisioning amendment. AP and Containment writes remain separate TBDs.
+Large-scale ingestion needs new Place identities while Phase 05 has no generic Place-create contract. Phase 06 must not invent same-Place, duplicate detection, public POST /places or caller-supplied GeoID semantics. CD-1 is closed by the additive internal provisioning amendment. AP and Containment writes remain separate TBDs.
 
 ## Operability and developer experience
 
@@ -62,10 +62,10 @@ Validate historical reads; merge/split/correction atomicity; stale basis; idempo
 
 ## Open items and gate
 
-CD-1 is RESOLVED. CD-2 split-child locating-basis review remains open and blocks Phase 06B final freeze. Long-term archival, auth/privacy policy, Extent geometry, AP writes/lifecycle, Containment writes/currentness, richer scope equivalence, provider selection and technology selection remain TBD.
+CD-1 is CLOSED. CD-2 split-child locating-basis review is RESOLVED. OBS-06-H14-LIFETIME remains OPEN / NON-BLOCKING. Long-term archival, auth/privacy policy, Extent geometry, AP writes/lifecycle, Containment writes/currentness, richer scope equivalence, provider selection and technology selection remain TBD.
 
 `PHASE 06A = HUMAN FROZEN`
 
-`PHASE 06B FINAL FREEZE = BLOCKED PENDING CD-2 REVIEW`
+`PHASE 06B LOGICAL ARCHITECTURE = AUTHORIZED`
 
 06B exploration may be prepared after CD-1 resolution planning, but no final ingestion/module ownership decision may be frozen before CD-1 closes.
