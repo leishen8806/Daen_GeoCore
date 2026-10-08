@@ -1,20 +1,61 @@
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Protocol, TypeVar
 
 from daen_geocore.ports.result import PortResult
 
 
 @dataclass(frozen=True, slots=True)
-class EvidenceRecord:
-    """Opaque evidence bytes with no provider or Domain interpretation."""
+class ReferenceReservationEvidence:
+    """Permanent non-reuse reservation evidence; not a request mapping."""
 
     payload: bytes
-    permanent: bool = False
+
+
+@dataclass(frozen=True, slots=True)
+class RequestReferenceRecoveryMapping:
+    """Request-to-reference recovery evidence; not commit proof."""
+
+    payload: bytes
+
+
+EvidenceT = TypeVar("EvidenceT")
+
+
+@dataclass(frozen=True, slots=True)
+class EvidenceCreated:
+    pass
+
+
+@dataclass(frozen=True, slots=True)
+class EvidenceAlreadyPresent:
+    pass
+
+
+@dataclass(frozen=True, slots=True)
+class EvidenceFound[EvidenceT]:
+    record: EvidenceT
+
+
+@dataclass(frozen=True, slots=True)
+class EvidenceAbsent:
+    pass
 
 
 class EvidenceStore(Protocol):
-    """Recovery/reservation evidence capability, not Domain authority."""
+    """Provider-neutral evidence capability, never Domain authority."""
 
-    def create_if_absent(self, key: str, record: EvidenceRecord) -> PortResult[bool]: ...
+    def create_reservation_if_absent(
+        self, key: str, record: ReferenceReservationEvidence
+    ) -> PortResult[EvidenceCreated | EvidenceAlreadyPresent]: ...
 
-    def read(self, key: str) -> PortResult[EvidenceRecord | None]: ...
+    def create_request_mapping_if_absent(
+        self, key: str, record: RequestReferenceRecoveryMapping
+    ) -> PortResult[EvidenceCreated | EvidenceAlreadyPresent]: ...
+
+    def read_reservation(
+        self, key: str
+    ) -> PortResult[EvidenceFound[ReferenceReservationEvidence] | EvidenceAbsent]: ...
+
+    def read_request_mapping(
+        self, key: str
+    ) -> PortResult[EvidenceFound[RequestReferenceRecoveryMapping] | EvidenceAbsent]: ...

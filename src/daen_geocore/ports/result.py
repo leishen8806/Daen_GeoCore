@@ -14,12 +14,13 @@ ValueT = TypeVar("ValueT")
 
 
 @dataclass(frozen=True, slots=True)
-class PortResult[ValueT]:
-    """Typed success/failure result without HTTP or provider semantics."""
+class PortSuccess[ValueT]:
+    value: ValueT
 
-    value: ValueT | None = None
-    failure: PortFailure | None = None
 
-    @property
-    def succeeded(self) -> bool:
-        return self.failure is None
+@dataclass(frozen=True, slots=True)
+class PortError:
+    failure: PortFailure
+
+
+type PortResult[ValueT] = PortSuccess[ValueT] | PortError

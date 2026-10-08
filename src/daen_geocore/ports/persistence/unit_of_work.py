@@ -1,13 +1,13 @@
-from typing import Protocol, Self
+from typing import Protocol
 
-from daen_geocore.ports.persistence.commit import CommitPort
+from daen_geocore.ports.persistence.commit import CommitOutcome
 
 
 class UnitOfWork(Protocol):
-    """Application transaction boundary; implementation owns storage details."""
+    """Explicit application transaction lifecycle."""
 
-    commit_port: CommitPort
+    def begin(self) -> None: ...
 
-    def __enter__(self) -> Self: ...
+    def commit(self) -> CommitOutcome: ...
 
-    def __exit__(self, exc_type: object, exc_value: object, traceback: object) -> None: ...
+    def rollback(self) -> None: ...
