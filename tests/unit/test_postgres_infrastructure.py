@@ -27,8 +27,6 @@ def test_begin_failure_is_transient_and_not_commit_unknown() -> None:
     assert failure.classification is TechnicalFailureClass.TRANSIENT_UNAVAILABLE
 
 
-def test_generic_commit_failure_is_definitely_not_committed() -> None:
+def test_generic_commit_failure_is_commit_unknown() -> None:
     outcome = translate_commit_failure(RuntimeError("constraint"))
-    assert isinstance(outcome, CommitNotCommitted)
-    assert outcome.failure is not None
-    assert outcome.failure.classification is TechnicalFailureClass.NON_RETRYABLE_TECHNICAL_FAILURE
+    assert isinstance(outcome, CommitUnknown)

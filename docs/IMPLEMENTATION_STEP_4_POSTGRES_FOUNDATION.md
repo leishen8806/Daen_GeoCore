@@ -7,8 +7,9 @@ architecture. It uses SQLAlchemy Core 2.x with psycopg 3 against PostgreSQL 17.
 - The engine factory uses runtime `DAEN_DATABASE_URL`, pool pre-ping, and read or mutation profiles.
 - Read transactions use READ COMMITTED; mutation transactions use SERIALIZABLE.
 - `PostgresUnitOfWork` owns one explicit local transaction and deterministic resource cleanup.
-- Commit translation preserves committed, definitely-not-committed, and outcome-unknown states.
-- Serialization and deadlock aborts map to retryable technical failures; indeterminate commit remains unknown.
+- Commit translation preserves committed, definitely-not-committed, and outcome-unknown states; unclassified commit-boundary uncertainty defaults to UNKNOWN.
+- Only proven serialization/deadlock aborts map to retryable technical failures; indeterminate and unclassified commit failures remain unknown.
 - Alembic targets the empty production metadata for future revisions.
 - Real PostgreSQL integration tests use a test-only probe table and `DAEN_TEST_DATABASE_URL`.
+- CI verifies a real PostgreSQL 17 SSI write-skew conflict with disjoint writes.
 - Domain schema, repositories, APIs, provider adapters, and deployment remain deferred.

@@ -43,10 +43,4 @@ def translate_commit_failure(error: BaseException) -> CommitOutcome:
                 detail=state,
             )
         )
-    return CommitNotCommitted(
-        failure=PortFailure(
-            code="postgres_commit_failed",
-            classification=TechnicalFailureClass.NON_RETRYABLE_TECHNICAL_FAILURE,
-            detail=state,
-        )
-    )
+    return CommitUnknown(reason="unclassified_commit_boundary_failure")
