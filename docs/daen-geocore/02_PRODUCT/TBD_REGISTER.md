@@ -177,7 +177,9 @@ Phase 06 may design around but must not decide protected Domain/API items: cross
 06A Human Freeze additionally requires explicit expected workload, expected growth, availability expectations, deployment region/data-residency constraints, budget/operational constraints, and team stack/operations capability. These assumptions must not be invented by the architecture agent.
 
 
-## Phase 06A Frozen Requirements and CD-1
+## Phase 06A Frozen Requirements and CD-1 — Historical Status at 06A Freeze
+
+Historical snapshot only. Superseded by the later CD-1 and CD-2 resolution records below. Current Phase 06 status is recorded in the Phase 06B Logical Architecture Status section.
 
 `CD-1 — INTERNAL PLACE PROVISIONING CONTRACT MISSING` remains OPEN and blocks Phase 06B final freeze for ingestion architecture. Phase 06A also preserves unresolved long-term archival, auth/privacy policy, Extent geometry, AP writes/lifecycle, Containment writes/currentness, richer scope equivalence, provider selection and technology selection.
 
@@ -202,4 +204,10 @@ Still open: H14 lifetime after birth; same-Place/dedup; cross-subject supersessi
 
 `PHASE 06B = HUMAN FROZEN`
 
-CD-1 is CLOSED; CD-2 is RESOLVED; `OBS-06-H14-LIFETIME = OPEN / NON-BLOCKING`. Phase 06C Persistence / Identity / History / Spatial is NOT YET AUTHORIZED. Historical defect records remain unchanged.
+`CD-1 = CLOSED`
+
+`CD-2 = RESOLVED`
+
+`OBS-06-H14-LIFETIME = OPEN / NON-BLOCKING`
+
+`PHASE 06C = NOT YET AUTHORIZED` Historical defect records remain unchanged.

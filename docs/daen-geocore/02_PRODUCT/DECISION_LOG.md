@@ -461,3 +461,10 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | Decision | Frozen result | Status |
 |---|---|---|
 | PHASE-06B-LOGICAL-ARCHITECTURE-FREEZE-01 | Modular Monolith pattern, module ownership/dependencies, logical mutation pipeline, Place Bootstrap, read/freshness boundary, audit/residency boundaries, ingestion/jobs and extraction seams are Human Frozen. No technology, DB, cache, queue, runtime, cloud or consensus selected; protected TBDs remain. | CONFIRMED |
+
+
+## Phase 06B Gate Status Normalization
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-06B-GATE-STATUS-NORMALIZATION-01 | Stale Phase 06A header corrected; historical CD-1 OPEN status explicitly marked historical; no architecture or contract semantics changed. | EDITORIAL / NON-SEMANTIC |
