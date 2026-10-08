@@ -182,3 +182,10 @@ Phase 06 may design around but must not decide protected Domain/API items: cross
 `CD-1 — INTERNAL PLACE PROVISIONING CONTRACT MISSING` remains OPEN and blocks Phase 06B final freeze for ingestion architecture. Phase 06A also preserves unresolved long-term archival, auth/privacy policy, Extent geometry, AP writes/lifecycle, Containment writes/currentness, richer scope equivalence, provider selection and technology selection.
 
 06A Human Freeze requires explicit workload, growth, availability, deployment region/data residency, budget/operations and team capability assumptions before 06A can reach Human Freeze; these must not be invented.
+
+
+## CD-1 Resolution and Carry-Forward
+
+Resolved: internal provisioning of an already-decided NEW PLACE.
+
+Still deferred: public generic Place creation; same-Place/dedup/matching; identity authority/governance; all AP, Containment and Extent writes; CD-2 Split-child locating basis; and OBS-06-H14 lifetime interpretation.
