@@ -497,3 +497,17 @@ Status: `CONFIRMED`
 Human decision: `PHASE 06D CONCURRENCY / IDEMPOTENCY / ATOMICITY = HUMAN FROZEN`.
 
 This freeze records optimistic concurrency, MutationBasis and recovery-incarnation safety, idempotency execution and replay, local transactional atomicity, non-reuse evidence, recovery/retry behavior, target multi-region guarantees, and declared-read-set protection. It selects no technology or product and does not resolve protected Domain/API TBDs.
+
+## PHASE-06D-LIMITED-CONFORMANCE-R1-ITERATE-01
+
+Status: `CONFIRMED`
+
+Baseline: `ca2347a374ea302ddb0465370d2380f0a82fb91f`.
+
+C3/F4 are the sole defect. C1, C2, C4-C8, Selection Race Error Mapping, Declared Read-Set Protection, Clock/Time Boundary, F1-F3, and F5-F8 are inherited PASS/conformant judgments. This is a bounded repair only; Phase 06E remains NOT authorized.
+
+## PHASE-06D-R1-PROVISIONING-RECOVERY-MAPPING-COMPLETION-01
+
+Status: `CONFIRMED`
+
+Request/reference recovery mappings receive independent durability, including CD-1 provisioning mappings across the primary loss window. The mapping is not commit authority; retries reuse the mapped references. No product was selected.

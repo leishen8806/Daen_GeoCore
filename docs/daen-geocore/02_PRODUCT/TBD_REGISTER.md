@@ -267,3 +267,12 @@ Protected Domain/API TBDs remain unresolved.
 - `PHASE 06E RUNTIME / TECHNOLOGY / DEPLOYMENT / OBSERVABILITY = NOT YET AUTHORIZED`
 
 A limited Phase 06D conformance re-review is required before Phase 06E. Protected Domain/API TBDs remain unresolved.
+
+## Phase 06D Limited Conformance Round 1
+
+- `PHASE 06D LIMITED CONFORMANCE R1 = ITERATE`
+- `C3/F4 BOUNDED COMPLETION = RECORDED`
+- `PHASE 06E = NOT YET AUTHORIZED`
+- `OBS-06-ISSUED-REFERENCE-DETAIL-LOSS = OPEN / NON-BLOCKING`
+
+Protected Domain/API TBDs remain unresolved.
