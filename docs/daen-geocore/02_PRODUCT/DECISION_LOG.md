@@ -475,3 +475,10 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | Decision | Frozen result | Status |
 |---|---|---|
 | PHASE-06B-LIMITED-CONFORMANCE-GO-01 | Limited conformance re-review at baseline `308c1b9f8ce6710fd643ef7d191c4d0c592bf0fb` = GO; C1-C8 PASS; Logical Mutation Unit conformant; no technology selected; no protected-TBD leak; no Phase 05/API regression. Phase 06B Logical Architecture FINAL ACCEPTED. Phase 06C Persistence / Identity / History / Spatial AUTHORIZED. CD-1 CLOSED; CD-2 RESOLVED; OBS-06-H14-LIFETIME remains OPEN / NON-BLOCKING. | CONFIRMED |
+
+
+## Phase 06C Persistence / Identity / History / Spatial Freeze
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-06C-PERSISTENCE-IDENTITY-HISTORY-SPATIAL-FREEZE-01 | Phase 06C Human Frozen: relational transactional store class, one primary authoritative store initially, reference family/non-reuse corrections, identity/history, selection heads, basis/idempotency persistence support, recovery, residency and spatial readiness requirements. No product selected; 06D not yet authorized pending limited conformance re-review. | CONFIRMED |
