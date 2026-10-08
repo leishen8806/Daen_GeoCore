@@ -6,7 +6,11 @@
 
 `DATABASE PRODUCT = NOT SELECTED`
 
-`PHASE 06D CONCURRENCY / IDEMPOTENCY / ATOMICITY = NOT YET AUTHORIZED`
+`PHASE 06C LIMITED CONFORMANCE RE-REVIEW = GO`
+
+`PHASE 06C PERSISTENCE ARCHITECTURE = FINAL ACCEPTED`
+
+`PHASE 06D CONCURRENCY / IDEMPOTENCY / ATOMICITY = AUTHORIZED`
 
 ## Persistence pattern
 
@@ -44,7 +48,7 @@ Source Provenance, Mutation Audit and Operational Logs remain distinct. Audit is
 
 AP persistence supports exact AccessPointRef lookup, Place↔AP relations, multi-Place service and neutral attributable facts with Provenance/Quality; no write/lifecycle model is frozen. Containment supports parent/child refs and both-direction lookup without tree, DAG, parent, cycle, transitivity, inheritance, currentness or write semantics.
 
-Spatial readiness must not preclude coordinate facts, source CRS metadata, future geometry, spatial indexing or Cambodia-scale data. Extent geometry, CRS, precision, roles, history, public search, reverse geocoding and routing remain deferred. A disposable spatial spike is required before selecting a spatial product/extension.
+Spatial readiness must not preclude coordinate facts, source CRS metadata, future geometry, spatial indexing or Cambodia-scale data. Extent geometry, CRS, precision, roles, history, public search, reverse geocoding and routing remain deferred. A disposable synthetic-data spatial spike is required before selecting a spatial product/extension; it must not use production or restricted data and does not open the Extent write gate.
 
 ## Evolution, partitioning and recovery
 

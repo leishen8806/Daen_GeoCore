@@ -482,3 +482,10 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | Decision | Frozen result | Status |
 |---|---|---|
 | PHASE-06C-PERSISTENCE-IDENTITY-HISTORY-SPATIAL-FREEZE-01 | Phase 06C Human Frozen: relational transactional store class, one primary authoritative store initially, reference family/non-reuse corrections, identity/history, selection heads, basis/idempotency persistence support, recovery, residency and spatial readiness requirements. No product selected; 06D not yet authorized pending limited conformance re-review. | CONFIRMED |
+
+
+## Phase 06C Limited Conformance GO
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-06C-LIMITED-CONFORMANCE-GO-01 | Baseline `2492dc5a9d0ae423ac4a962696a245498f55d563`; C1–C8 PASS; Current Representation persistence and History/Audit persistence conformant; Phase 06C final accepted; no technology/product selection; no protected-TBD leak; Phase 06D authorized. | CONFIRMED |
