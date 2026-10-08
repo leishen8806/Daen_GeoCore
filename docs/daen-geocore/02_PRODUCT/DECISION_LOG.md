@@ -523,3 +523,9 @@ Baseline: `1ae66c7ee454b4523d42aa5bc94196e96946ebe6`. C3 PASS, F4 PASS, orphan m
 Status: `CONFIRMED`
 
 `PHASE 06E SOFTWARE STACK = HUMAN FROZEN`. The approved CPython/FastAPI/Uvicorn/Pydantic/PostgreSQL 17/psycopg/SQLAlchemy Core/Alembic/PostgreSQL-backed jobs/no-cache/EvidenceStore/OpenTelemetry/Ruff/Pyright/pytest/Hypothesis/Docker/Compose/GitHub Actions baseline is recorded. Cloud, provider, deployment, evidence region, cost, and infrastructure closure remain explicitly deferred; protected Domain/API TBDs are unchanged.
+
+## PHASE-06E-SOFTWARE-STACK-LIMITED-CONFORMANCE-GO-01
+
+Status: `CONFIRMED`
+
+Baseline: `a6920d9c26261d38530c2add631f8ba35e974fb7`. C1-C6 PASS and software-stack coherence conformant. The software stack is FINAL ACCEPTED; infrastructure/provider/cost remain open, Phase 06F is not authorized, and no protected TBD leaked.

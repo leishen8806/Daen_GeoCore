@@ -72,3 +72,15 @@ All existing protected Domain/API TBDs remain unresolved, including same-Place/d
 ## Preserved Architecture Constraints
 
 The stack must preserve the relational transactional primary-store class, one initial primary authoritative store, local transactional commit, independent non-reuse/recovery durability, fail-closed evidence policy, frozen reference/idempotency/recovery semantics, and future multi-region evolution.
+
+## Final Software Stack Status
+
+- `PHASE 06E SOFTWARE STACK LIMITED CONFORMANCE RE-REVIEW = GO`
+- `PHASE 06E SOFTWARE STACK = FINAL ACCEPTED`
+- `PHASE 06E INFRASTRUCTURE / DEPLOYMENT / COST = OPEN`
+- `PHASE 06E OVERALL = IN PROGRESS`
+- `PHASE 06F = NOT YET AUTHORIZED`
+
+PostgreSQL-backed jobs are operational scheduling/execution state only. A job performing a material DAEN mutation must use the normal application facade/mutation pipeline and inherit normal idempotency, applicable MutationBasis, authoritative revalidation, audit, evidence, and commit semantics. Job state is not Domain authority.
+
+EvidenceStore records are recovery/reservation support only; they are not Domain truth, a stable-reference allocator, or authoritative mutation commit proof.
