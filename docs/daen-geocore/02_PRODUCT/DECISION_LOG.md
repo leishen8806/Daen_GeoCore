@@ -454,3 +454,10 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | PHASE-06-CD1-LIMITED-REREVIEW-GO-01 | CD-1 limited re-review = GO; internal Place provisioning contract closed. | CONFIRMED |
 | PHASE-05-POST-GO-CD2-SPLIT-CHILD-LOCATING-BASIS-01 | H14 at Split-child birth; no parent reassociation or cross-subject supersession; no automatic selection; endpoint surface and Phase 05 tag unchanged; CD-2 resolved. | CONFIRMED |
 | OBS-06-H14-LIFETIME-01 | H14 lifetime after birth remains open and non-blocking. | OPEN / NON-BLOCKING |
+
+
+## Phase 06B Logical Architecture Freeze
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-06B-LOGICAL-ARCHITECTURE-FREEZE-01 | Modular Monolith pattern, module ownership/dependencies, logical mutation pipeline, Place Bootstrap, read/freshness boundary, audit/residency boundaries, ingestion/jobs and extraction seams are Human Frozen. No technology, DB, cache, queue, runtime, cloud or consensus selected; protected TBDs remain. | CONFIRMED |

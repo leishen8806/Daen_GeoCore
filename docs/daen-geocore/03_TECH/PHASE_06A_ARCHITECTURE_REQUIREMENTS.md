@@ -66,6 +66,6 @@ CD-1 is CLOSED. CD-2 split-child locating-basis review is RESOLVED. OBS-06-H14-L
 
 `PHASE 06A = HUMAN FROZEN`
 
-`PHASE 06B LOGICAL ARCHITECTURE = AUTHORIZED`
+`PHASE 06B LOGICAL ARCHITECTURE = HUMAN FROZEN`
 
-06B exploration may be prepared after CD-1 resolution planning, but no final ingestion/module ownership decision may be frozen before CD-1 closes.
+CD-1 is CLOSED; CD-2 is RESOLVED; OBS-06-H14-LIFETIME is OPEN / NON-BLOCKING. Phase 06B logical architecture is Human Frozen; Phase 06C remains not yet authorized.

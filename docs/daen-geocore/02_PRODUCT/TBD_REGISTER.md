@@ -196,3 +196,10 @@ Still deferred: public generic Place creation; same-Place/dedup/matching; identi
 Resolved: CD-1 internal already-decided Place provisioning; CD-2 locating basis at birth for Split-created Places.
 
 Still open: H14 lifetime after birth; same-Place/dedup; cross-subject supersession; locating-basis adequacy; identity/split authority; AP/Containment/Extent writes; and all other protected TBDs.
+
+
+## Phase 06B Logical Architecture Status
+
+`PHASE 06B = HUMAN FROZEN`
+
+CD-1 is CLOSED; CD-2 is RESOLVED; `OBS-06-H14-LIFETIME = OPEN / NON-BLOCKING`. Phase 06C Persistence / Identity / History / Spatial is NOT YET AUTHORIZED. Historical defect records remain unchanged.
