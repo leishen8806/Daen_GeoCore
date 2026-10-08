@@ -428,3 +428,11 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | Decision | Frozen result | Status |
 |---|---|---|
 | PHASE-06-TECH-ENTRY-GATE-FREEZE-01 | Phase 06 Entry Gate frozen; no technology, DB or framework selected; no Domain/API TBD resolved; 06A Requirements & Quality Attributes authorized. | CONFIRMED |
+
+
+## Phase 06A Architecture Requirements Freeze
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-06A-ARCH-REQUIREMENTS-FREEZE-01 | Phase 06A requirements and quality attributes are Human Frozen; no technology, DB, framework, code, OpenAPI or Domain/API TBD resolution. | CONFIRMED |
+| PHASE-06-CD1-INTERNAL-PLACE-PROVISIONING-DEFECT-01 | Internal Place provisioning contract is missing and requires a bounded prior-contract amendment before 06B final ingestion architecture. AP and Containment writes are separate TBDs. | OPEN — BOUNDED PRIOR-CONTRACT AMENDMENT REQUIRED |

@@ -175,3 +175,10 @@ All still-protected TBDs remain carried forward without semantic change.
 Phase 06 may design around but must not decide protected Domain/API items: cross-subject reassociation; lifecycle taxonomy; demolition/rebuild and demolition→closure; withdrawal authority/removal; Extent semantics; containment currentness/multi-parent; selection authority; selected-value derivation; source ranking; Quality scale; merge survivor policy; same-Place algorithm; generic Place creation; AP write/lifecycle/subject semantics; temporal/as-of; richer scope equivalence; merge reversal/reopen/un-withdraw; auth/privacy semantics.
 
 06A Human Freeze additionally requires explicit expected workload, expected growth, availability expectations, deployment region/data-residency constraints, budget/operational constraints, and team stack/operations capability. These assumptions must not be invented by the architecture agent.
+
+
+## Phase 06A Frozen Requirements and CD-1
+
+`CD-1 — INTERNAL PLACE PROVISIONING CONTRACT MISSING` remains OPEN and blocks Phase 06B final freeze for ingestion architecture. Phase 06A also preserves unresolved long-term archival, auth/privacy policy, Extent geometry, AP writes/lifecycle, Containment writes/currentness, richer scope equivalence, provider selection and technology selection.
+
+06A Human Freeze requires explicit workload, growth, availability, deployment region/data residency, budget/operations and team capability assumptions before 06A can reach Human Freeze; these must not be invented.
