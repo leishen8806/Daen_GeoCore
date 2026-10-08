@@ -517,3 +517,9 @@ Request/reference recovery mappings receive independent durability, including CD
 Status: `CONFIRMED`
 
 Baseline: `1ae66c7ee454b4523d42aa5bc94196e96946ebe6`. C3 PASS, F4 PASS, orphan mapping PASS, fail-closed PASS, and non-reuse/request-mapping separation PASS. All inherited findings remain accepted. Phase 06D is FINAL ACCEPTED and Phase 06E is AUTHORIZED. No product or technology was selected.
+
+## PHASE-06E-SOFTWARE-STACK-FREEZE-01
+
+Status: `CONFIRMED`
+
+`PHASE 06E SOFTWARE STACK = HUMAN FROZEN`. The approved CPython/FastAPI/Uvicorn/Pydantic/PostgreSQL 17/psycopg/SQLAlchemy Core/Alembic/PostgreSQL-backed jobs/no-cache/EvidenceStore/OpenTelemetry/Ruff/Pyright/pytest/Hypothesis/Docker/Compose/GitHub Actions baseline is recorded. Cloud, provider, deployment, evidence region, cost, and infrastructure closure remain explicitly deferred; protected Domain/API TBDs are unchanged.

@@ -286,3 +286,12 @@ Protected Domain/API TBDs remain unresolved.
 - `OBS-06-ISSUED-REFERENCE-DETAIL-LOSS = OPEN / NON-BLOCKING`
 
 Historical Phase 06D iterate and bounded-completion records are preserved. Protected Domain/API TBDs remain unresolved.
+
+## Current Phase 06E Gate
+
+- `PHASE 06E SOFTWARE STACK = HUMAN FROZEN`
+- `PHASE 06E INFRASTRUCTURE / DEPLOYMENT / COST = OPEN`
+- `PHASE 06E OVERALL = IN PROGRESS`
+- `DATABASE PRODUCT = POSTGRESQL 17 SOFTWARE BASELINE; PROVIDER/OFFERING NOT SELECTED`
+
+Protected Domain/API TBDs remain unresolved. Phase 06F is not yet authorized.
