@@ -113,3 +113,22 @@ The recovery serving gate must establish integrity and availability of non-reuse
 ### Repaired F4 Behavior
 
 `R -> PlaceRef P + SourceAssertionRefs A1...An` is durably mapped independently; after acknowledged primary loss, retry of the same R finds and reuses P,A1...An, then safely reconstructs/recommits or fails closed. It never creates Q. `F4 = PASS after bounded repair`.
+
+## Final Phase 06D / 06E Gate Status
+
+- `PHASE 06D C3/F4 LIMITED RE-REVIEW = GO`
+- `PHASE 06D CONCURRENCY / IDEMPOTENCY / ATOMICITY = FINAL ACCEPTED`
+- `PHASE 06E RUNTIME / TECHNOLOGY / DEPLOYMENT / OBSERVABILITY = AUTHORIZED`
+- `OBS-06-ISSUED-REFERENCE-DETAIL-LOSS = OPEN / NON-BLOCKING`
+
+Public request/reference recovery mappings retained for the frozen `>= 7 days` replay horizon receive independent recovery-domain durability sufficient for that protected period. Public idempotency is not permanent; CD-1 lifetime retention is unchanged.
+
+The already-frozen failure policy remains `FAIL CLOSED`: if required non-reuse evidence or request/reference recovery mapping cannot be durably established, trusted, or reconciled, affected reference-issuing and recovery operations fail closed. No probabilistic-randomness fallback is permitted.
+
+## Phase 06E Carry-Forward
+
+Phase 06E may evaluate restore detection before serving, evidence-store and durability topology options, cost and availability, recovery-gate deployment, and synthetic spikes for catastrophic mapping recovery and unavailable mappings. These are implementation questions and do not reopen the frozen semantics.
+
+Phase 06E may select runtime/language, framework, database and spatial product candidates, evidence/recovery implementation, Singapore-first deployment, managed services, packaging, secrets/configuration, backup/recovery tooling, observability, health/readiness, CI/CD, runbooks, topology, and cost model. It must preserve the relational transactional primary-store class, one initial primary authoritative store, local transactional commit, independent durability, fail-closed policy, reference/idempotency/recovery semantics, and future multi-region evolution.
+
+06E does not authorize changes to Domain/API contracts, protected Place/Access Point/Containment/Extent/source/selection/survivor/withdrawal/H14/auth/privacy decisions, or final target consensus product selection.

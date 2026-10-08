@@ -511,3 +511,9 @@ C3/F4 are the sole defect. C1, C2, C4-C8, Selection Race Error Mapping, Declared
 Status: `CONFIRMED`
 
 Request/reference recovery mappings receive independent durability, including CD-1 provisioning mappings across the primary loss window. The mapping is not commit authority; retries reuse the mapped references. No product was selected.
+
+## PHASE-06D-C3-F4-LIMITED-REREVIEW-GO-01
+
+Status: `CONFIRMED`
+
+Baseline: `1ae66c7ee454b4523d42aa5bc94196e96946ebe6`. C3 PASS, F4 PASS, orphan mapping PASS, fail-closed PASS, and non-reuse/request-mapping separation PASS. All inherited findings remain accepted. Phase 06D is FINAL ACCEPTED and Phase 06E is AUTHORIZED. No product or technology was selected.

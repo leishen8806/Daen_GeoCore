@@ -276,3 +276,13 @@ A limited Phase 06D conformance re-review is required before Phase 06E. Protecte
 - `OBS-06-ISSUED-REFERENCE-DETAIL-LOSS = OPEN / NON-BLOCKING`
 
 Protected Domain/API TBDs remain unresolved.
+
+## Current Phase 06 Final Gate
+
+- `PHASE 06D = FINAL ACCEPTED`
+- `PHASE 06E RUNTIME / TECHNOLOGY / DEPLOYMENT / OBSERVABILITY = AUTHORIZED`
+- `DATABASE PRODUCT = NOT SELECTED`
+- `OBS-06-H14-LIFETIME = OPEN / NON-BLOCKING`
+- `OBS-06-ISSUED-REFERENCE-DETAIL-LOSS = OPEN / NON-BLOCKING`
+
+Historical Phase 06D iterate and bounded-completion records are preserved. Protected Domain/API TBDs remain unresolved.
