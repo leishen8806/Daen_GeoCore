@@ -1,14 +1,7 @@
 from dataclasses import dataclass
 from typing import TypeVar
 
-
-@dataclass(frozen=True, slots=True)
-class PortFailure:
-    """Transport-neutral failure detail for a port operation."""
-
-    code: str
-    detail: str | None = None
-
+from daen_geocore.ports.failures import PortFailure
 
 ValueT = TypeVar("ValueT")
 

@@ -1,3 +1,24 @@
-from .result import PortError, PortFailure, PortResult, PortSuccess
+from .failures import PortFailure, TechnicalFailureClass
+from .result import PortError, PortResult, PortSuccess
+from .technical import (
+    EvidenceLookupKey,
+    IntentFingerprint,
+    OpaqueClientIdentity,
+    OpaqueReplayMetadata,
+    OpaqueRequestIdentity,
+    TechnicalOperationKey,
+)
 
-__all__ = ["PortError", "PortFailure", "PortResult", "PortSuccess"]
+__all__ = [
+    "EvidenceLookupKey",
+    "IntentFingerprint",
+    "OpaqueClientIdentity",
+    "OpaqueReplayMetadata",
+    "OpaqueRequestIdentity",
+    "PortError",
+    "PortFailure",
+    "PortResult",
+    "PortSuccess",
+    "TechnicalFailureClass",
+    "TechnicalOperationKey",
+]

@@ -3,6 +3,6 @@ from typing import Protocol
 
 
 class Clock(Protocol):
-    """Time source port; callers decide whether time is operational metadata."""
+    """UTC recorded-time metadata only; not basis, ordering, LWW, or consensus."""
 
     def now(self) -> datetime: ...

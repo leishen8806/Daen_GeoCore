@@ -14,18 +14,12 @@ class CommitTechnicalAbort:
 
 
 @dataclass(frozen=True, slots=True)
-class CommitSemanticConflict:
-    status: Literal["semantic_conflict"] = "semantic_conflict"
-    reason: str | None = None
-
-
-@dataclass(frozen=True, slots=True)
 class CommitUnknown:
     status: Literal["unknown"] = "unknown"
     reason: str | None = None
 
 
-type CommitOutcome = CommitAccepted | CommitTechnicalAbort | CommitSemanticConflict | CommitUnknown
+type CommitOutcome = CommitAccepted | CommitTechnicalAbort | CommitUnknown
 
 
 class CommitPort(Protocol):
