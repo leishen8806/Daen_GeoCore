@@ -8,8 +8,14 @@ class CommitAccepted:
 
 
 @dataclass(frozen=True, slots=True)
-class CommitRejected:
-    status: Literal["rejected"] = "rejected"
+class CommitTechnicalAbort:
+    status: Literal["technical_abort"] = "technical_abort"
+    reason: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class CommitSemanticConflict:
+    status: Literal["semantic_conflict"] = "semantic_conflict"
     reason: str | None = None
 
 
@@ -19,7 +25,7 @@ class CommitUnknown:
     reason: str | None = None
 
 
-type CommitOutcome = CommitAccepted | CommitRejected | CommitUnknown
+type CommitOutcome = CommitAccepted | CommitTechnicalAbort | CommitSemanticConflict | CommitUnknown
 
 
 class CommitPort(Protocol):

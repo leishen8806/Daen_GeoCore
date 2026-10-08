@@ -1,24 +1,25 @@
 from dataclasses import dataclass
-from typing import Protocol, TypeVar
+from typing import Protocol
 
 from daen_geocore.ports.result import PortResult
 
 
 @dataclass(frozen=True, slots=True)
 class ReferenceReservationEvidence:
-    """Permanent non-reuse reservation evidence; not a request mapping."""
+    """Permanent non-reuse evidence, separate from request mapping."""
 
-    payload: bytes
+    references: tuple[str, ...]
+    payload: bytes = b""
 
 
 @dataclass(frozen=True, slots=True)
 class RequestReferenceRecoveryMapping:
-    """Request-to-reference recovery evidence; not commit proof."""
+    """Request-to-reference recovery evidence, not commit proof."""
 
-    payload: bytes
-
-
-EvidenceT = TypeVar("EvidenceT")
+    request_identity: str
+    semantic_intent_fingerprint: str
+    references: tuple[str, ...]
+    payload: bytes = b""
 
 
 @dataclass(frozen=True, slots=True)
@@ -27,7 +28,12 @@ class EvidenceCreated:
 
 
 @dataclass(frozen=True, slots=True)
-class EvidenceAlreadyPresent:
+class EvidenceAlreadyPresentSame:
+    pass
+
+
+@dataclass(frozen=True, slots=True)
+class EvidenceAlreadyPresentConflict:
     pass
 
 
@@ -46,11 +52,15 @@ class EvidenceStore(Protocol):
 
     def create_reservation_if_absent(
         self, key: str, record: ReferenceReservationEvidence
-    ) -> PortResult[EvidenceCreated | EvidenceAlreadyPresent]: ...
+    ) -> PortResult[
+        EvidenceCreated | EvidenceAlreadyPresentSame | EvidenceAlreadyPresentConflict
+    ]: ...
 
     def create_request_mapping_if_absent(
         self, key: str, record: RequestReferenceRecoveryMapping
-    ) -> PortResult[EvidenceCreated | EvidenceAlreadyPresent]: ...
+    ) -> PortResult[
+        EvidenceCreated | EvidenceAlreadyPresentSame | EvidenceAlreadyPresentConflict
+    ]: ...
 
     def read_reservation(
         self, key: str

@@ -2,7 +2,8 @@ from .commit import (
     CommitAccepted,
     CommitOutcome,
     CommitPort,
-    CommitRejected,
+    CommitSemanticConflict,
+    CommitTechnicalAbort,
     CommitUnknown,
 )
 from .repositories import RepositoryPort
@@ -12,7 +13,8 @@ __all__ = [
     "CommitAccepted",
     "CommitOutcome",
     "CommitPort",
-    "CommitRejected",
+    "CommitSemanticConflict",
+    "CommitTechnicalAbort",
     "CommitUnknown",
     "RepositoryPort",
     "UnitOfWork",

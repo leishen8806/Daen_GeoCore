@@ -1,6 +1,7 @@
 from .store import (
     EvidenceAbsent,
-    EvidenceAlreadyPresent,
+    EvidenceAlreadyPresentConflict,
+    EvidenceAlreadyPresentSame,
     EvidenceCreated,
     EvidenceFound,
     EvidenceStore,
@@ -10,7 +11,8 @@ from .store import (
 
 __all__ = [
     "EvidenceAbsent",
-    "EvidenceAlreadyPresent",
+    "EvidenceAlreadyPresentConflict",
+    "EvidenceAlreadyPresentSame",
     "EvidenceCreated",
     "EvidenceFound",
     "EvidenceStore",

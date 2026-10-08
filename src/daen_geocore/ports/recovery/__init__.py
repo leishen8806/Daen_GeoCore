@@ -1,3 +1,3 @@
-from .gate import RecoveryGate, RecoveryReadiness
+from .gate import RecoveryGate, RecoveryIncarnation, RecoveryReadiness
 
-__all__ = ["RecoveryGate", "RecoveryReadiness"]
+__all__ = ["RecoveryGate", "RecoveryIncarnation", "RecoveryReadiness"]
