@@ -1,17 +1,16 @@
 from dataclasses import dataclass
 from typing import Any
 
+from .typed_values import TypedValue
+
 
 @dataclass(frozen=True, slots=True)
 class Provenance:
-    """Minimal attributable source/mutation context carrier.
+    """Open originating source context for a fact or representation.
 
-    This is intentionally open and does not model a Source resource,
-    authorization, ranking, or mutation audit record.
+    This is not mutation provenance, mutation audit, a Source resource,
+    authorization data, provider ranking, or trust scoring.
     """
 
-    recorded_by: Any = None
-    context: Any = None
-    affected_references: tuple[Any, ...] = ()
-    evidence: Any = None
-    resulting_references: tuple[Any, ...] = ()
+    source_context: Any = None
+    details: tuple[TypedValue[Any], ...] = ()

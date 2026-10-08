@@ -15,14 +15,17 @@ class ExactEqualityProvider(Protocol):
     def equality_key(self, value: Any) -> ExactEqualityKey: ...
 
 
-@dataclass(frozen=True, slots=True)
+class ExactEqualityResolver(Protocol):
+    def provider_for(self, type_id: TypeIdentifier) -> ExactEqualityProvider | None: ...
+
+
+@dataclass(frozen=True, slots=True, eq=False)
 class ExplicitScope:
     type_id: TypeIdentifier
     value: Any
-    equality_provider: ExactEqualityProvider | None = None
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True, slots=True, eq=False)
 class UnknownScope:
     """Unknown scope is absence of an established explicit scope."""
 
@@ -30,15 +33,16 @@ class UnknownScope:
 
 
 def exact_scope_equal(
-    left: ExplicitScope | UnknownScope, right: ExplicitScope | UnknownScope
+    left: ExplicitScope | UnknownScope,
+    right: ExplicitScope | UnknownScope,
+    resolver: ExactEqualityResolver | None = None,
 ) -> bool | None:
-    """Return True/False when exact equality is established, else None."""
+    """Return True/False when one resolver establishes exact equality, else None."""
     if isinstance(left, UnknownScope) or isinstance(right, UnknownScope):
         return None
-    if left.type_id != right.type_id:
-        return False
-    if left.equality_provider is None or right.equality_provider is None:
+    if left.type_id != right.type_id or resolver is None:
+        return False if left.type_id != right.type_id else None
+    provider = resolver.provider_for(left.type_id)
+    if provider is None:
         return None
-    left_key = left.equality_provider.equality_key(left.value)
-    right_key = right.equality_provider.equality_key(right.value)
-    return left_key == right_key
+    return provider.equality_key(left.value) == provider.equality_key(right.value)

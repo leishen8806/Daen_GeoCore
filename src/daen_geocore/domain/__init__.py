@@ -4,6 +4,7 @@ from .references import AccessPointRef, PlaceRef, SelectionRecordRef, SourceAsse
 from .scope import (
     ExactEqualityKey,
     ExactEqualityProvider,
+    ExactEqualityResolver,
     ExplicitScope,
     UnknownScope,
     exact_scope_equal,
@@ -12,9 +13,10 @@ from .typed_values import TypedValue, TypeIdentifier
 
 __all__ = [
     "AccessPointRef",
-    "ExplicitScope",
     "ExactEqualityKey",
     "ExactEqualityProvider",
+    "ExactEqualityResolver",
+    "ExplicitScope",
     "PlaceRef",
     "Provenance",
     "Quality",
