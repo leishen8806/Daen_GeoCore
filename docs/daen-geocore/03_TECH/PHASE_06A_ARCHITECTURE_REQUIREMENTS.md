@@ -8,7 +8,7 @@
 
 `PHASE 06B LOGICAL ARCHITECTURE = HUMAN FROZEN`
 
-`PHASE 06C PERSISTENCE / IDENTITY / HISTORY / SPATIAL = NOT YET AUTHORIZED`
+`PHASE 06C PERSISTENCE / IDENTITY / HISTORY / SPATIAL = AUTHORIZED`
 
 ## Initial deployment profile
 
@@ -38,7 +38,7 @@ Human assumptions only: 100k–1M requests/day; peak 10–100 QPS; 80% reads/20%
 
 Internal bulk ingestion is required, outside public Phase 05 mutation API, and may optimize throughput without bypassing Provenance, Quality, history, reference stability or idempotency.
 
-`CD-1 INTERNAL PLACE PROVISIONING CONTRACT = RESOLVED`
+`CD-1 INTERNAL PLACE PROVISIONING CONTRACT = CLOSED`
 
 Large-scale ingestion needs new Place identities while Phase 05 has no generic Place-create contract. Phase 06 must not invent same-Place, duplicate detection, public POST /places or caller-supplied GeoID semantics. CD-1 is closed by the additive internal provisioning amendment. AP and Containment writes remain separate TBDs.
 
@@ -70,4 +70,4 @@ CD-1 is CLOSED. CD-2 split-child locating-basis review is RESOLVED. OBS-06-H14-L
 
 `PHASE 06B LOGICAL ARCHITECTURE = HUMAN FROZEN`
 
-CD-1 is CLOSED; CD-2 is RESOLVED; OBS-06-H14-LIFETIME is OPEN / NON-BLOCKING. Phase 06B logical architecture is Human Frozen; Phase 06C remains not yet authorized.
+CD-1 is CLOSED; CD-2 is RESOLVED; OBS-06-H14-LIFETIME is OPEN / NON-BLOCKING. Phase 06B logical architecture is Human Frozen and Final Accepted; Phase 06C is Authorized.

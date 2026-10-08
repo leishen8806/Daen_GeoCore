@@ -6,7 +6,7 @@
 
 ## Pattern
 
-`Modular Monolith`: one deployable application with strict ownership boundaries and future extraction seams. Physical deployment topology and technologies are not frozen.
+`Modular Monolith` is the initial logical architecture pattern: one deployable application initially, with strict ownership boundaries and future extraction seams. Physical deployment topology and technologies are not frozen.
 
 ## Module map and ownership
 
@@ -68,4 +68,10 @@ Modular monolith; module ownership/dependencies; identity/resolution; assertions
 
 `PHASE 06B = HUMAN FROZEN`
 
-`PHASE 06C PERSISTENCE / IDENTITY / HISTORY / SPATIAL = NOT YET AUTHORIZED`
+`PHASE 06B LIMITED CONFORMANCE RE-REVIEW = GO`
+
+`PHASE 06B LOGICAL ARCHITECTURE = FINAL ACCEPTED`
+
+`PHASE 06C PERSISTENCE / IDENTITY / HISTORY / SPATIAL = AUTHORIZED`
+
+Conformance record: `PHASE_06B_LIMITED_CONFORMANCE_REREVIEW.md`.

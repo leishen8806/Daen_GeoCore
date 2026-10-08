@@ -210,4 +210,27 @@ Still open: H14 lifetime after birth; same-Place/dedup; cross-subject supersessi
 
 `OBS-06-H14-LIFETIME = OPEN / NON-BLOCKING`
 
-`PHASE 06C = NOT YET AUTHORIZED` Historical defect records remain unchanged.
+`PHASE 06C = NOT YET AUTHORIZED`
+
+Historical snapshot at the Phase 06B freeze; superseded by the Phase 06B Final Acceptance section below. Historical defect records remain unchanged.
+
+
+## Phase 06B Final Acceptance and Phase 06C Authorization
+
+Current gate status:
+
+`PHASE 06B = FINAL ACCEPTED`
+
+`CD-1 = CLOSED`
+
+`CD-2 = RESOLVED`
+
+`OBS-06-H14-LIFETIME = OPEN / NON-BLOCKING`
+
+`PHASE 06C PERSISTENCE / IDENTITY / HISTORY / SPATIAL = AUTHORIZED`
+
+Phase 06C is authorized to evaluate persistence model; identity/reference implementation options; history persistence model; Current Representation persistence/materialization; spatial capability requirements; restore/non-reuse safety; storage capability; and future multi-region persistence readiness.
+
+Phase 06C authorization does not automatically authorize final database product selection beyond what the Phase 06 sequencing rules allow, runtime/framework selection, cloud deployment selection, consensus implementation, Access Point write semantics, Containment write semantics, or Extent Domain semantics.
+
+No existing TBD is resolved by this record. All protected Domain/API TBDs remain protected, including same-Place/dedup, source ranking, selection authority, merge survivor policy, withdrawal authority, H14 lifetime, Access Point writes/lifecycle, Containment writes/currentness, Extent geometry/history, richer scope equivalence, temporal/as-of, provider selection, auth/privacy policy and locating-basis adequacy.

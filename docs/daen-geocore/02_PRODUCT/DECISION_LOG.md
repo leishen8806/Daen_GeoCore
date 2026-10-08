@@ -468,3 +468,10 @@ Evidence: `d1db291e11afd2082ce86bb97e6caedb467ad61c`; input freeze `0e47bdc6b9f7
 | Decision | Frozen result | Status |
 |---|---|---|
 | PHASE-06B-GATE-STATUS-NORMALIZATION-01 | Stale Phase 06A header corrected; historical CD-1 OPEN status explicitly marked historical; no architecture or contract semantics changed. | EDITORIAL / NON-SEMANTIC |
+
+
+## Phase 06B Final Acceptance and Phase 06C Authorization
+
+| Decision | Frozen result | Status |
+|---|---|---|
+| PHASE-06B-LIMITED-CONFORMANCE-GO-01 | Limited conformance re-review at baseline `308c1b9f8ce6710fd643ef7d191c4d0c592bf0fb` = GO; C1-C8 PASS; Logical Mutation Unit conformant; no technology selected; no protected-TBD leak; no Phase 05/API regression. Phase 06B Logical Architecture FINAL ACCEPTED. Phase 06C Persistence / Identity / History / Spatial AUTHORIZED. CD-1 CLOSED; CD-2 RESOLVED; OBS-06-H14-LIFETIME remains OPEN / NON-BLOCKING. | CONFIRMED |
