@@ -31,10 +31,11 @@ Implementation project state:
 1. R0 verified these drafts against frozen references at `fdbfd0c`.
 2. R1 freezes the bounded `/gateway/v1` scope amendment recorded separately.
 3. WP0 and WP10 collect legal, privacy, dependency, and consumer inputs.
-4. WP2 contract and WP3 provider port are reviewed (R2).
-5. S1 must close before WP4 Google adapter work.
-6. WP4 is independently reviewed (R3), then WP5/WP6 are reviewed (R4).
-7. WP9/WP11 and launch evidence are reviewed at R5.
+4. After R1, WP2 contract and WP3 provider-neutral port proceed to R2.
+5. After R2, WP5 may proceed using a fake/stub provider and WP9 may begin incrementally.
+6. WP4 proceeds separately only after R2, S1 CLOSED, and T1 CLOSED; R3 reviews WP4.
+7. WP6 follows accepted WP2 + WP5; R4 reviews gateway application/transport implementation.
+8. WP9 final hardening completes after WP6; WP11 continues in parallel and required launch/deployment/cost items close before R5.
 
 Documentation review, Q2/Q3 research, WP8 cache research, and consumer
 clarification may proceed in parallel after R0. After R1, WP2/WP3 may proceed;
@@ -45,11 +46,11 @@ authorizes Phase 06F.
 
 | ID | Goal | Owner | Scope amendment first? |
 |---|---|---|---|
-| WP0 | L1, L2, P1, P2, S1, T1, C1 gates | Human / Legal / Compliance | Yes for implementation |
+| WP0 | L1, L2, P1, P2, S1, T1, C1 gates | Human / ChatGPT / Claude review | Yes for implementation |
 | WP1 | Product + architecture scope amendment | Human + ChatGPT | Yes |
 | WP2 | Contract-first `/gateway/v1` OpenAPI and error mapping | Codex / Claude | R1 |
 | WP3 | Provider-neutral port/value types | Codex / Claude | R1 |
-| WP4 | Google adapter with bounded failure controls | Codex / Claude | S1 + R2 |
+| WP4 | Google adapter with bounded failure controls | Codex / Claude | R2 + S1 + T1 |
 | WP5 | Gateway use cases, bounded telemetry, rate-limit hook | Codex / Claude | R2 |
 | WP6 | Gateway HTTP transport | Codex / Claude | R2 |
 | WP7 | Q2 provider Place ID and Q3 address-to-GeoID research | ChatGPT / Human | No code |
@@ -62,12 +63,20 @@ Required WP10 inputs are daily and peak volume/QPS, raw-address retention
 need/system/duration, platform, map scenarios, DAU, calls/day, and whether a
 selected location must resolve to GeoID. Do not invent values.
 
+### S1 ownership
+
+Accountable owner: **Human**. Coordinator: **ChatGPT / Final Decision Layer**.
+Independent reviewer: **Claude**. S1 closes only when a Phase 06E bounded
+software dependency addendum is recorded. Legal and Compliance may be
+consulted but are not S1 owners.
+
 ## Sequencing
 
 Core implementation may continue independently. CD-3 must not alter frozen
 `/v1`, delay core mutations/reads, require Merge/Split, or resolve protected
-TBDs. Provider implementation waits for S1, legal/privacy decisions, R1, and
-R2. The first release remains exactly three gateway operations.
+TBDs. WP5 may use a fake/stub provider after R2. WP4 waits separately for R2,
+S1, and T1. WP6 follows accepted WP2 and WP5. The first release remains
+exactly three gateway operations.
 
 ## Codex Prompts
 
@@ -108,15 +117,21 @@ is not closed. Commit: `feat: add CD-3 Google gateway adapter`.
 
 ### Codex WP5 — Gateway Application
 
-Baseline: reviewed WP4 commit. Add only geocode/reverse/status application
-use cases, bounded telemetry and rate-limit hooks. Never log addresses,
-coordinates, provider content, normalized values, or hashes. Do not persist
-provider answers. Commit: `feat: add CD-3 gateway application`.
+Baseline: insert the future exact commit for the accepted R2 contract/port
+state here when this prompt is issued; do not use a WP4 baseline. Add only
+geocode/reverse/status application use cases, bounded telemetry and rate-limit
+hooks. Use a fake/stub `GeocodingProvider`; WP5 has no Google adapter
+dependency, no production provider credentials, and no S1 dependency of its
+own. Never log addresses, coordinates, provider content, normalized values, or
+hashes. Do not persist provider answers. Commit:
+`feat: add CD-3 gateway application`.
 
 ### Codex WP6 — Gateway Transport
 
-Baseline: reviewed WP5 commit. Add only `/gateway/v1` transport routes and
-DTO mapping for the three operations. Do not touch frozen `/v1`, Domain,
+Baseline: insert the future exact commit for the accepted WP2 contract and
+WP5 application surface here when this prompt is issued; do not require WP4.
+Add only `/gateway/v1` transport routes and DTO mapping for the three
+operations. Do not touch frozen `/v1`, Domain,
 mutation, migration, or provider semantics. Commit:
 `feat: expose CD-3 gateway transport`.
 
