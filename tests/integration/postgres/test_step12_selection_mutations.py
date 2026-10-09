@@ -581,7 +581,7 @@ def test_postgres_add_t2_withdrawal_does_not_use_support_owner_basis(engine) -> 
     suffix = "add-t2"
     target = seed_withdrawal(engine, suffix)
     place = PlaceRef(f"place-{suffix}")
-    slot = SelectionSlotKey(place, "address", _scope().type_id, _scope().equality_key or b"")
+    slot = SelectionSlotKey(place, "name", _scope().type_id, _scope().equality_key or b"")
     codec = FakeMutationBasisCodec()
     token = codec.issue(
         MutationBasisClaims(
