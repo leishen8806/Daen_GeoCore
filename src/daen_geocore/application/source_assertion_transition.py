@@ -298,16 +298,16 @@ class _SourceAssertionTransition:
                 return head
             if isinstance(head.value, RecordAbsent):
                 return _result(SourceAssertionTransitionOutcome.TARGET_STANDING_HEAD_MISSING)
-            history = uow.assertions.list_assertion_history(command.target_source_assertion_ref)
-            if isinstance(history, PortError):
-                return history
-            if any(f.fact_type == SUPERSESSION_FACT_TYPE for f in history.value):
-                return _result(SourceAssertionTransitionOutcome.TARGET_ALREADY_SUPERSEDED)
             basis = self._validate_basis(
                 command.mutation_basis, command.target_source_assertion_ref, uow
             )
             if isinstance(basis, PortError) or basis.value is not BasisValidation.VALID:
                 return self._basis_result(basis)
+            history = uow.assertions.list_assertion_history(command.target_source_assertion_ref)
+            if isinstance(history, PortError):
+                return history
+            if any(f.fact_type == SUPERSESSION_FACT_TYPE for f in history.value):
+                return _result(SourceAssertionTransitionOutcome.TARGET_ALREADY_SUPERSEDED)
         recovery = self._recover(command)
         if isinstance(recovery, PortError):
             return recovery
@@ -493,13 +493,6 @@ class _SourceAssertionTransition:
             if isinstance(head.value, RecordAbsent):
                 uow.rollback()
                 return _result(SourceAssertionTransitionOutcome.TARGET_STANDING_HEAD_MISSING)
-            history = uow.assertions.list_assertion_history(command.target_source_assertion_ref)
-            if isinstance(history, PortError):
-                uow.rollback()
-                return history
-            if any(f.fact_type == SUPERSESSION_FACT_TYPE for f in history.value):
-                uow.rollback()
-                return _result(SourceAssertionTransitionOutcome.TARGET_ALREADY_SUPERSEDED)
             basis = self._validate_basis(
                 command.mutation_basis, command.target_source_assertion_ref, uow
             )
@@ -516,6 +509,13 @@ class _SourceAssertionTransition:
             if not isinstance(current, OwnerPresent):
                 uow.rollback()
                 return _result(SourceAssertionTransitionOutcome.TARGET_STANDING_HEAD_MISSING)
+            history = uow.assertions.list_assertion_history(command.target_source_assertion_ref)
+            if isinstance(history, PortError):
+                uow.rollback()
+                return history
+            if any(f.fact_type == SUPERSESSION_FACT_TYPE for f in history.value):
+                uow.rollback()
+                return _result(SourceAssertionTransitionOutcome.TARGET_ALREADY_SUPERSEDED)
             old = target.value.record
             new = SourceAssertionRecord(
                 material.new_ref,

@@ -335,6 +335,70 @@ def test_replay_precedes_basis_and_recovery_and_cross_operation_conflicts() -> N
     assert committed.bindings
 
 
+def test_stale_basis_precedes_existing_supersession_and_has_no_side_effects() -> None:
+    old, assertions, _, _, codec, token, evidence, candidates, clock, factory = _setup()
+    operation = SupersedeSourceAssertion(factory, evidence, Gate(), codec, candidates, clock)
+    first = operation.execute(_command("supersede", token))
+    assert first.value.outcome is SourceAssertionTransitionOutcome.APPLIED
+    assertions.history[old.source_assertion_ref].append(
+        AssertionHistoryFact(
+            AssertionHistoryFactRef("existing"),
+            old.source_assertion_ref,
+            SUPERSESSION_FACT_TYPE,
+            NOW,
+            first.value.new_source_assertion_ref,
+        )
+    )
+    candidates.calls = 0
+    clock.calls = 0
+    evidence.reservation_writes = 0
+    result = operation.execute(
+        replace(
+            _command("supersede", token),
+            key=IdempotencyBindingKey(
+                OpaqueClientIdentity("client-2"), OpaqueRequestIdentity("stale")
+            ),
+        )
+    )
+    assert result.value.outcome is SourceAssertionTransitionOutcome.STALE_BASIS
+    assert candidates.calls == 0 and clock.calls == 0 and evidence.reservation_writes == 0
+
+
+def test_fresh_basis_after_supersession_returns_already_superseded_without_generation() -> None:
+    old, assertions, _, _, codec, token, evidence, candidates, clock, factory = _setup()
+    operation = SupersedeSourceAssertion(factory, evidence, Gate(), codec, candidates, clock)
+    first = operation.execute(_command("supersede", token))
+    assert first.value.outcome is SourceAssertionTransitionOutcome.APPLIED
+    new_ref = first.value.new_source_assertion_ref
+    assert new_ref is not None
+    assertions.heads[old.source_assertion_ref] = AssertionStandingHead(
+        old.source_assertion_ref, AssertionHistoryFactRef("existing"), StateWitness("w2")
+    )
+    fresh = codec.issue(
+        MutationBasisClaims(
+            RecoveryIncarnation("r1"),
+            (
+                ObservedOwnerState(
+                    AssertionOwner(old.source_assertion_ref), OwnerPresent(StateWitness("w2"))
+                ),
+            ),
+        )
+    ).value
+    candidates.calls = 0
+    clock.calls = 0
+    evidence.reservation_writes = 0
+    result = operation.execute(
+        replace(
+            _command("supersede", fresh),
+            key=IdempotencyBindingKey(
+                OpaqueClientIdentity("client-3"), OpaqueRequestIdentity("fresh")
+            ),
+        )
+    )
+    assert result.value.outcome is SourceAssertionTransitionOutcome.TARGET_ALREADY_SUPERSEDED
+    assert candidates.calls == 0 and clock.calls == 0 and evidence.reservation_writes == 0
+
+
 def test_valid_mapping_retry_reuses_all_transition_material() -> None:
     old, assertions, _, _, codec, token, evidence, candidates, clock, factory = _setup()
     command = _command("supersede", token)
