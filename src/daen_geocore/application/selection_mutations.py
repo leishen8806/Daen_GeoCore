@@ -1,18 +1,15 @@
-# pyright: basic, reportArgumentType=false, reportAttributeAccessIssue=false, reportUnknownArgumentType=false, reportUnknownParameterType=false, reportUnknownVariableType=false, reportReturnType=false, reportMissingParameterType=false, reportUnusedImport=false
-
 from __future__ import annotations
 
 import json
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from enum import StrEnum
-from typing import Protocol
+from typing import Protocol, cast
 
 from daen_geocore.application.mutation_runtime import (
     AuthoritativeReadSetCapture,
-    BasisValidation,
+    MutationBasisClaims,
     MutationBasisCodec,
-    MutationBasisValidator,
     ReadSetRevalidator,
     ReadSetValidation,
     RecoveryMappingCoordinator,
@@ -48,7 +45,7 @@ from daen_geocore.ports.mutation import (
     OwnerStateReader,
     SelectionSlotOwner,
 )
-from daen_geocore.ports.persistence.commit import CommitAccepted, CommitNotCommitted
+from daen_geocore.ports.persistence.commit import CommitAccepted, CommitNotCommitted, CommitOutcome
 from daen_geocore.ports.persistence.records import (
     ConditionalWriteDisposition,
     InsertDisposition,
@@ -176,7 +173,7 @@ class _SelectionUow(Protocol):
 
     def __enter__(self) -> _SelectionUow: ...
     def __exit__(self, exc_type: object, exc_value: object, traceback: object) -> None: ...
-    def commit(self): ...
+    def commit(self) -> CommitOutcome: ...
     def rollback(self) -> None: ...
 
 
@@ -211,8 +208,15 @@ def _decode_mapping(
 ) -> tuple[SelectionRecordRef, StateWitness, datetime] | None:
     if len(mapping.references) != 1 or not isinstance(mapping.references[0], SelectionRecordRef):
         return None
-    values = dict(mapping.replay_metadata.entries)
-    if len(values) != 2 or set(values) != {"state_witness", "recorded_at"}:
+    raw_entries = mapping.replay_metadata.entries
+    values = dict(raw_entries)
+    if (
+        len(raw_entries) != 2
+        or len(values) != 2
+        or set(values) != {"state_witness", "recorded_at"}
+        or not values["state_witness"]
+        or not values["recorded_at"]
+    ):
         return None
     try:
         recorded = datetime.fromisoformat(values["recorded_at"])
@@ -264,14 +268,10 @@ class _SelectionMutation:
     ) -> PortResult[SelectionMutationResult]:
         preflight = self._preflight(command)
         if isinstance(preflight, PortError) or preflight.value is not None:
-            return preflight
+            return cast(PortResult[SelectionMutationResult], preflight)
         recovered = self._recover(command)
-        if (
-            isinstance(recovered, PortError)
-            or recovered.value is not None
-            and isinstance(recovered.value, SelectionMutationResult)
-        ):
-            return recovered
+        if isinstance(recovered, PortError) or isinstance(recovered.value, SelectionMutationResult):
+            return cast(PortResult[SelectionMutationResult], recovered)
         ref, witness, recorded = recovered.value
         reservation = self._reservation.reserve(
             ReferenceReservationPlan(command.evidence_lookup_key, (ref,))
@@ -284,16 +284,18 @@ class _SelectionMutation:
             return _result(SelectionMutationOutcome.REFERENCE_EVIDENCE_CONFLICT)
         return self._authoritative(command, ref, witness, recorded)
 
-    def _preflight(self, command):
-        scope = _slot(command.place_ref, command.fact_purpose, command.scope)
-        if scope is None:
-            return _result(SelectionMutationOutcome.SCOPE_EQUALITY_UNESTABLISHED)
-        if not command.supporting_assertion_refs:
-            return _result(SelectionMutationOutcome.SUPPORTING_ASSERTIONS_REQUIRED)
+    def _preflight(
+        self, command: AddSelectionCommand | ReplaceSelectionCommand
+    ) -> PortResult[SelectionMutationResult | None]:
         with self._factory.create() as uow:
             replay = self._replay(uow, command)
             if isinstance(replay, PortError) or replay.value is not None:
                 return replay
+            scope = _slot(command.place_ref, command.fact_purpose, command.scope)
+            if scope is None:
+                return _result(SelectionMutationOutcome.SCOPE_EQUALITY_UNESTABLISHED)
+            if not command.supporting_assertion_refs:
+                return _result(SelectionMutationOutcome.SUPPORTING_ASSERTIONS_REQUIRED)
             place = uow.identity.get_place(command.place_ref)
             if isinstance(place, PortError):
                 return place
@@ -340,23 +342,28 @@ class _SelectionMutation:
                 return support
         return PortSuccess(None)
 
-    def _basis(self, token, scope, uow, replace):
-        checked = MutationBasisValidator(self._codec, self._gate, OwnerStateReader()).validate(
-            token, uow
-        )
-        if isinstance(checked, PortError):
-            return checked
-        if checked.value is not BasisValidation.VALID:
-            if checked.value is BasisValidation.INVALID_TOKEN:
-                return _result(SelectionMutationOutcome.INVALID_BASIS)
-            if checked.value is BasisValidation.RECOVERY_INCARNATION_MISMATCH:
-                return _result(SelectionMutationOutcome.RECOVERY_NOT_READY)
-            if checked.value is BasisValidation.OWNER_STATE_MISMATCH:
-                return _result(SelectionMutationOutcome.STALE_SLOT_BASIS)
-            return _result(SelectionMutationOutcome.INSUFFICIENT_BASIS)
+    def _basis(
+        self,
+        token: MutationBasisToken,
+        scope: SelectionSlotKey,
+        uow: _SelectionUow,
+        replace: bool,
+    ) -> PortResult[SelectionMutationResult] | None:
+        observation = self._gate.observation()
+        if not observation.may_authoritative_serve:
+            return _result(SelectionMutationOutcome.RECOVERY_NOT_READY)
+        serving = self._gate.validate_before_authoritative_serving()
+        if isinstance(serving, PortError):
+            return serving
+        if serving.value != observation.incarnation:
+            return _result(SelectionMutationOutcome.RECOVERY_INCARNATION_MISMATCH)
         decoded = self._codec.verify(token)
         if not isinstance(decoded, PortSuccess):
             return decoded
+        if not isinstance(decoded.value, MutationBasisClaims):
+            return _result(SelectionMutationOutcome.INVALID_BASIS)
+        if observation.incarnation != decoded.value.recovery_incarnation:
+            return _result(SelectionMutationOutcome.RECOVERY_INCARNATION_MISMATCH)
         claims = decoded.value.observed_owners
         expected = OwnerPresent if replace else OwnerAbsent
         exact = [
@@ -364,11 +371,18 @@ class _SelectionMutation:
             for claim in claims
             if isinstance(claim.owner, SelectionSlotOwner) and claim.owner.slot == scope
         ]
-        if len(exact) != 1 or not isinstance(exact[0].state, expected):
+        if len(exact) != 1 or type(exact[0].state) is not expected:
             return _result(SelectionMutationOutcome.INSUFFICIENT_BASIS)
+        current = OwnerStateReader().read(exact[0].owner, uow)
+        if isinstance(current, PortError):
+            return current
+        if current.value != exact[0].state:
+            return _result(SelectionMutationOutcome.STALE_SLOT_BASIS)
         return None
 
-    def _validate_supports(self, uow, command):
+    def _validate_supports(
+        self, uow: _SelectionUow, command: AddSelectionCommand | ReplaceSelectionCommand
+    ) -> PortResult[SelectionMutationResult] | None:
         for ref in command.supporting_assertion_refs:
             assertion = uow.assertions.get_assertion(ref)
             if isinstance(assertion, PortError):
@@ -390,7 +404,9 @@ class _SelectionMutation:
                 return _result(SelectionMutationOutcome.SUPPORT_STANDING_HEAD_MISSING)
         return None
 
-    def _replay(self, uow, command):
+    def _replay(
+        self, uow: _SelectionUow, command: AddSelectionCommand | ReplaceSelectionCommand
+    ) -> PortResult[SelectionMutationResult | None]:
         result = uow.committed_idempotency.read(command.key)
         if isinstance(result, PortError):
             return result
@@ -403,8 +419,8 @@ class _SelectionMutation:
         ):
             return _result(SelectionMutationOutcome.IDEMPOTENCY_CONFLICT)
         expected = 1 if self.operation == ADD_OPERATION else 2
-        if len(binding.result.references) != expected or not isinstance(
-            binding.result.references[0], SelectionRecordRef
+        if len(binding.result.references) != expected or not all(
+            isinstance(item, SelectionRecordRef) for item in binding.result.references
         ):
             return _result(SelectionMutationOutcome.MALFORMED_RECOVERY_METADATA)
         kind = "selection_added" if self.operation == ADD_OPERATION else "selection_replaced"
@@ -412,14 +428,21 @@ class _SelectionMutation:
             return _result(SelectionMutationOutcome.MALFORMED_RECOVERY_METADATA)
         if (
             self.operation == REPLACE_OPERATION
+            and isinstance(command, ReplaceSelectionCommand)
             and binding.result.references[0] != command.prior_selection_record_ref
         ):
             return _result(SelectionMutationOutcome.MALFORMED_RECOVERY_METADATA)
-        prior = binding.result.references[0] if self.operation == REPLACE_OPERATION else None
-        ref = binding.result.references[-1]
+        prior = (
+            cast(SelectionRecordRef, binding.result.references[0])
+            if self.operation == REPLACE_OPERATION
+            else None
+        )
+        ref = cast(SelectionRecordRef, binding.result.references[-1])
         return _result(SelectionMutationOutcome.REPLAY, ref, prior)
 
-    def _recover(self, command):
+    def _recover(
+        self, command: AddSelectionCommand | ReplaceSelectionCommand
+    ) -> PortResult[SelectionMutationResult | tuple[SelectionRecordRef, StateWitness, datetime]]:
         existing = self._evidence.read_request_mapping(command.evidence_lookup_key)
         if isinstance(existing, PortError):
             return existing
@@ -456,6 +479,27 @@ class _SelectionMutation:
         if isinstance(resolved, PortError):
             return resolved
         if resolved.value.outcome is RecoveryMappingOutcome.CONFLICT:
+            current = self._evidence.read_request_mapping(command.evidence_lookup_key)
+            if isinstance(current, PortError):
+                return current
+            if not isinstance(current.value, EvidenceFound):
+                return _result(SelectionMutationOutcome.RECOVERY_MAPPING_CONFLICT)
+            stored = current.value.record
+            if (
+                stored.client_identity == command.key.client_identity
+                and stored.request_identity == command.key.request_identity
+            ):
+                if (
+                    stored.intent_fingerprint != command.intent_fingerprint
+                    or stored.operation_key != self.operation
+                ):
+                    return _result(SelectionMutationOutcome.IDEMPOTENCY_CONFLICT)
+                decoded = _decode_mapping(stored)
+                return (
+                    PortSuccess(decoded)
+                    if decoded is not None
+                    else _result(SelectionMutationOutcome.MALFORMED_RECOVERY_METADATA)
+                )
             return _result(SelectionMutationOutcome.RECOVERY_MAPPING_CONFLICT)
         mapping = resolved.value.mapping
         decoded = _decode_mapping(mapping) if mapping else None
@@ -465,13 +509,22 @@ class _SelectionMutation:
             else _result(SelectionMutationOutcome.MALFORMED_RECOVERY_METADATA)
         )
 
-    def _authoritative(self, command, ref, witness, recorded):
-        scope = _slot(command.place_ref, command.fact_purpose, command.scope)
+    def _authoritative(
+        self,
+        command: AddSelectionCommand | ReplaceSelectionCommand,
+        ref: SelectionRecordRef,
+        witness: StateWitness,
+        recorded: datetime,
+    ) -> PortResult[SelectionMutationResult]:
         with self._factory.create() as uow:
             replay = self._replay(uow, command)
             if isinstance(replay, PortError) or replay.value is not None:
                 uow.rollback()
-                return replay
+                return cast(PortResult[SelectionMutationResult], replay)
+            scope = _slot(command.place_ref, command.fact_purpose, command.scope)
+            if scope is None:
+                uow.rollback()
+                return _result(SelectionMutationOutcome.SCOPE_EQUALITY_UNESTABLISHED)
             place = uow.identity.get_place(command.place_ref)
             if isinstance(place, PortError):
                 uow.rollback()
@@ -493,6 +546,21 @@ class _SelectionMutation:
                 if isinstance(prior.value, RecordAbsent):
                     uow.rollback()
                     return _result(SelectionMutationOutcome.PRIOR_SELECTION_NOT_FOUND)
+                prior_record = prior.value.record
+                if prior_record.place_ref != command.place_ref:
+                    uow.rollback()
+                    return _result(SelectionMutationOutcome.PLACE_INVARIANT_FAILED)
+                if prior_record.fact_purpose != command.fact_purpose:
+                    uow.rollback()
+                    return _result(SelectionMutationOutcome.FACT_PURPOSE_INVARIANT_FAILED)
+                prior_scope = (
+                    _slot(prior_record.place_ref, prior_record.fact_purpose, prior_record.scope)
+                    if isinstance(prior_record.scope, PersistedExplicitScope)
+                    else None
+                )
+                if prior_scope != scope:
+                    uow.rollback()
+                    return _result(SelectionMutationOutcome.SCOPE_INVARIANT_FAILED)
                 head = uow.representation.get_selection_slot_head(scope)
                 if isinstance(head, PortError):
                     uow.rollback()
@@ -536,18 +604,18 @@ class _SelectionMutation:
                 recorded,
             )
             inserted = uow.representation.insert_selection_record_if_absent(record)
-            if (
-                isinstance(inserted, PortError)
-                or inserted.value is InsertDisposition.CONFLICTING_EXISTING
-            ):
+            if isinstance(inserted, PortError):
+                uow.rollback()
+                return inserted
+            if inserted.value is InsertDisposition.CONFLICTING_EXISTING:
                 uow.rollback()
                 return _result(SelectionMutationOutcome.REFERENCE_COLLISION)
             for support_ref in command.supporting_assertion_refs:
                 linked = uow.representation.insert_support_link_if_absent(ref, support_ref)
-                if (
-                    isinstance(linked, PortError)
-                    or linked.value is InsertDisposition.CONFLICTING_EXISTING
-                ):
+                if isinstance(linked, PortError):
+                    uow.rollback()
+                    return linked
+                if linked.value is InsertDisposition.CONFLICTING_EXISTING:
                     uow.rollback()
                     return _result(SelectionMutationOutcome.REFERENCE_COLLISION)
             valid = ReadSetRevalidator(OwnerStateReader()).revalidate(captured.value, uow)
@@ -555,26 +623,62 @@ class _SelectionMutation:
                 uow.rollback()
                 return valid
             if valid.value is not ReadSetValidation.VALID:
+                for observed in captured.value.observed_owners:
+                    if isinstance(observed.owner, SelectionSlotOwner):
+                        current_slot = uow.representation.get_selection_slot_head(
+                            observed.owner.slot
+                        )
+                        if isinstance(current_slot, PortError):
+                            uow.rollback()
+                            return current_slot
+                        current_state = (
+                            OwnerAbsent()
+                            if isinstance(current_slot.value, RecordAbsent)
+                            else OwnerPresent(current_slot.value.record.state_witness)
+                        )
+                        if current_state != observed.state:
+                            uow.rollback()
+                            return _result(SelectionMutationOutcome.STALE_SLOT_BASIS)
+                    elif isinstance(observed.owner, AssertionOwner):
+                        history = uow.assertions.list_assertion_history(
+                            observed.owner.source_assertion_ref
+                        )
+                        if isinstance(history, PortError):
+                            uow.rollback()
+                            return history
+                        if any(fact.fact_type == WITHDRAWN_FACT_TYPE for fact in history.value):
+                            uow.rollback()
+                            return _result(SelectionMutationOutcome.SUPPORT_ASSERTION_WITHDRAWN)
+                        head = uow.assertions.get_standing_head(observed.owner.source_assertion_ref)
+                        if isinstance(head, PortError):
+                            uow.rollback()
+                            return head
+                        if isinstance(head.value, RecordAbsent):
+                            uow.rollback()
+                            return _result(SelectionMutationOutcome.SUPPORT_STANDING_HEAD_MISSING)
                 uow.rollback()
                 return _result(SelectionMutationOutcome.SUPPORT_ASSERTION_STATE_CHANGED)
             if isinstance(command, AddSelectionCommand):
                 write = uow.representation.insert_selection_slot_head_if_absent(
                     SelectionSlotHead(scope, ref, witness)
                 )
-                if (
-                    isinstance(write, PortError)
-                    or write.value is InsertDisposition.CONFLICTING_EXISTING
-                ):
+                if isinstance(write, PortError):
+                    uow.rollback()
+                    return write
+                if write.value is InsertDisposition.CONFLICTING_EXISTING:
                     uow.rollback()
                     return _result(SelectionMutationOutcome.SLOT_CONFLICT)
             else:
+                if expected is None:
+                    uow.rollback()
+                    return _result(SelectionMutationOutcome.CURRENT_SELECTION_MISSING)
                 write = uow.representation.compare_and_swap_selection_slot_head(
                     scope, command.prior_selection_record_ref, expected, ref, witness
                 )
-                if (
-                    isinstance(write, PortError)
-                    or write.value is ConditionalWriteDisposition.PRECONDITION_NOT_MET
-                ):
+                if isinstance(write, PortError):
+                    uow.rollback()
+                    return write
+                if write.value is ConditionalWriteDisposition.PRECONDITION_NOT_MET:
                     uow.rollback()
                     return _result(SelectionMutationOutcome.STALE_SLOT_BASIS)
             audited = uow.mutation_audit.append_if_absent(
@@ -587,10 +691,10 @@ class _SelectionMutation:
                     _audit(command, self.operation, ref),
                 )
             )
-            if (
-                isinstance(audited, PortError)
-                or audited.value is InsertDisposition.CONFLICTING_EXISTING
-            ):
+            if isinstance(audited, PortError):
+                uow.rollback()
+                return audited
+            if audited.value is InsertDisposition.CONFLICTING_EXISTING:
                 uow.rollback()
                 return _result(SelectionMutationOutcome.AUDIT_CONFLICT)
             refs = (
@@ -611,10 +715,10 @@ class _SelectionMutation:
                 BindingRetention.PUBLIC_REPLAY_HORIZON,
             )
             committed = uow.committed_idempotency.create_if_absent(binding)
-            if (
-                isinstance(committed, PortError)
-                or committed.value is IdempotencyCreateDisposition.CONFLICTING_EXISTING
-            ):
+            if isinstance(committed, PortError):
+                uow.rollback()
+                return committed
+            if committed.value is IdempotencyCreateDisposition.CONFLICTING_EXISTING:
                 uow.rollback()
                 return _result(SelectionMutationOutcome.IDEMPOTENCY_CONFLICT)
             outcome = uow.commit()
