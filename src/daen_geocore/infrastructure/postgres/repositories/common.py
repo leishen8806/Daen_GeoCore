@@ -13,14 +13,19 @@ from daen_geocore.ports.result import PortError
 
 
 def technical_error(error: BaseException) -> PortError:
-    classification = (
-        TechnicalFailureClass.TRANSIENT_UNAVAILABLE
-        if isinstance(error, (ConnectionError, TimeoutError))
-        else TechnicalFailureClass.NON_RETRYABLE_TECHNICAL_FAILURE
-    )
-    return PortError(
-        PortFailure("postgres_repository_failure", classification, type(error).__name__)
-    )
+    original = getattr(error, "orig", error)
+    sqlstate = getattr(original, "sqlstate", None) or getattr(original, "pgcode", None)
+    if sqlstate in {"40001", "40P01"}:
+        classification = TechnicalFailureClass.RETRYABLE_TRANSACTION_ABORT
+        code = "postgres_serialization_failure" if sqlstate == "40001" else "postgres_deadlock"
+    else:
+        classification = (
+            TechnicalFailureClass.TRANSIENT_UNAVAILABLE
+            if isinstance(error, (ConnectionError, TimeoutError))
+            else TechnicalFailureClass.NON_RETRYABLE_TECHNICAL_FAILURE
+        )
+        code = "postgres_repository_failure"
+    return PortError(PortFailure(code, classification, sqlstate or type(error).__name__))
 
 
 def scope_from_row(row: Any) -> PersistedScope:

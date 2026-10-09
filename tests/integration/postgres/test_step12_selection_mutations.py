@@ -375,7 +375,8 @@ def test_postgres_add_add_race_has_one_current_winner(engine) -> None:
     results = _run_selection_race(operations)
     assert (
         sum(
-            getattr(result.value, "outcome", None) is SelectionMutationOutcome.APPLIED
+            getattr(getattr(result, "value", None), "outcome", None)
+            is SelectionMutationOutcome.APPLIED
             for result in results
         )
         <= 1
@@ -511,7 +512,8 @@ def test_postgres_replace_replace_race_has_one_final_replacement(engine) -> None
     results = _run_selection_race(operations)
     assert (
         sum(
-            getattr(result.value, "outcome", None) is SelectionMutationOutcome.APPLIED
+            getattr(getattr(result, "value", None), "outcome", None)
+            is SelectionMutationOutcome.APPLIED
             for result in results
         )
         <= 1
@@ -973,5 +975,5 @@ def test_postgres_support_place_mismatch_and_unknown_support_are_preflight_error
         mismatch_result.value.outcome is SelectionMutationOutcome.SUPPORT_ASSERTION_PLACE_MISMATCH
     )
     assert unknown_result.value.outcome is SelectionMutationOutcome.SUPPORT_ASSERTION_NOT_FOUND
-    assert mismatch_evidence.mapping_reads == 0
-    assert unknown_evidence.mapping_reads == 0
+    assert getattr(mismatch_evidence, "mapping_reads", 0) == 0
+    assert getattr(unknown_evidence, "mapping_reads", 0) == 0
