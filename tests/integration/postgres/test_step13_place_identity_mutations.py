@@ -401,7 +401,8 @@ def _run_race(engine, place: PlaceRef, first_kind: str, second_kind: str):
 
 def test_postgres_close_close_and_withdraw_withdraw_races_have_one_winner(engine) -> None:
     for index, kind in enumerate(("close", "withdraw")):
-        results = _run_race(engine, PlaceRef(f"step13-{kind}-race-{index}"), kind, kind)
+        place = PlaceRef(f"step13-{kind}-race-{index}")
+        results = _run_race(engine, place, kind, kind)
         assert (
             sum(
                 getattr(getattr(result, "value", None), "outcome", None)
@@ -410,6 +411,47 @@ def test_postgres_close_close_and_withdraw_withdraw_races_have_one_winner(engine
             )
             <= 1
         )
+        with engine.connect() as connection:
+            facts = (
+                connection.execute(
+                    select(identity_place_history).where(
+                        identity_place_history.c.place_ref == place.token
+                    )
+                )
+                .mappings()
+                .all()
+            )
+            head = (
+                connection.execute(
+                    select(identity_place_head).where(
+                        identity_place_head.c.place_ref == place.token
+                    )
+                )
+                .mappings()
+                .one()
+            )
+            audits = (
+                connection.execute(
+                    select(mutation_audit).where(
+                        mutation_audit.c.request_identity.like(f"{place.token}-%")
+                    )
+                )
+                .mappings()
+                .all()
+            )
+            bindings = (
+                connection.execute(
+                    select(mutation_committed_binding).where(
+                        mutation_committed_binding.c.request_identity.like(f"{place.token}-%")
+                    )
+                )
+                .mappings()
+                .all()
+            )
+        assert len(facts) == 1
+        assert head["latest_history_fact_ref"] == facts[0]["history_fact_ref"]
+        assert head["state_witness"] != "w0"
+        assert len(audits) == len(bindings) == 1
 
 
 def test_postgres_close_withdraw_race_serializes_one_transition(engine) -> None:
@@ -492,3 +534,23 @@ def test_postgres_close_withdraw_race_serializes_one_transition(engine) -> None:
     assert final_head["latest_history_fact_ref"] in {
         fact["history_fact_ref"] for fact in final_facts
     }
+    with engine.connect() as connection:
+        audits = (
+            connection.execute(
+                select(mutation_audit).where(
+                    mutation_audit.c.request_identity.like(f"{place.token}-%")
+                )
+            )
+            .mappings()
+            .all()
+        )
+        bindings = (
+            connection.execute(
+                select(mutation_committed_binding).where(
+                    mutation_committed_binding.c.request_identity.like(f"{place.token}-%")
+                )
+            )
+            .mappings()
+            .all()
+        )
+    assert len(audits) == len(bindings) == 1
