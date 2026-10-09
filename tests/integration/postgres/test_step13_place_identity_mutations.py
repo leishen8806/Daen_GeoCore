@@ -276,4 +276,4 @@ def test_postgres_close_withdraw_race_serializes_one_transition(engine) -> None:
             .scalars()
             .all()
         )
-        assert len(facts) == 1
+        assert len(facts) == 1, [repr(result) for result in results]
