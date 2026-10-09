@@ -27,5 +27,5 @@ committed replay binding, and maps commit unknown without hidden retry.
 Selection operations do not mutate assertions or Places, do not append
 assertion history, add no HTTP route, and require no schema migration.
 
-The acceptance matrix must include real PostgreSQL Add/Add and Replace/Replace
+Real PostgreSQL acceptance covers Add/Add and Replace/Replace
 races, Add/T2 and Replace/T2 support races, replay, and rollback checks.
