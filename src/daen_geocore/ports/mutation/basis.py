@@ -45,6 +45,7 @@ class BasisValidation(StrEnum):
     VALID = "valid"
     RECOVERY_INCARNATION_MISMATCH = "recovery_incarnation_mismatch"
     OWNER_STATE_MISMATCH = "owner_state_mismatch"
+    INSUFFICIENT_OWNER_CLAIM = "insufficient_owner_claim"
     INVALID_TOKEN = "invalid_token"
 
 
