@@ -233,7 +233,7 @@ def _run_race(engine, place: PlaceRef, first_kind: str, second_kind: str):
         results.append(
             operation.execute(
                 command_type(
-                    _key(f"{kind}-{suffix}"),
+                    _key(f"{place.token}-{kind}-{suffix}"),
                     IntentFingerprint(f"{kind}-v1"),
                     place,
                     token,
