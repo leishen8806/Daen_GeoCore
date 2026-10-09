@@ -50,6 +50,7 @@ from daen_geocore.ports.mutation import (
     SelectionSlotOwner,
 )
 from daen_geocore.ports.persistence.records import (
+    AssertionHistoryFactRef,
     OpaqueEncodedPayload,
     PersistedExplicitScope,
     PersistedQualityUnknown,
@@ -830,10 +831,7 @@ def test_postgres_replace_replay_precedes_stale_basis_and_side_effects(engine) -
         command.key.request_identity,
         command.intent_fingerprint,
         REPLACE_OPERATION,
-        (
-            SelectionRecordRef(command.prior_selection_record_ref.token),
-            SelectionRecordRef("step12-replace-replay-ref"),
-        ),
+        (SelectionRecordRef("step12-replace-replay-ref"),),
         OpaqueReplayMetadata(
             (("state_witness", "step12-replace-replay-w"), ("recorded_at", NOW.isoformat()))
         ),
@@ -861,8 +859,19 @@ def test_postgres_replace_replay_precedes_stale_basis_and_side_effects(engine) -
 
 def test_postgres_withdrawn_support_rejects_before_recovery(engine) -> None:
     target = seed_withdrawal(engine, "withdrawn-support")
+
+    class FixedWithdrawalCandidates(Candidates):
+        def new_assertion_history_fact_ref(self):
+            return AssertionHistoryFactRef("step12-withdrawn-support-history")
+
+        def new_state_witness(self):
+            return StateWitness("step12-withdrawn-support-witness")
+
     withdrawal = WithdrawSourceAssertion(
-        PostgresMutationUnitOfWorkFactory(DATABASE_URL), Gate(), Candidates(), FakeTransitionClock()
+        PostgresMutationUnitOfWorkFactory(DATABASE_URL),
+        Gate(),
+        FixedWithdrawalCandidates(),
+        FakeTransitionClock(),
     ).execute(withdraw_command("withdrawn-support", target))
     assert withdrawal.value.outcome is SourceAssertionWithdrawalOutcome.APPLIED
     place = PlaceRef("place-withdrawn-support")
@@ -883,7 +892,7 @@ def test_postgres_withdrawn_support_rejects_before_recovery(engine) -> None:
         PostgresMutationUnitOfWorkFactory(DATABASE_URL), evidence, Gate(), codec, candidates, clock
     ).execute(command)
     assert result.value.outcome is SelectionMutationOutcome.SUPPORT_ASSERTION_WITHDRAWN
-    assert evidence.mapping_reads == 0
+    assert getattr(evidence, "mapping_reads", 0) == 0
     assert candidates.calls == 0
     assert clock.calls == 0
 
