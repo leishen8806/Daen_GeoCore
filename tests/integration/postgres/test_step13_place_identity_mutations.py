@@ -49,6 +49,18 @@ DATABASE_URL = os.getenv("DAEN_TEST_DATABASE_URL")
 pytestmark = pytest.mark.skipif(not DATABASE_URL, reason="DAEN_TEST_DATABASE_URL is not configured")
 
 
+class PlaceCandidates(Candidates):
+    def __init__(self, namespace: str) -> None:
+        super().__init__()
+        self.namespace = namespace
+
+    def new_place_history_fact_ref(self):
+        return type(super().new_place_history_fact_ref())(f"{self.namespace}-history")
+
+    def new_state_witness(self):
+        return StateWitness(f"{self.namespace}-witness")
+
+
 def _config() -> Config:
     config = Config(str(Path("alembic.ini").resolve()))
     config.set_main_option("sqlalchemy.url", DATABASE_URL or "")
@@ -210,9 +222,7 @@ def _run_race(engine, place: PlaceRef, first_kind: str, second_kind: str):
     def worker(kind: str, suffix: str) -> None:
         operation_type = ClosePlace if kind == "close" else WithdrawPlace
         command_type = ClosePlaceCommand if kind == "close" else WithdrawPlaceCommand
-        candidates = Candidates()
-        base = sum((index + 1) * ord(char) for index, char in enumerate(place.token)) * 100
-        candidates.calls = base + (10_000 if suffix == "a" else 20_000)
+        candidates = PlaceCandidates(f"{place.token}-{suffix}")
         operation = operation_type(
             PostgresMutationUnitOfWorkFactory(DATABASE_URL or ""),
             _BarrierGate(barrier),
