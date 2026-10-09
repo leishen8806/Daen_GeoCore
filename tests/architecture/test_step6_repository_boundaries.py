@@ -50,8 +50,10 @@ def test_no_generic_crud_public_surface() -> None:
 def test_no_production_delete_and_single_migration() -> None:
     assert all("delete(" not in p.read_text() for p in REPO_DIR.glob("*.py"))
     migrations = list((Path(__file__).parents[2] / "alembic" / "versions").glob("*.py"))
-    assert len(migrations) == 1
-    assert not any(p.name.startswith("0002") for p in migrations)
+    assert {p.name for p in migrations} == {
+        "0001_authoritative_persistence.py",
+        "0002_correctness_persistence.py",
+    }
 
 
 def test_owner_table_boundaries() -> None:

@@ -52,6 +52,18 @@ class PostgresUnitOfWork:
 
         return PostgresRepresentationRepository(self._require_connection())
 
+    @property
+    def committed_idempotency(self):
+        from .correctness import PostgresCommittedIdempotencyStore
+
+        return PostgresCommittedIdempotencyStore(self._require_connection())
+
+    @property
+    def mutation_audit(self):
+        from .correctness.audit import PostgresMutationAuditStore
+
+        return PostgresMutationAuditStore(self._require_connection())
+
     def __enter__(self) -> PostgresUnitOfWork:
         self.begin()
         return self

@@ -7,7 +7,9 @@ from sqlalchemy import (
     DateTime,
     ForeignKeyConstraint,
     Index,
+    Integer,
     LargeBinary,
+    MetaData,
     PrimaryKeyConstraint,
     Table,
     Text,
@@ -15,6 +17,8 @@ from sqlalchemy import (
 )
 
 from .metadata import metadata
+
+correctness_metadata = MetaData()
 
 
 def _scope_columns() -> list[Column[Any]]:
@@ -226,6 +230,82 @@ representation_selection_slot_head = Table(
         "scope_equality_key",
         name="pk_representation_selection_slot_head",
     ),
+)
+
+
+mutation_committed_binding = Table(
+    "mutation_committed_binding",
+    correctness_metadata,
+    Column("client_identity", Text, nullable=False),
+    Column("request_identity", Text, nullable=False),
+    Column("intent_fingerprint", Text, nullable=False),
+    Column("operation_key", Text, nullable=False),
+    Column("retention_class", Text, nullable=False),
+    PrimaryKeyConstraint(
+        "client_identity", "request_identity", name="pk_mutation_committed_binding"
+    ),
+)
+
+mutation_committed_result_reference = Table(
+    "mutation_committed_result_reference",
+    correctness_metadata,
+    Column("client_identity", Text, nullable=False),
+    Column("request_identity", Text, nullable=False),
+    Column("ordinal", Integer, nullable=False),
+    Column("reference_kind", Text, nullable=False),
+    Column("reference_token", Text, nullable=False),
+    ForeignKeyConstraint(
+        ["client_identity", "request_identity"],
+        [
+            "mutation_committed_binding.client_identity",
+            "mutation_committed_binding.request_identity",
+        ],
+    ),
+    PrimaryKeyConstraint(
+        "client_identity", "request_identity", "ordinal", name="pk_mutation_result_reference"
+    ),
+)
+
+mutation_committed_replay_metadata = Table(
+    "mutation_committed_replay_metadata",
+    correctness_metadata,
+    Column("client_identity", Text, nullable=False),
+    Column("request_identity", Text, nullable=False),
+    Column("ordinal", Integer, nullable=False),
+    Column("metadata_key", Text, nullable=False),
+    Column("metadata_value", Text, nullable=False),
+    ForeignKeyConstraint(
+        ["client_identity", "request_identity"],
+        [
+            "mutation_committed_binding.client_identity",
+            "mutation_committed_binding.request_identity",
+        ],
+    ),
+    PrimaryKeyConstraint(
+        "client_identity", "request_identity", "ordinal", name="pk_mutation_replay_metadata"
+    ),
+)
+
+mutation_audit = Table(
+    "mutation_audit",
+    correctness_metadata,
+    Column("client_identity", Text, nullable=False),
+    Column("request_identity", Text, nullable=False),
+    Column("intent_fingerprint", Text, nullable=False),
+    Column("operation_key", Text, nullable=False),
+    Column("recorded_at", DateTime(timezone=True), nullable=False),
+    Column("mutation_provenance_encoding", Text, nullable=False),
+    Column("mutation_provenance_payload", LargeBinary, nullable=False),
+    Column("audit_details_encoding", Text, nullable=False),
+    Column("audit_details_payload", LargeBinary, nullable=False),
+    PrimaryKeyConstraint("client_identity", "request_identity", name="pk_mutation_audit"),
+)
+
+ALL_CORRECTNESS_TABLES = (
+    mutation_committed_binding,
+    mutation_committed_result_reference,
+    mutation_committed_replay_metadata,
+    mutation_audit,
 )
 
 ALL_TABLES = (

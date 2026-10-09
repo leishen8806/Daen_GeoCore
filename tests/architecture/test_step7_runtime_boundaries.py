@@ -33,7 +33,9 @@ def test_no_public_v1_route_added() -> None:
         assert '"/v1' not in path.read_text() and "'/v1" not in path.read_text()
 
 
-def test_step7_does_not_add_schema_or_migration() -> None:
+def test_step8_adds_only_the_correctness_migration() -> None:
     versions = list((Path(__file__).parents[2] / "alembic" / "versions").glob("*.py"))
-    assert len(versions) == 1
-    assert not any(path.name.startswith("0002") for path in versions)
+    assert {path.name for path in versions} == {
+        "0001_authoritative_persistence.py",
+        "0002_correctness_persistence.py",
+    }

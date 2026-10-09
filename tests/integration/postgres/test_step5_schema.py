@@ -34,6 +34,10 @@ EXPECTED_TABLES = {
     "representation_selection_record",
     "representation_selection_support",
     "representation_selection_slot_head",
+    "mutation_committed_binding",
+    "mutation_committed_result_reference",
+    "mutation_committed_replay_metadata",
+    "mutation_audit",
 }
 
 
