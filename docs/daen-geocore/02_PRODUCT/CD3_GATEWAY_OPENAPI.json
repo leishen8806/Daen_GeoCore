@@ -1,0 +1,65 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "DAEN Geo Core CD-3 Gateway",
+    "version": "0.1.0-contract-candidate",
+    "description": "CD-3 WP2 CONTRACT CANDIDATE / NOT R2 ACCEPTED. This transport contract is provider-neutral and does not authorize runtime implementation, persistence, Geo Core identity, or GeoID creation."
+  },
+  "servers": [{"url": "/"}],
+  "paths": {
+    "/gateway/v1/geocode": {
+      "post": {
+        "operationId": "gatewayGeocode",
+        "summary": "Transient forward geocode lookup",
+        "description": "Lookup only. Location input is JSON body data so it is not placed in a URL. Provider answers are transient and are not automatically persisted or promoted to DAEN identity.",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/GeocodeRequest"}, "examples": {"synthetic": {"value": {"address": {"text": "Example Street 1, Test District"}, "regionCode": "KH", "languageCode": "km", "consumerPurposeCode": "demo.lookup"}}}}}},
+        "responses": {"200": {"$ref": "#/components/responses/LookupSuccess"}, "400": {"$ref": "#/components/responses/BadRequest"}, "422": {"$ref": "#/components/responses/UnprocessableRequest"}, "401": {"$ref": "#/components/responses/Unauthorized"}, "403": {"$ref": "#/components/responses/Forbidden"}, "429": {"$ref": "#/components/responses/RateLimited"}, "502": {"$ref": "#/components/responses/BadGateway"}, "503": {"$ref": "#/components/responses/Unavailable"}, "504": {"$ref": "#/components/responses/Timeout"}, "500": {"$ref": "#/components/responses/InternalError"}}
+      }
+    },
+    "/gateway/v1/reverse-geocode": {
+      "post": {
+        "operationId": "gatewayReverseGeocode",
+        "summary": "Transient reverse geocode lookup",
+        "description": "Lookup only. Coordinates are JSON body data and are not accepted in a URL or query string. Provider answers are transient.",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ReverseGeocodeRequest"}, "examples": {"synthetic": {"value": {"location": {"latitude": 11.000001, "longitude": 104.000001}, "languageCode": "km", "consumerPurposeCode": "demo.lookup"}}}}}},
+        "responses": {"200": {"$ref": "#/components/responses/LookupSuccess"}, "400": {"$ref": "#/components/responses/BadRequest"}, "422": {"$ref": "#/components/responses/UnprocessableRequest"}, "401": {"$ref": "#/components/responses/Unauthorized"}, "403": {"$ref": "#/components/responses/Forbidden"}, "429": {"$ref": "#/components/responses/RateLimited"}, "502": {"$ref": "#/components/responses/BadGateway"}, "503": {"$ref": "#/components/responses/Unavailable"}, "504": {"$ref": "#/components/responses/Timeout"}, "500": {"$ref": "#/components/responses/InternalError"}}
+      }
+    },
+    "/gateway/v1/status": {
+      "get": {
+        "operationId": "gatewayStatus",
+        "summary": "Coarse gateway operational status",
+        "description": "Coarse status only. Final authentication and exposure policy remains OPEN and is not frozen by this contract. Do not expose credentials, billing, exact account quota, or location content.",
+        "responses": {"200": {"description": "Coarse operational status", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/StatusResponse"}}}}, "401": {"$ref": "#/components/responses/Unauthorized"}, "403": {"$ref": "#/components/responses/Forbidden"}, "500": {"$ref": "#/components/responses/InternalError"}, "503": {"$ref": "#/components/responses/Unavailable"}}
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GeocodeRequest": {"type": "object", "additionalProperties": false, "required": ["address"], "properties": {"address": {"type": "object", "additionalProperties": false, "required": ["text"], "properties": {"text": {"type": "string", "minLength": 1, "maxLength": 512, "description": "Transport-bound address text; meaning is not normalized or reinterpreted."}}}, "regionCode": {"type": "string", "minLength": 1, "maxLength": 16, "pattern": "^[A-Za-z0-9-]+$"}, "languageCode": {"type": "string", "minLength": 1, "maxLength": 35, "pattern": "^[A-Za-z0-9-]+$"}, "consumerPurposeCode": {"$ref": "#/components/schemas/ConsumerPurposeCode"}}},
+      "ReverseGeocodeRequest": {"type": "object", "additionalProperties": false, "required": ["location"], "properties": {"location": {"$ref": "#/components/schemas/Location"}, "languageCode": {"type": "string", "minLength": 1, "maxLength": 35, "pattern": "^[A-Za-z0-9-]+$"}, "consumerPurposeCode": {"$ref": "#/components/schemas/ConsumerPurposeCode"}}},
+      "ConsumerPurposeCode": {"type": "string", "minLength": 1, "maxLength": 64, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$", "description": "Bounded non-sensitive caller classification. Business vocabulary remains a WP10 decision."},
+      "Location": {"type": "object", "additionalProperties": false, "required": ["latitude", "longitude"], "properties": {"latitude": {"type": "number", "minimum": -90, "maximum": 90}, "longitude": {"type": "number", "minimum": -180, "maximum": 180}}},
+      "LookupSuccess": {"type": "object", "additionalProperties": false, "required": ["requestId", "status", "provider", "results"], "properties": {"requestId": {"$ref": "#/components/schemas/RequestId"}, "status": {"type": "string", "enum": ["OK", "ZERO_RESULTS"]}, "provider": {"$ref": "#/components/schemas/ProviderInfo"}, "results": {"type": "array", "items": {"$ref": "#/components/schemas/ProviderResult"}}}},
+      "ProviderInfo": {"type": "object", "additionalProperties": false, "required": ["id", "attributionRequired"], "properties": {"id": {"type": "string", "minLength": 1, "maxLength": 64, "pattern": "^[A-Za-z0-9._:-]+$"}, "attributionRequired": {"type": "boolean"}}},
+      "ProviderResult": {"type": "object", "additionalProperties": false, "properties": {"providerReference": {"type": "string", "minLength": 1, "maxLength": 256, "description": "External provider value only; not a DAEN reference, GeoID, or durable linkage."}, "formattedAddress": {"type": "string", "maxLength": 512}, "name": {"type": "string", "maxLength": 256}, "location": {"$ref": "#/components/schemas/Location"}, "precisionClass": {"type": "string", "maxLength": 64}, "partialMatch": {"type": "boolean"}, "displayRequirements": {"$ref": "#/components/schemas/DisplayRequirements"}}},
+      "DisplayRequirements": {"type": "object", "additionalProperties": false, "properties": {"attributionRequired": {"type": "boolean"}, "attributionText": {"type": "string", "maxLength": 512}}},
+      "StatusResponse": {"type": "object", "additionalProperties": false, "required": ["requestId", "status"], "properties": {"requestId": {"$ref": "#/components/schemas/RequestId"}, "status": {"type": "string", "enum": ["OK", "DEGRADED", "UNAVAILABLE"]}}},
+      "RequestId": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[A-Za-z0-9._:-]+$"},
+      "ErrorEnvelope": {"type": "object", "additionalProperties": false, "required": ["requestId", "error"], "properties": {"requestId": {"$ref": "#/components/schemas/RequestId"}, "error": {"$ref": "#/components/schemas/GatewayError"}}},
+      "GatewayError": {"type": "object", "additionalProperties": false, "required": ["code", "message", "retryable"], "properties": {"code": {"type": "string", "enum": ["INVALID_REQUEST", "INVALID_FIELD", "AUTHENTICATION_REQUIRED", "FORBIDDEN", "RATE_LIMITED", "PROVIDER_TIMEOUT", "PROVIDER_UNAVAILABLE", "PROVIDER_CAPACITY_UNAVAILABLE", "PROVIDER_CONFIGURATION_FAILURE", "PROVIDER_RESPONSE_INVALID", "INTERNAL_ERROR"]}, "message": {"type": "string", "maxLength": 256}, "retryable": {"type": "boolean"}, "retryAfterSeconds": {"type": "integer", "minimum": 1, "maximum": 3600}}}
+    },
+    "responses": {
+      "LookupSuccess": {"description": "Transient lookup result, including ZERO_RESULTS with an empty results array.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/LookupSuccess"}}}},
+      "BadRequest": {"description": "Malformed request structure.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ErrorEnvelope"}}}},
+      "UnprocessableRequest": {"description": "Valid structure with invalid field semantics.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ErrorEnvelope"}}}},
+      "Unauthorized": {"description": "Authentication required; final mechanism remains OPEN.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ErrorEnvelope"}}}},
+      "Forbidden": {"description": "Authenticated caller is not permitted; final policy remains OPEN.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ErrorEnvelope"}}}},
+      "RateLimited": {"description": "Gateway consumer-facing rate limit; topology remains OPEN.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ErrorEnvelope"}}}},
+      "BadGateway": {"description": "Provider response is unusable or provider configuration prevents a valid answer.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ErrorEnvelope"}}}},
+      "Unavailable": {"description": "Provider unavailable, circuit open, or upstream capacity/quota unavailable.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ErrorEnvelope"}}}},
+      "Timeout": {"description": "Provider timeout.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ErrorEnvelope"}}}},
+      "InternalError": {"description": "Unexpected gateway-internal failure.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ErrorEnvelope"}}}}
+    }
+  }
+}

@@ -224,3 +224,9 @@ withdrawal policy, H14 lifetime, richer scope equivalence, temporal/as-of,
 Access Point/Containment writes, Extent semantics, auth/privacy, locating-basis
 adequacy, T2 Current Representation effect, and issued-but-lost reference
 presentation.
+
+## WP2 contract artifacts
+
+The R2 contract candidate is recorded in `CD3_GATEWAY_OPENAPI.json` with its
+separate `CD3_GATEWAY_ERROR_CONTRACT.md`. Neither artifact authorizes runtime
+implementation or changes the frozen `/v1` surface.
