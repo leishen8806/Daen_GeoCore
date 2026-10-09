@@ -212,6 +212,151 @@ def test_postgres_close_rolls_back_history_and_head_on_audit_conflict(engine) ->
         assert head["state_witness"] == "w0"
 
 
+def test_postgres_withdraw_rolls_back_history_and_head_on_audit_conflict(engine) -> None:
+    place = PlaceRef("step13-withdraw-rollback-place")
+    _seed(engine, place)
+    codec = FakeMutationBasisCodec()
+    command = WithdrawPlaceCommand(
+        _key("withdraw-rollback"),
+        IntentFingerprint("withdraw-v1"),
+        place,
+        _token(codec, place, "w0"),
+        OpaqueEncodedPayload("mutation", b"operator"),
+    )
+    with engine.begin() as connection:
+        connection.execute(
+            mutation_audit.insert().values(
+                client_identity=command.key.client_identity.value,
+                request_identity=command.key.request_identity.value,
+                intent_fingerprint="different-intent",
+                operation_key="place.withdraw",
+                recorded_at=NOW,
+                mutation_provenance_encoding="mutation",
+                mutation_provenance_payload=b"prior",
+                audit_details_encoding="details",
+                audit_details_payload=b"prior",
+            )
+        )
+    candidates = PlaceCandidates("withdraw-rollback")
+    result = WithdrawPlace(
+        PostgresMutationUnitOfWorkFactory(DATABASE_URL or ""),
+        Gate(),
+        codec,
+        candidates,
+        FakeTransitionClock(),
+    ).execute(command)
+    assert result.value.outcome is PlaceMutationOutcome.AUDIT_CONFLICT
+    with engine.connect() as connection:
+        facts = (
+            connection.execute(
+                select(identity_place_history).where(
+                    identity_place_history.c.place_ref == place.token
+                )
+            )
+            .mappings()
+            .all()
+        )
+        head = (
+            connection.execute(
+                select(identity_place_head).where(identity_place_head.c.place_ref == place.token)
+            )
+            .mappings()
+            .one()
+        )
+        bindings = (
+            connection.execute(
+                select(mutation_committed_binding).where(
+                    mutation_committed_binding.c.request_identity
+                    == command.key.request_identity.value
+                )
+            )
+            .mappings()
+            .all()
+        )
+    assert facts == []
+    assert head["latest_history_fact_ref"] is None and head["state_witness"] == "w0"
+    assert bindings == []
+
+
+def test_postgres_already_holds_and_replay_for_both_operations(engine) -> None:
+    for kind in ("close", "withdraw"):
+        place = PlaceRef(f"step13-{kind}-holds")
+        _seed(engine, place)
+        codec = FakeMutationBasisCodec()
+        operation_type = ClosePlace if kind == "close" else WithdrawPlace
+        command_type = ClosePlaceCommand if kind == "close" else WithdrawPlaceCommand
+        fact_type = CLOSE_FACT_TYPE if kind == "close" else WITHDRAW_FACT_TYPE
+        factory = PostgresMutationUnitOfWorkFactory(DATABASE_URL or "")
+        generator = PlaceCandidates(f"{kind}-holds")
+        operation = operation_type(factory, Gate(), codec, generator, FakeTransitionClock())
+        first = command_type(
+            _key(f"{kind}-first"),
+            IntentFingerprint(f"{kind}-v1"),
+            place,
+            _token(codec, place, "w0"),
+            OpaqueEncodedPayload("mutation", b"operator"),
+        )
+        applied = operation.execute(first)
+        assert applied.value.outcome is PlaceMutationOutcome.APPLIED
+        replay = operation.execute(first)
+        assert replay.value.outcome is PlaceMutationOutcome.REPLAY
+        with engine.connect() as connection:
+            head = (
+                connection.execute(
+                    select(identity_place_head).where(
+                        identity_place_head.c.place_ref == place.token
+                    )
+                )
+                .mappings()
+                .one()
+            )
+            history_count = len(
+                connection.execute(
+                    select(identity_place_history).where(
+                        identity_place_history.c.place_ref == place.token
+                    )
+                )
+                .mappings()
+                .all()
+            )
+        fresh = command_type(
+            _key(f"{kind}-duplicate"),
+            IntentFingerprint(f"{kind}-v1"),
+            place,
+            _token(codec, place, head["state_witness"]),
+            OpaqueEncodedPayload("mutation", b"operator"),
+        )
+        duplicate = operation.execute(fresh)
+        assert duplicate.value.outcome is PlaceMutationOutcome.ALREADY_HOLDS
+        duplicate_replay = operation.execute(fresh)
+        assert duplicate_replay.value.outcome is PlaceMutationOutcome.REPLAY
+        with engine.connect() as connection:
+            assert (
+                len(
+                    connection.execute(
+                        select(identity_place_history).where(
+                            identity_place_history.c.place_ref == place.token,
+                            identity_place_history.c.fact_type == fact_type,
+                        )
+                    )
+                    .mappings()
+                    .all()
+                )
+                == 1
+            )
+            final_head = (
+                connection.execute(
+                    select(identity_place_head).where(
+                        identity_place_head.c.place_ref == place.token
+                    )
+                )
+                .mappings()
+                .one()
+            )
+        assert final_head["state_witness"] == head["state_witness"]
+        assert history_count == 1
+
+
 def _run_race(engine, place: PlaceRef, first_kind: str, second_kind: str):
     _seed(engine, place)
     codec = FakeMutationBasisCodec()
@@ -280,11 +425,70 @@ def test_postgres_close_withdraw_race_serializes_one_transition(engine) -> None:
     with engine.connect() as connection:
         facts = (
             connection.execute(
-                select(identity_place_history.c.fact_type).where(
+                select(identity_place_history).where(
                     identity_place_history.c.place_ref == place.token
                 )
             )
-            .scalars()
+            .mappings()
             .all()
         )
-        assert len(facts) == 1, [repr(result) for result in results]
+        head = (
+            connection.execute(
+                select(identity_place_head).where(identity_place_head.c.place_ref == place.token)
+            )
+            .mappings()
+            .one()
+        )
+        identity_row = (
+            connection.execute(
+                select(identity_place).where(identity_place.c.place_ref == place.token)
+            )
+            .mappings()
+            .one()
+        )
+    assert len(facts) == 1, [repr(result) for result in results]
+    assert facts[0]["fact_type"] in {CLOSE_FACT_TYPE, WITHDRAW_FACT_TYPE}
+    assert head["latest_history_fact_ref"] == facts[0]["history_fact_ref"]
+    assert head["state_witness"] != "w0"
+    assert identity_row["place_ref"] == place.token and identity_row["recorded_at"] == NOW
+    winning_kind = "close" if facts[0]["fact_type"] == CLOSE_FACT_TYPE else "withdraw"
+    other_kind = "withdraw" if winning_kind == "close" else "close"
+    codec = FakeMutationBasisCodec()
+    operation_type = ClosePlace if other_kind == "close" else WithdrawPlace
+    command_type = ClosePlaceCommand if other_kind == "close" else WithdrawPlaceCommand
+    command = command_type(
+        _key("mixed-other"),
+        IntentFingerprint(f"{other_kind}-v1"),
+        place,
+        _token(codec, place, head["state_witness"]),
+        OpaqueEncodedPayload("mutation", b"operator"),
+    )
+    second = operation_type(
+        PostgresMutationUnitOfWorkFactory(DATABASE_URL or ""),
+        Gate(),
+        codec,
+        PlaceCandidates("mixed-other"),
+        FakeTransitionClock(),
+    ).execute(command)
+    assert second.value.outcome is PlaceMutationOutcome.APPLIED
+    with engine.connect() as connection:
+        final_facts = (
+            connection.execute(
+                select(identity_place_history).where(
+                    identity_place_history.c.place_ref == place.token
+                )
+            )
+            .mappings()
+            .all()
+        )
+        final_head = (
+            connection.execute(
+                select(identity_place_head).where(identity_place_head.c.place_ref == place.token)
+            )
+            .mappings()
+            .one()
+        )
+    assert {fact["fact_type"] for fact in final_facts} == {CLOSE_FACT_TYPE, WITHDRAW_FACT_TYPE}
+    assert final_head["latest_history_fact_ref"] in {
+        fact["history_fact_ref"] for fact in final_facts
+    }

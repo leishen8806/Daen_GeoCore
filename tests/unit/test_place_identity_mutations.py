@@ -13,10 +13,14 @@ from daen_geocore.application.place_identity_mutations import (
 from daen_geocore.domain.references import PlaceRef
 from daen_geocore.ports.audit.store import MutationAuditRecord
 from daen_geocore.ports.clock import Clock
+from daen_geocore.ports.failures import TechnicalFailureClass
 from daen_geocore.ports.idempotency.store import (
+    BindingRetention,
     CommittedBindingAbsent,
     CommittedBindingFound,
     CommittedIdempotencyStore,
+    CommittedMutationBinding,
+    CommittedMutationResult,
     IdempotencyBindingKey,
     IdempotencyCreateDisposition,
 )
@@ -24,10 +28,11 @@ from daen_geocore.ports.mutation import (
     MutationBasisClaims,
     MutationBasisToken,
     ObservedOwnerState,
+    OwnerAbsent,
     OwnerPresent,
     PlaceOwner,
 )
-from daen_geocore.ports.persistence.commit import CommitAccepted
+from daen_geocore.ports.persistence.commit import CommitAccepted, CommitNotCommitted, CommitUnknown
 from daen_geocore.ports.persistence.records import (
     ConditionalWriteDisposition,
     InsertDisposition,
@@ -41,11 +46,13 @@ from daen_geocore.ports.persistence.records import (
     StateWitness,
 )
 from daen_geocore.ports.recovery.gate import RecoveryIncarnation, RecoveryObservation, RecoveryState
-from daen_geocore.ports.result import PortSuccess
+from daen_geocore.ports.result import PortError, PortFailure, PortSuccess
 from daen_geocore.ports.technical import (
     IntentFingerprint,
     OpaqueClientIdentity,
+    OpaqueReplayMetadata,
     OpaqueRequestIdentity,
+    TechnicalOperationKey,
 )
 from tests.fakes.mutation_runtime import FakeMutationBasisCodec
 
@@ -125,6 +132,16 @@ class Identity:
         return PortSuccess(ConditionalWriteDisposition.APPLIED)
 
 
+class BrokenIdentity:
+    def __init__(self, identity, method, failure):
+        self.identity, self.method, self.failure = identity, method, failure
+
+    def __getattr__(self, name):
+        if name == self.method:
+            return lambda *_args, **_kwargs: self.failure
+        return getattr(self.identity, name)
+
+
 @dataclass
 class Audit:
     records: dict[IdempotencyBindingKey, MutationAuditRecord] = field(default_factory=dict)
@@ -136,6 +153,11 @@ class Audit:
         return PortSuccess(InsertDisposition.INSERTED)
 
 
+class BrokenAudit(Audit):
+    def append_if_absent(self, _record):
+        return PortError(PortFailure("audit_down", TechnicalFailureClass.TRANSIENT_UNAVAILABLE))
+
+
 @dataclass
 class Uow:
     identity: Identity
@@ -143,6 +165,7 @@ class Uow:
     mutation_audit: Audit
     assertions: object = field(default_factory=object)
     representation: object = field(default_factory=object)
+    commit_outcome: object = field(default_factory=CommitAccepted)
 
     def __enter__(self):
         return self
@@ -151,18 +174,28 @@ class Uow:
         return None
 
     def commit(self):
-        return CommitAccepted()
+        return self.commit_outcome
 
     def rollback(self):
         return None
 
 
 class Factory:
-    def __init__(self, identity, committed, audit):
-        self.identity, self.committed, self.audit = identity, committed, audit
+    def __init__(self, identity, committed, audit, commit_outcome=None):
+        self.identity, self.committed, self.audit, self.commit_outcome = (
+            identity,
+            committed,
+            audit,
+            commit_outcome,
+        )
 
     def create(self):
-        return Uow(self.identity, self.committed, self.audit)
+        return Uow(
+            self.identity,
+            self.committed,
+            self.audit,
+            commit_outcome=self.commit_outcome or CommitAccepted(),
+        )
 
 
 def _key(name: str) -> IdempotencyBindingKey:
@@ -207,6 +240,11 @@ class InMemoryCommittedStore(CommittedIdempotencyStore):
             if current == binding
             else IdempotencyCreateDisposition.CONFLICTING_EXISTING
         )
+
+
+class BrokenBindingStore(InMemoryCommittedStore):
+    def create_if_absent(self, _binding):
+        return PortError(PortFailure("binding_down", TechnicalFailureClass.TRANSIENT_UNAVAILABLE))
 
 
 def _command(place, token, name="close", intent=None):
@@ -350,3 +388,122 @@ def test_withdraw_already_holds_and_replay_are_distinct():
     duplicate = operation.execute(_command(place, fresh, "withdraw-2"))
     assert duplicate.value.outcome is PlaceMutationOutcome.ALREADY_HOLDS
     assert len(identity.history[place]) == 1
+
+
+def test_committed_replay_is_operation_specific_and_shape_strict():
+    place, identity, committed, audit, codec, token = _setup()
+    command = _command(place, token, "close-replay")
+    committed.bindings[command.key] = CommittedMutationBinding(
+        command.key,
+        command.intent_fingerprint,
+        TechnicalOperationKey("place.close"),
+        CommittedMutationResult(
+            (place,), OpaqueReplayMetadata((("result_kind", "place_withdrawn"),))
+        ),
+        BindingRetention.PUBLIC_REPLAY_HORIZON,
+    )
+    result = _operation(
+        "close", Factory(identity, committed, audit), Gate(), codec, Generator()
+    ).execute(command)
+    assert result.value.outcome is PlaceMutationOutcome.IDEMPOTENCY_CONFLICT
+
+
+def test_basis_matrix_covers_missing_unrelated_absent_and_stale_owner():
+    place, identity, committed, audit, codec, token = _setup()
+    factory = Factory(identity, committed, audit)
+    operation = _operation("close", factory, Gate(), codec, Generator())
+    cases = (
+        (),
+        (ObservedOwnerState(PlaceOwner(PlaceRef("other")), OwnerPresent(StateWitness("w"))),),
+        (ObservedOwnerState(PlaceOwner(place), OwnerAbsent()),),
+        (ObservedOwnerState(PlaceOwner(place), OwnerPresent(StateWitness("wrong"))),),
+    )
+    expected = (
+        PlaceMutationOutcome.INSUFFICIENT_BASIS,
+        PlaceMutationOutcome.INSUFFICIENT_BASIS,
+        PlaceMutationOutcome.INSUFFICIENT_BASIS,
+        PlaceMutationOutcome.STALE_BASIS,
+    )
+    for index, (claims, outcome) in enumerate(zip(cases, expected, strict=True)):
+        current = codec.issue(MutationBasisClaims(RecoveryIncarnation("r1"), claims)).value
+        result = operation.execute(_command(place, current, f"basis-{index}"))
+        assert result.value.outcome is outcome
+
+
+def test_commit_outcomes_are_exposed_without_retry():
+    for commit_outcome, expected in (
+        (CommitNotCommitted(), PlaceMutationOutcome.NOT_COMMITTED),
+        (CommitUnknown(), PlaceMutationOutcome.COMMIT_OUTCOME_UNKNOWN),
+    ):
+        place, identity, committed, audit, codec, token = _setup()
+        generator = Generator()
+        operation = _operation(
+            "close", Factory(identity, committed, audit, commit_outcome), Gate(), codec, generator
+        )
+        result = operation.execute(_command(place, token, f"commit-{expected.value}"))
+        assert result.value.outcome is expected
+        assert generator.n == 2
+
+
+def test_idempotency_port_error_is_preserved():
+    place, identity, committed, audit, codec, token = _setup()
+    failure = PortError(PortFailure("down", TechnicalFailureClass.TRANSIENT_UNAVAILABLE))
+
+    class BrokenStore(InMemoryCommittedStore):
+        def read(self, _key):
+            return failure
+
+    result = _operation(
+        "close", Factory(identity, BrokenStore(), audit), Gate(), codec, Generator()
+    ).execute(_command(place, token, "technical-idempotency"))
+    assert result is failure
+
+
+def test_place_ports_and_audit_binding_errors_stay_technical():
+    place, identity, committed, audit, codec, token = _setup()
+    failure = PortError(PortFailure("port_down", TechnicalFailureClass.TRANSIENT_UNAVAILABLE))
+
+    def run(factory, name):
+        return _operation("close", factory, Gate(), codec, Generator()).execute(
+            _command(place, token, name)
+        )
+
+    assert (
+        run(Factory(BrokenIdentity(identity, "get_place", failure), committed, audit), "place")
+        is failure
+    )
+    assert (
+        run(Factory(BrokenIdentity(identity, "get_place_head", failure), committed, audit), "head")
+        is failure
+    )
+    assert (
+        run(
+            Factory(BrokenIdentity(identity, "list_place_history", failure), committed, audit),
+            "history",
+        )
+        is failure
+    )
+    assert (
+        run(
+            Factory(
+                BrokenIdentity(identity, "append_place_history_if_absent", failure),
+                committed,
+                audit,
+            ),
+            "append",
+        )
+        is failure
+    )
+    assert (
+        run(
+            Factory(
+                BrokenIdentity(identity, "compare_and_swap_place_head", failure), committed, audit
+            ),
+            "cas",
+        )
+        is failure
+    )
+    audit_error = run(Factory(identity, committed, BrokenAudit()), "audit")
+    binding_error = run(Factory(identity, BrokenBindingStore(), audit), "binding")
+    assert isinstance(audit_error, PortError) and audit_error.failure.code == "audit_down"
+    assert isinstance(binding_error, PortError) and binding_error.failure.code == "binding_down"

@@ -133,17 +133,22 @@ def _result(
 
 
 def _replay_result(
-    binding: CommittedMutationBinding, place_ref: PlaceRef
+    binding: CommittedMutationBinding,
+    place_ref: PlaceRef,
+    applied_kind: str,
+    already_kind: str,
 ) -> PlaceMutationOutcome | None:
     if binding.result.references != (place_ref,):
         return None
     values = dict(binding.result.replay_metadata.entries)
     if len(binding.result.replay_metadata.entries) != 1:
         return None
-    kind = values.get("result_kind")
-    if kind in {"place_closed", "place_withdrawn"}:
+    if set(values) != {"result_kind"}:
+        return None
+    kind = values["result_kind"]
+    if kind == applied_kind:
         return PlaceMutationOutcome.APPLIED
-    if kind in {"place_already_closed", "place_already_withdrawn"}:
+    if kind == already_kind:
         return PlaceMutationOutcome.ALREADY_HOLDS
     return None
 
@@ -204,7 +209,9 @@ class _PlaceMutation:
                 or binding.operation_key != self.operation
             ):
                 return _result(PlaceMutationOutcome.IDEMPOTENCY_CONFLICT, command.place_ref)
-            outcome = _replay_result(binding, command.place_ref)
+            outcome = _replay_result(
+                binding, command.place_ref, self.applied_kind, self.already_kind
+            )
             if outcome is None:
                 return _result(PlaceMutationOutcome.IDEMPOTENCY_CONFLICT, command.place_ref)
             return _result(PlaceMutationOutcome.REPLAY, command.place_ref, outcome)
@@ -402,7 +409,7 @@ class _PlaceMutation:
             or binding.operation_key != self.operation
         ):
             return _result(PlaceMutationOutcome.IDEMPOTENCY_CONFLICT, command.place_ref)
-        outcome = _replay_result(binding, command.place_ref)
+        outcome = _replay_result(binding, command.place_ref, self.applied_kind, self.already_kind)
         return (
             _result(PlaceMutationOutcome.REPLAY, command.place_ref, outcome)
             if outcome is not None
