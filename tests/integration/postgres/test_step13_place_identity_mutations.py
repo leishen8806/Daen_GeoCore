@@ -1,4 +1,5 @@
 import os
+import threading
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -40,6 +41,7 @@ from daen_geocore.ports.technical import (
     OpaqueRequestIdentity,
 )
 from tests.fakes.mutation_runtime import FakeMutationBasisCodec
+from tests.integration.postgres.test_step11_source_assertion_withdrawal import _BarrierGate
 from tests.unit.test_source_assertion_transition import Candidates, FakeTransitionClock, Gate
 
 NOW = datetime(2026, 10, 9, 15, 0, tzinfo=UTC)
@@ -196,3 +198,80 @@ def test_postgres_close_rolls_back_history_and_head_on_audit_conflict(engine) ->
         )
         assert head["latest_history_fact_ref"] is None
         assert head["state_witness"] == "w0"
+
+
+def _run_race(engine, place: PlaceRef, first_kind: str, second_kind: str):
+    _seed(engine, place)
+    codec = FakeMutationBasisCodec()
+    token = _token(codec, place, "w0")
+    barrier = threading.Barrier(2)
+    results = []
+
+    def worker(kind: str, suffix: str) -> None:
+        operation_type = ClosePlace if kind == "close" else WithdrawPlace
+        command_type = ClosePlaceCommand if kind == "close" else WithdrawPlaceCommand
+        operation = operation_type(
+            PostgresMutationUnitOfWorkFactory(DATABASE_URL or ""),
+            _BarrierGate(barrier),
+            codec,
+            Candidates(),
+            FakeTransitionClock(),
+        )
+        results.append(
+            operation.execute(
+                command_type(
+                    _key(f"{kind}-{suffix}"),
+                    IntentFingerprint(f"{kind}-v1"),
+                    place,
+                    token,
+                    OpaqueEncodedPayload("mutation", suffix.encode()),
+                )
+            )
+        )
+
+    threads = [
+        threading.Thread(target=worker, args=(first_kind, "a")),
+        threading.Thread(target=worker, args=(second_kind, "b")),
+    ]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join(timeout=20)
+    assert all(not thread.is_alive() for thread in threads)
+    return results
+
+
+def test_postgres_close_close_and_withdraw_withdraw_races_have_one_winner(engine) -> None:
+    for index, kind in enumerate(("close", "withdraw")):
+        results = _run_race(engine, PlaceRef(f"step13-{kind}-race-{index}"), kind, kind)
+        assert (
+            sum(
+                getattr(getattr(result, "value", None), "outcome", None)
+                is PlaceMutationOutcome.APPLIED
+                for result in results
+            )
+            <= 1
+        )
+
+
+def test_postgres_close_withdraw_race_serializes_one_transition(engine) -> None:
+    place = PlaceRef("step13-close-withdraw-race")
+    results = _run_race(engine, place, "close", "withdraw")
+    assert (
+        sum(
+            getattr(getattr(result, "value", None), "outcome", None) is PlaceMutationOutcome.APPLIED
+            for result in results
+        )
+        <= 1
+    )
+    with engine.connect() as connection:
+        facts = (
+            connection.execute(
+                select(identity_place_history.c.fact_type).where(
+                    identity_place_history.c.place_ref == place.token
+                )
+            )
+            .scalars()
+            .all()
+        )
+        assert len(facts) == 1
