@@ -165,11 +165,13 @@ def test_postgres_close_rolls_back_history_and_head_on_audit_conflict(engine) ->
                 audit_details_payload=b"prior",
             )
         )
+    candidates = Candidates()
+    candidates.calls = 10_000
     operation = ClosePlace(
         PostgresMutationUnitOfWorkFactory(DATABASE_URL or ""),
         Gate(),
         codec,
-        Candidates(),
+        candidates,
         FakeTransitionClock(),
     )
     result = operation.execute(command)
