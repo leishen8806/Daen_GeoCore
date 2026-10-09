@@ -211,7 +211,8 @@ def _run_race(engine, place: PlaceRef, first_kind: str, second_kind: str):
         operation_type = ClosePlace if kind == "close" else WithdrawPlace
         command_type = ClosePlaceCommand if kind == "close" else WithdrawPlaceCommand
         candidates = Candidates()
-        candidates.calls = 10_000 if suffix == "a" else 20_000
+        base = sum((index + 1) * ord(char) for index, char in enumerate(place.token)) * 100
+        candidates.calls = base + (10_000 if suffix == "a" else 20_000)
         operation = operation_type(
             PostgresMutationUnitOfWorkFactory(DATABASE_URL or ""),
             _BarrierGate(barrier),
