@@ -2,10 +2,11 @@
 
 ## Status
 
-`DRAFT / REVIEW CANDIDATE / NOT FROZEN`
+`R1 SCOPE AMENDMENT RECORDED / IMPLEMENTATION PACKAGES REMAIN GATED`
 
-This assignment is R0 review material. It is not an approval, implementation
-authorization, Phase 06F gate, or Human freeze.
+R0 was FINAL ACCEPTED and R1 is HUMAN FROZEN. Only the bounded scope amendment
+is frozen; implementation packages remain gated and this is not a Phase 06F
+authorization.
 
 ## Summary
 
@@ -27,8 +28,8 @@ Implementation project state:
 
 ## Gate Order
 
-1. R0 verifies these drafts against frozen references.
-2. Human accepts or iterates the bounded `/gateway/v1` scope amendment (R1).
+1. R0 verified these drafts against frozen references at `fdbfd0c`.
+2. R1 freezes the bounded `/gateway/v1` scope amendment recorded separately.
 3. WP0 and WP10 collect legal, privacy, dependency, and consumer inputs.
 4. WP2 contract and WP3 provider port are reviewed (R2).
 5. S1 must close before WP4 Google adapter work.
@@ -36,7 +37,9 @@ Implementation project state:
 7. WP9/WP11 and launch evidence are reviewed at R5.
 
 Documentation review, Q2/Q3 research, WP8 cache research, and consumer
-clarification may proceed in parallel after R0. No step authorizes Phase 06F.
+clarification may proceed in parallel after R0. After R1, WP2/WP3 may proceed;
+WP5/WP9 wait for R2; WP4 waits for R2, S1 CLOSED, and T1 CLOSED. No step
+authorizes Phase 06F.
 
 ## Work Packages
 
@@ -159,10 +162,24 @@ Phase 06F or silently resolves a protected TBD.
 - Q3: What exact consumer flow obtains a GeoID for a new address?
 - What authentication/exposure model is approved for status?
 
+## R1 Clarifications
+
+WP2 must define a separate `CD-3 Gateway Error Contract`; the Phase-05 HTTP
+status mapping does not automatically govern `/gateway/v1`. R1 freezes no
+provider Place ID linkage, no new-address-to-GeoID flow, no automatic Place
+creation, no matching/deduplication, and no locating-basis decision.
+
+The complete protected registry is `TBD_REGISTER.md`; this prompt only repeats
+directly relevant examples. R1 also records that Step 13 was accepted by the
+Human + ChatGPT Final Decision Layer at baseline
+`72897e0dc1770fa439005960fc906cee0ac95062`; that acceptance record is external
+to repository governance files at the R1 baseline.
+
+R5 is only the CD-3 Launch Gate. It does not close Phase 06E or authorize 06F.
+
 ## Recommendation
 
-Accept these documents as R0 review candidates only. Proceed first with WP0,
-WP7, WP8 research, WP10, and R0/R1 review. Keep all implementation packages
-blocked until the bounded scope amendment and their named gates are accepted.
+Proceed with WP0, WP7, WP8 research, WP10, and the named R2/R3/R4/R5 gates.
+Keep each implementation package blocked until its explicit gate is accepted.
 
-CD-3 WORK ASSIGNMENT READY FOR HUMAN APPROVAL
+CD-3 R1 SCOPE AMENDMENT RECORDED — IMPLEMENTATION PACKAGES REMAIN GATED

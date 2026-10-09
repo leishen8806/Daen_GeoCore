@@ -2,8 +2,8 @@
 
 ## Status
 
-- `CD-3 MAP GATEWAY ARCHITECTURE = DRAFT / REVIEW CANDIDATE / NOT FROZEN`
-- This document is R0 review material. It is not approved, final, or human frozen.
+- `CD-3 R1 SCOPE = HUMAN FROZEN / IMPLEMENTATION NOT YET AUTHORIZED`
+- Only the bounded R1 scope amendment is frozen; WP2+ implementation details remain gated.
 - Phase 06F remains `NOT YET AUTHORIZED`.
 
 ## 1. Architectural stance
@@ -107,10 +107,10 @@ carry free-form names, addresses, loan notes, customer profiles, or prose.
 
 ## 7. Gateway surface boundary
 
-The proposed `/gateway/v1` surface is separate from the 18 frozen canonical
-Phase 05 `/v1` endpoints. It is not part of the frozen API map, does not change
-`/v1`, and requires a bounded CD-3 scope amendment before implementation.
-Status is `RECOMMENDED / DRAFT pending Human freeze`.
+The R1 amendment freezes `/gateway/v1` as separate from the 18 frozen canonical
+Phase 05 `/v1` endpoints. It is not in the frozen API map, is not an alias or
+new canonical endpoint, and does not change `/v1`. The packages listed above
+are integration packages, not authoritative Domain modules.
 
 The proposed operations are only:
 
@@ -148,7 +148,8 @@ WP6 adds transport; WP7 researches Q2/Q3; WP8 researches future cache only;
 WP9 hardens privacy/failure/architecture/CI; WP10 collects consumer inputs; and
 WP11 records infrastructure, deployment, cost, and dependency addenda.
 
-Claude checkpoints are R0 through R5 and are not development packages.
+Claude checkpoints are R0 through R5 and are not development packages. R5 is
+only the CD-3 Launch Gate and does not close 06E or authorize 06F.
 
 ## 11. Protected architecture boundaries
 

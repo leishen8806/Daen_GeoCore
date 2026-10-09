@@ -529,3 +529,11 @@ Status: `CONFIRMED`
 Status: `CONFIRMED`
 
 Baseline: `a6920d9c26261d38530c2add631f8ba35e974fb7`. C1-C6 PASS and software-stack coherence conformant. The software stack is FINAL ACCEPTED; infrastructure/provider/cost remain open, Phase 06F is not authorized, and no protected TBD leaked.
+
+## CD-3 R1 Scope Amendment — Human Frozen
+
+| Decision | Result | Status |
+|---|---|---|
+| CD3-R1-SCOPE-AMENDMENT-01 | Date: 2026-10-09. R0 reviewed commit `fdbfd0cd572d58104c6e6b7f3224ae3ea4d9f70b` with P0=0, P1=0, P2=11; R1 GO freezes a separate `/gateway/v1` surface with exactly POST geocode, POST reverse-geocode, and GET status. The 06B integration-package exception is bounded; no V1 cache, Domain/provider authority, or automatic persistence is authorized. S1 remains OPEN; Q2 and Q3 remain OPEN; L1/L2/P1/P2/T1/C1 remain open; Phase 06E remains IN PROGRESS; Phase 06F remains NOT AUTHORIZED. | CONFIRMED |
+
+R1 is a documentation/governance scope amendment only. The frozen Phase-05 18-endpoint surface and all existing `/v1` semantics remain unchanged. WP2 defines a separate gateway error contract, and implementation remains gated by R2/R3/R4/R5 and the named dependency/legal decisions.

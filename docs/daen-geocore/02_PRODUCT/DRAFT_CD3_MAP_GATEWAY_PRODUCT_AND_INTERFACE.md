@@ -2,9 +2,9 @@
 
 ## Status
 
-- `CD-3 MAP GATEWAY = DRAFT / REVIEW CANDIDATE / NOT FROZEN`
-- This document is R0 review material only. It is not approved, final, or human frozen.
-- It changes no Constitution, Domain Model, Phase 05 contract, Phase 06 document, Decision Log, or TBD Register.
+- `CD-3 R1 SCOPE = HUMAN FROZEN / IMPLEMENTATION NOT YET AUTHORIZED`
+- Only the bounded R1 scope amendment is frozen; WP2+ implementation details remain gated.
+- The amendment changes no Constitution, Domain Model, or frozen Phase-05/06 semantics.
 
 ## 1. Purpose and product position
 
@@ -23,15 +23,15 @@ the consuming business systems. Geo Core does not become a lending system.
 
 ## 2. Frozen boundaries that this draft must respect
 
-Phase 05 has exactly 18 frozen canonical `/v1` endpoints. CD-3 proposes a
-separate, draft-only gateway surface:
+Phase 05 has exactly 18 frozen canonical `/v1` endpoints. R1 authorizes a
+separate gateway surface:
 
 `/gateway/v1`
 
-This surface is not added to the Phase 05 endpoint map, does not change `/v1`
-or its semantics, and requires a bounded CD-3 scope amendment before any
-implementation. It is transport/integration capability, not new Geo Core
-identity semantics. Its status remains `RECOMMENDED / DRAFT pending Human freeze`.
+This surface is not added to the Phase 05 endpoint map, is not a 19th/20th/21st
+Phase-05 endpoint, is not an alias of `/v1`, and is not a Geo Core Domain
+mutation endpoint. It does not change `/v1` semantics and is transport/
+integration capability, not new Geo Core identity semantics.
 
 The gateway must not require Merge, Split, Resolution Link, Succession, or
 protected TBD resolution. Core implementation may continue independently.
@@ -111,9 +111,9 @@ as making location data non-sensitive.
 ## 6. Provider authority and open gaps
 
 Provider-returned address, coordinate, name, and provider precision metadata are
-transient provider answers. They are not automatically persisted, promoted to
-Source Assertions, selected as Current Representation, or used as a locating
-basis.
+transient gateway answers. They are not automatically persisted, promoted to
+Source Assertions, selected as Current Representation, used as a locating
+basis, turned into a GeoID, Resolution Link, or Succession.
 
 ### Q2 — provider Place ID
 
@@ -127,7 +127,18 @@ provider Place ID is not a DAEN reference and no new endpoint is authorized.
 Place birth requires a locating basis. The exact consumer/gateway flow remains
 a decision task. No automatic geocode-result-to-GeoID behavior is authorized.
 
-## 7. Gates and inputs
+## 7. Frozen statement scope limits
+
+R1 records bounded exceptions to the Phase-05 non-scope for provider
+orchestration and consumer-map integration only through this separate gateway
+surface. The exact Place resolution contract remains exact GeoID resolution,
+not search, provider lookup, reverse geocoding, matching, or ambiguity
+resolution. The Phase 06B anti-module rule is unchanged: the authorized
+integration packages own no identity, matching, resolver, Source Assertion,
+Current Representation, MutationBasis, idempotency, EvidenceStore, or
+selection authority.
+
+## 8. Gates and inputs
 
 | ID | Gate / input | Owner | Status |
 |---|---|---|---|
@@ -148,7 +159,7 @@ retention system, and retention duration. Dr.life+ inputs: platform, map
 scenarios, expected DAU, map calls/day, and whether selected locations must
 eventually resolve to DAEN GeoID. Missing numbers remain OPEN.
 
-## 8. Work packages
+## 9. Work packages
 
 Exactly twelve packages are proposed:
 
@@ -169,7 +180,7 @@ Exactly twelve packages are proposed:
 
 Claude review gates are recorded separately and are not work packages.
 
-## 9. Review gates
+## 10. Review gates
 
 - `R0 — CD-3 Draft Conformance Review`
 - `R1 — Scope Amendment Review`
@@ -181,20 +192,35 @@ Claude review gates are recorded separately and are not work packages.
 No gate authorizes Phase 06F. Each gate requires a named commit and returns
 PASS or ITERATE.
 
-## 10. Sequencing recommendation
+## 11. Sequencing recommendation
 
-WP0, WP7, WP8 research, WP10, and document review may proceed in parallel after
-R0. WP1 and R1 must establish the `/gateway/v1` scope amendment before code.
-WP2 and WP3 follow R1. WP4 waits for S1 and relevant legal/privacy decisions.
-WP5 and WP6 follow accepted contract and port reviews. WP9 and WP11 continue
-through R4/R5.
+Immediately after R0, WP0, WP7, WP8 research, and WP10 may proceed. After R1,
+WP2 and WP3 may proceed. After R2, WP5 may use a fake/stub provider and WP9 may
+begin incrementally. WP4 requires R2, S1 CLOSED, and T1 CLOSED; it uses only
+synthetic or recorded fixtures during implementation. WP6 requires accepted
+WP2 and WP5. WP9 completes after WP6, while WP11 runs in parallel and closes
+deployment/cost items before R5.
 
-CD-3 must not alter frozen `/v1`, delay core mutations or reads, or resolve
-protected TBDs.
+CD-3 must not alter frozen `/v1`, delay core mutations or reads, require
+Merge/Split, or resolve protected TBDs.
 
-## 11. Protected items
+## 12. Gateway error contract and launch boundary
 
-Same-Place/deduplication, source ranking, selection authority, survivor policy,
-withdrawal authority, H14 lifetime, Access Point and Containment writes,
-Extent semantics, authentication/privacy mechanics, locating-basis adequacy,
-and T2 effects remain unresolved.
+WP2 will define a separate `CD-3 Gateway Error Contract`. The frozen
+Phase-05 `API_ERROR_CONTRACT.md` remains unchanged and its HTTP mappings do
+not automatically govern `/gateway/v1`. Proposed 429/502/503/504, provider
+timeout, quota, and credential failures must be specified in WP2 and reviewed
+at R2.
+
+R5 is only the `CD-3 Launch Gate`; it does not close Phase 06E, authorize
+Phase 06F, decide unrelated infrastructure, or resolve protected TBDs.
+
+## 13. Protected items
+
+TBD_REGISTER.md is the authoritative complete protected registry. Relevant
+examples that remain unresolved include provider selection outside T1, same-
+Place/deduplication, source ranking, selection authority, survivor and
+withdrawal policy, H14 lifetime, richer scope equivalence, temporal/as-of,
+Access Point/Containment writes, Extent semantics, auth/privacy, locating-basis
+adequacy, T2 Current Representation effect, and issued-but-lost reference
+presentation.

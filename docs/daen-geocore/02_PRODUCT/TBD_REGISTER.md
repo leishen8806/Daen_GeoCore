@@ -306,3 +306,27 @@ Protected Domain/API TBDs remain unresolved. Phase 06F is not yet authorized.
 - `OBS-06-ISSUED-REFERENCE-DETAIL-LOSS = OPEN / NON-BLOCKING`
 
 Protected Domain/API TBDs remain unresolved.
+
+## CD-3 R1 Scope Amendment — Current Records
+
+Reference: `CD3_MAP_GATEWAY_SCOPE_AMENDMENT.md`; R0 baseline `fdbfd0cd572d58104c6e6b7f3224ae3ea4d9f70b`.
+
+- `L1` Google contract terms for caching, storage, and lending use — OPEN.
+- `L2` business-confirmed provider result retention — OPEN.
+- `P1` third-party/cross-border processing of customer addresses — OPEN.
+- `P2` bounded telemetry/logging policy — OPEN.
+- `S1` production outbound HTTP dependency / Phase 06E bounded addendum — OPEN.
+- `T1` Google as first gateway provider adapter — OPEN.
+- `C1` provider cost in the Phase 06E infrastructure/budget gate — OPEN.
+- `Q2` provider Place ID fit for the Source Assertion value model — OPEN.
+- `Q3` new address to GeoID consumer flow — OPEN.
+- Gateway authentication/exposure for coarse status — OPEN.
+- Gateway rate-limit topology — OPEN.
+
+The CD-3 amendment does not close protected Domain/API TBDs. The complete
+protected registry is this file; directly relevant examples include
+same-Place/deduplication, source ranking, selection authority, survivor and
+withdrawal policy, H14 lifetime, richer scope equivalence, temporal/as-of,
+Access Point/Containment writes, Extent semantics, auth/privacy,
+locating-basis adequacy, T2 Current Representation effect, and issued-but-lost
+reference presentation.
