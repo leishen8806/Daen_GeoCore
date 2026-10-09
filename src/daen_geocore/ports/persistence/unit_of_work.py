@@ -1,6 +1,11 @@
 from typing import Protocol, Self
 
 from daen_geocore.ports.persistence.commit import CommitOutcome
+from daen_geocore.ports.persistence.repositories import (
+    AssertionsRepository,
+    IdentityRepository,
+    RepresentationRepository,
+)
 
 
 class UnitOfWork(Protocol):
@@ -15,3 +20,12 @@ class UnitOfWork(Protocol):
     def commit(self) -> CommitOutcome: ...
 
     def rollback(self) -> None: ...
+
+    @property
+    def identity(self) -> IdentityRepository: ...
+
+    @property
+    def assertions(self) -> AssertionsRepository: ...
+
+    @property
+    def representation(self) -> RepresentationRepository: ...

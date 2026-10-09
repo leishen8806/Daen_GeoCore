@@ -29,6 +29,29 @@ class PostgresUnitOfWork:
     def state(self) -> str:
         return self._state
 
+    def _require_connection(self) -> Connection:
+        if self._connection is None or self._state != "active":
+            raise RuntimeError("unit of work is not active")
+        return self._connection
+
+    @property
+    def identity(self):
+        from .repositories import PostgresIdentityRepository
+
+        return PostgresIdentityRepository(self._require_connection())
+
+    @property
+    def assertions(self):
+        from .repositories import PostgresAssertionsRepository
+
+        return PostgresAssertionsRepository(self._require_connection())
+
+    @property
+    def representation(self):
+        from .repositories import PostgresRepresentationRepository
+
+        return PostgresRepresentationRepository(self._require_connection())
+
     def __enter__(self) -> PostgresUnitOfWork:
         self.begin()
         return self
