@@ -41,6 +41,7 @@ from daen_geocore.ports.persistence.records import (
     RecordAbsent,
     RecordFound,
     SourceAssertionRecord,
+    StateWitness,
 )
 from daen_geocore.ports.recovery.gate import RecoveryIncarnation, RecoveryObservation, RecoveryState
 from daen_geocore.ports.result import PortError, PortFailure, PortSuccess
@@ -52,6 +53,7 @@ from daen_geocore.ports.technical import (
     OpaqueClientIdentity,
     OpaqueReplayMetadata,
     OpaqueRequestIdentity,
+    TechnicalOperationKey,
 )
 
 NOW = datetime(2026, 10, 9, 12, 0, tzinfo=UTC)
@@ -282,17 +284,92 @@ def test_create_replay_is_before_evidence_and_unknown_place_has_no_side_effect()
     assert len(assertions.records) == 1 and len(audit.records) == 1
 
 
-def test_recovery_reuses_ref_witness_and_recorded_at_without_clock_or_candidate() -> None:
+def test_valid_recovery_mapping_reuses_exact_material_without_regeneration() -> None:
+    evidence = FakeEvidence()
+    cmd = command()
+    ref = SourceAssertionRef("reused-assertion")
+    witness = StateWitness("reused-witness")
+    recorded_at = datetime(2026, 10, 8, 9, 30, tzinfo=UTC)
+    evidence.mappings[cmd.evidence_lookup_key] = RequestReferenceRecoveryMapping(
+        cmd.key.client_identity,
+        cmd.key.request_identity,
+        cmd.intent_fingerprint,
+        SOURCE_ASSERTION_CREATE_OPERATION,
+        (ref,),
+        OpaqueReplayMetadata(
+            (("initial_state_witness", witness.value), ("recorded_at", recorded_at.isoformat()))
+        ),
+    )
     candidates = FakeCandidates()
     clock = FakeClock()
-    op, _, evidence, assertions, _, _ = operation(candidates=candidates, clock=clock)
-    first = op.execute(command())
-    second = op.execute(command(request="other"))
-    assert first.value.source_assertion_ref != second.value.source_assertion_ref
-    assert candidates.count == 4 and clock.calls == 2
-    mapping = next(iter(evidence.mappings.values()))
-    assert mapping.operation_key == SOURCE_ASSERTION_CREATE_OPERATION
-    assert len(assertions.records) == 2
+    op, _, _, assertions, _, _ = operation(evidence=evidence, candidates=candidates, clock=clock)
+    result = op.execute(cmd)
+    assert result.value.outcome is SourceAssertionCreateOutcome.APPLIED
+    assert result.value.source_assertion_ref == ref
+    assert candidates.count == 0 and clock.calls == 0
+    assert assertions.records[ref].recorded_at == recorded_at
+    assert assertions.heads[ref].state_witness == witness
+
+
+def test_mapping_different_intent_is_idempotency_conflict_without_regeneration() -> None:
+    evidence = FakeEvidence()
+    original = command()
+    evidence.mappings[original.evidence_lookup_key] = RequestReferenceRecoveryMapping(
+        original.key.client_identity,
+        original.key.request_identity,
+        original.intent_fingerprint,
+        SOURCE_ASSERTION_CREATE_OPERATION,
+        (SourceAssertionRef("existing"),),
+        OpaqueReplayMetadata((("initial_state_witness", "w1"), ("recorded_at", NOW.isoformat()))),
+    )
+    candidates = FakeCandidates()
+    clock = FakeClock()
+    op, factory, _, assertions, _, audit = operation(
+        evidence=evidence, candidates=candidates, clock=clock
+    )
+    result = op.execute(replace(original, intent_fingerprint=IntentFingerprint("intent-2")))
+    assert result.value.outcome is SourceAssertionCreateOutcome.IDEMPOTENCY_CONFLICT
+    assert candidates.count == 0 and clock.calls == 0
+    assert evidence.reservation_writes == 0
+    assert len(factory.created) == 1 and not assertions.records and not audit.records
+
+
+def test_mapping_different_client_or_request_is_recovery_conflict_without_regeneration() -> None:
+    evidence = FakeEvidence()
+    original = command()
+    evidence.mappings[original.evidence_lookup_key] = RequestReferenceRecoveryMapping(
+        OpaqueClientIdentity("other-client"),
+        original.key.request_identity,
+        original.intent_fingerprint,
+        SOURCE_ASSERTION_CREATE_OPERATION,
+        (SourceAssertionRef("existing"),),
+        OpaqueReplayMetadata((("initial_state_witness", "w1"), ("recorded_at", NOW.isoformat()))),
+    )
+    candidates = FakeCandidates()
+    clock = FakeClock()
+    op, factory, _, assertions, _, audit = operation(
+        evidence=evidence, candidates=candidates, clock=clock
+    )
+    result = op.execute(original)
+    assert result.value.outcome is SourceAssertionCreateOutcome.RECOVERY_MAPPING_CONFLICT
+    assert candidates.count == 0 and clock.calls == 0
+    assert evidence.reservation_writes == 0
+    assert len(factory.created) == 1 and not assertions.records and not audit.records
+
+
+def test_mapping_different_operation_is_idempotency_conflict() -> None:
+    evidence = FakeEvidence()
+    original = command()
+    evidence.mappings[original.evidence_lookup_key] = RequestReferenceRecoveryMapping(
+        original.key.client_identity,
+        original.key.request_identity,
+        original.intent_fingerprint,
+        TechnicalOperationKey("other.operation"),
+        (SourceAssertionRef("existing"),),
+        OpaqueReplayMetadata((("initial_state_witness", "w1"), ("recorded_at", NOW.isoformat()))),
+    )
+    op, _, _, _, _, _ = operation(evidence=evidence)
+    assert op.execute(original).value.outcome is SourceAssertionCreateOutcome.IDEMPOTENCY_CONFLICT
 
 
 def test_reservation_failure_prevents_authoritative_writes() -> None:
@@ -378,6 +455,48 @@ def test_commit_unknown_is_explicit() -> None:
     assert (
         op.execute(command()).value.outcome is SourceAssertionCreateOutcome.COMMIT_OUTCOME_UNKNOWN
     )
+
+
+def test_commit_unknown_retry_reuses_recovery_material_without_regeneration() -> None:
+    identity = FakeIdentity({PlaceRef("place-1")})
+    committed = __import__(
+        "tests.fakes.mutation_runtime", fromlist=["InMemoryCommittedIdempotencyStore"]
+    ).InMemoryCommittedIdempotencyStore()
+    evidence = FakeEvidence()
+    candidates = FakeCandidates()
+    clock = FakeClock()
+    first_factory = FakeFactory(
+        identity,
+        FakeAssertions(),
+        committed,
+        FakeAudit(),
+        CommitUnknown(reason="network"),
+    )
+    first_operation = CreateSourceAssertion(first_factory, evidence, FakeGate(), candidates, clock)
+    assert (
+        first_operation.execute(command()).value.outcome
+        is SourceAssertionCreateOutcome.COMMIT_OUTCOME_UNKNOWN
+    )
+    committed.bindings.clear()
+    mapping = next(iter(evidence.mappings.values()))
+    recovered_ref = mapping.references[0]
+    assert isinstance(recovered_ref, SourceAssertionRef)
+    recovered_witness = mapping.replay_metadata.entries[0][1]
+    recovered_recorded_at = mapping.replay_metadata.entries[1][1]
+
+    second_assertions = FakeAssertions()
+    second_factory = FakeFactory(
+        identity, second_assertions, committed, FakeAudit(), CommitAccepted()
+    )
+    second_operation = CreateSourceAssertion(
+        second_factory, evidence, FakeGate(), candidates, clock
+    )
+    result = second_operation.execute(command())
+    assert result.value.outcome is SourceAssertionCreateOutcome.APPLIED
+    assert result.value.source_assertion_ref == recovered_ref
+    assert candidates.count == 2 and clock.calls == 1
+    assert second_assertions.records[recovered_ref].recorded_at.isoformat() == recovered_recorded_at
+    assert second_assertions.heads[recovered_ref].state_witness.value == recovered_witness
 
 
 def test_explicit_scope_quality_and_provenance_are_preserved_without_selection() -> None:

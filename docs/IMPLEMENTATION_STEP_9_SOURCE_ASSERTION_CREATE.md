@@ -10,7 +10,7 @@ The fixed internal operation key is `source_assertion.create`. The operation fir
 
 ## Recovery and reservation
 
-A request/reference recovery mapping is read before generating technical values. A valid mapping reuses its SourceAssertionRef, initial StateWitness, and recorded UTC time. A missing mapping creates exactly one candidate, one witness, and one Clock value, then records the mapping. Recovery mapping is not commit proof. The exact recovered SourceAssertionRef must pass the READY recovery gate and independent reservation evidence before the authoritative UoW opens. Evidence failure, conflict, or an unready gate fails closed.
+A request/reference recovery mapping is read before generating technical values. Mapping identity conflicts (client/request lookup mismatch, or same client/request with a different intent or operation) are distinct from malformed technical recovery metadata. A valid same-request mapping reuses its exact SourceAssertionRef, initial StateWitness, and recorded UTC time; retries never generate replacement material. A missing mapping creates exactly one candidate, one witness, and one Clock value, then records the mapping. Recovery mapping is not commit proof. The exact recovered SourceAssertionRef must pass the READY recovery gate and independent reservation evidence before the authoritative UoW opens. Evidence failure, conflict, or an unready gate fails closed.
 
 ## One authoritative UoW
 

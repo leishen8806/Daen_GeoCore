@@ -135,14 +135,7 @@ def _mapping_metadata(witness: StateWitness, recorded_at: datetime) -> OpaqueRep
 def _decode_mapping(
     mapping: RequestReferenceRecoveryMapping, command: CreateSourceAssertionCommand
 ) -> tuple[SourceAssertionRef, StateWitness, datetime] | None:
-    if (
-        mapping.client_identity != command.key.client_identity
-        or mapping.request_identity != command.key.request_identity
-        or mapping.intent_fingerprint != command.intent_fingerprint
-        or mapping.operation_key != SOURCE_ASSERTION_CREATE_OPERATION
-        or len(mapping.references) != 1
-        or not isinstance(mapping.references[0], SourceAssertionRef)
-    ):
+    if len(mapping.references) != 1 or not isinstance(mapping.references[0], SourceAssertionRef):
         return None
     raw_entries = mapping.replay_metadata.entries
     entries = dict(raw_entries)
@@ -264,7 +257,17 @@ class CreateSourceAssertion:
         if isinstance(existing, PortError):
             return existing
         if isinstance(existing.value, EvidenceFound):
-            decoded = _decode_mapping(existing.value.record, command)
+            mapping = existing.value.record
+            if mapping.client_identity != command.key.client_identity:
+                return _result(SourceAssertionCreateOutcome.RECOVERY_MAPPING_CONFLICT)
+            if mapping.request_identity != command.key.request_identity:
+                return _result(SourceAssertionCreateOutcome.RECOVERY_MAPPING_CONFLICT)
+            if (
+                mapping.intent_fingerprint != command.intent_fingerprint
+                or mapping.operation_key != SOURCE_ASSERTION_CREATE_OPERATION
+            ):
+                return _result(SourceAssertionCreateOutcome.IDEMPOTENCY_CONFLICT)
+            decoded = _decode_mapping(mapping, command)
             return (
                 PortSuccess(decoded)
                 if decoded is not None
@@ -285,6 +288,21 @@ class CreateSourceAssertion:
         if isinstance(resolved, PortError):
             return resolved
         if resolved.value.outcome is RecoveryMappingOutcome.CONFLICT:
+            current = self._evidence.read_request_mapping(command.evidence_lookup_key)
+            if isinstance(current, PortError):
+                return current
+            if not isinstance(current.value, EvidenceFound):
+                return _result(SourceAssertionCreateOutcome.RECOVERY_MAPPING_CONFLICT)
+            mapping = current.value.record
+            if (
+                mapping.client_identity == command.key.client_identity
+                and mapping.request_identity == command.key.request_identity
+                and (
+                    mapping.intent_fingerprint != command.intent_fingerprint
+                    or mapping.operation_key != SOURCE_ASSERTION_CREATE_OPERATION
+                )
+            ):
+                return _result(SourceAssertionCreateOutcome.IDEMPOTENCY_CONFLICT)
             return _result(SourceAssertionCreateOutcome.RECOVERY_MAPPING_CONFLICT)
         mapping = resolved.value.mapping
         if mapping is None:
