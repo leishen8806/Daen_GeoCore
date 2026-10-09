@@ -34,6 +34,9 @@ binding, and if absent re-evaluates the current target state. T2/T2 and
 T2/Supersede or T2/Correct races are decided by the authoritative read-set and
 standing-head CAS, allowing at most one transition from a shared original
 witness and no duplicate withdrawal history.
+The real PostgreSQL heterogeneous race tests also verify one original
+standing witness produces exactly one committed transition branch, with a
+coherent final standing head and no committed material for the loser.
 
 No HTTP route, schema migration, generic lifecycle enum, generic mutation
 framework, Selection mutation, Place mutation, or provider-specific adapter is

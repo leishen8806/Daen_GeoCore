@@ -11,9 +11,11 @@ from alembic.config import Config
 from sqlalchemy import create_engine, func, select
 
 from daen_geocore.application.source_assertion_transition import (
+    CORRECTION_FACT_TYPE,
     SUPERSESSION_FACT_TYPE,
     CorrectSourceAssertion,
     CorrectSourceAssertionCommand,
+    SourceAssertionTransitionOutcome,
     SupersedeSourceAssertion,
     SupersedeSourceAssertionCommand,
 )
@@ -280,7 +282,12 @@ def _race_t2(engine, other_kind: str, request: str):
     results = []
 
     def t2_worker():
-        results.append(_withdraw(_command(f"{request}-t2", target), gate=_BarrierGate(barrier)))
+        results.append(
+            (
+                (f"step11-{request}-t2", f"{request}-t2"),
+                _withdraw(_command(f"{request}-t2", target), gate=_BarrierGate(barrier)),
+            )
+        )
 
     def other_worker():
         common = dict(
@@ -309,14 +316,17 @@ def _race_t2(engine, other_kind: str, request: str):
         candidates = Candidates()
         candidates.calls = sum((index + 1) * ord(char) for index, char in enumerate(request)) + 1000
         results.append(
-            operation_type(
-                PostgresMutationUnitOfWorkFactory(DATABASE_URL),
-                Evidence(),
-                _BarrierGate(barrier),
-                codec,
-                candidates,
-                FakeTransitionClock(),
-            ).execute(command)
+            (
+                (f"{request}-other", request),
+                operation_type(
+                    PostgresMutationUnitOfWorkFactory(DATABASE_URL),
+                    Evidence(),
+                    _BarrierGate(barrier),
+                    codec,
+                    candidates,
+                    FakeTransitionClock(),
+                ).execute(command),
+            )
         )
 
     threads = [threading.Thread(target=t2_worker), threading.Thread(target=other_worker)]
@@ -331,8 +341,13 @@ def _race_t2(engine, other_kind: str, request: str):
 def test_postgres_t2_supersede_and_correct_races_have_one_original_winner(engine) -> None:
     for kind in ("supersede", "correct"):
         results, target = _race_t2(engine, kind, f"race-{kind}")
-        outcomes = [result.value.outcome for result in results if hasattr(result, "value")]
-        assert outcomes.count(SourceAssertionWithdrawalOutcome.APPLIED) <= 1
+        outcomes = [result.value.outcome for _, result in results if hasattr(result, "value")]
+        total_applied = sum(
+            outcome is SourceAssertionWithdrawalOutcome.APPLIED
+            or outcome is SourceAssertionTransitionOutcome.APPLIED
+            for outcome in outcomes
+        )
+        assert total_applied <= 1
         with engine.connect() as connection:
             facts = (
                 connection.execute(
@@ -343,8 +358,97 @@ def test_postgres_t2_supersede_and_correct_races_have_one_original_winner(engine
                 .mappings()
                 .all()
             )
-        assert sum(fact["fact_type"] == WITHDRAW_FACT_TYPE for fact in facts) <= 1
-        assert sum(fact["fact_type"] == SUPERSESSION_FACT_TYPE for fact in facts) <= 1
+            head = (
+                connection.execute(
+                    select(assertions_standing_head).where(
+                        assertions_standing_head.c.source_assertion_ref == target.token
+                    )
+                )
+                .mappings()
+                .one()
+            )
+            bindings = (
+                connection.execute(
+                    select(mutation_committed_binding).where(
+                        mutation_committed_binding.c.client_identity.in_(
+                            [f"step11-race-{kind}-t2", f"race-{kind}-other"]
+                        )
+                    )
+                )
+                .mappings()
+                .all()
+            )
+            audits = (
+                connection.execute(
+                    select(mutation_audit).where(
+                        mutation_audit.c.client_identity.in_(
+                            [f"step11-race-{kind}-t2", f"race-{kind}-other"]
+                        )
+                    )
+                )
+                .mappings()
+                .all()
+            )
+            candidate_offset = (
+                sum((index + 1) * ord(char) for index, char in enumerate(f"race-{kind}")) + 1001
+            )
+            proposed_ref = f"new-{candidate_offset}"
+            replacement = (
+                connection.execute(
+                    select(assertions_source_assertion).where(
+                        assertions_source_assertion.c.source_assertion_ref == proposed_ref
+                    )
+                )
+                .mappings()
+                .all()
+            )
+        withdrawal_count = sum(fact["fact_type"] == WITHDRAW_FACT_TYPE for fact in facts)
+        supersession_count = sum(fact["fact_type"] == SUPERSESSION_FACT_TYPE for fact in facts)
+        correction_count = sum(fact["fact_type"] == CORRECTION_FACT_TYPE for fact in facts)
+        assert withdrawal_count + supersession_count == 1
+        assert head["state_witness"] != "w1"
+        if withdrawal_count == 1:
+            assert supersession_count == 0 and correction_count == 0
+            assert head["latest_history_fact_ref"] == next(
+                fact["history_fact_ref"]
+                for fact in facts
+                if fact["fact_type"] == WITHDRAW_FACT_TYPE
+            )
+            assert not replacement
+        else:
+            assert supersession_count == 1
+            if kind == "correct":
+                assert correction_count == 1
+                assert head["latest_history_fact_ref"] == next(
+                    fact["history_fact_ref"]
+                    for fact in facts
+                    if fact["fact_type"] == CORRECTION_FACT_TYPE
+                )
+            else:
+                assert correction_count == 0
+                assert head["latest_history_fact_ref"] == next(
+                    fact["history_fact_ref"]
+                    for fact in facts
+                    if fact["fact_type"] == SUPERSESSION_FACT_TYPE
+                )
+            assert replacement
+        assert len(bindings) <= 1
+        assert len(audits) <= 1
+        if total_applied == 1:
+            assert len(bindings) == 1
+            assert len(audits) == 1
+            applied_identities = {
+                identity
+                for identity, result in results
+                if hasattr(result, "value")
+                and (
+                    result.value.outcome is SourceAssertionTransitionOutcome.APPLIED
+                    or result.value.outcome is SourceAssertionWithdrawalOutcome.APPLIED
+                )
+            }
+            assert len(applied_identities) == 1
+            assert bindings[0]["client_identity"] == next(iter(applied_identities))[0]
+            assert audits[0]["client_identity"] == next(iter(applied_identities))[0]
 
 
 def test_postgres_t2_t2_race_has_one_withdrawal_fact(engine) -> None:
