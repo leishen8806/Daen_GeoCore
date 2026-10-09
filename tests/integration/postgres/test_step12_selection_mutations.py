@@ -606,7 +606,7 @@ def test_postgres_add_t2_withdrawal_does_not_use_support_owner_basis(engine) -> 
         FakeTransitionClock(),
     )
     results = _run_selection_race([(add, command), (withdraw, withdraw_command(suffix, target))])
-    outcomes = [getattr(result.value, "outcome", None) for result in results]
+    outcomes = [getattr(getattr(result, "value", None), "outcome", None) for result in results]
     assert (
         SourceAssertionWithdrawalOutcome.APPLIED in outcomes
         or SelectionMutationOutcome.SUPPORT_ASSERTION_WITHDRAWN in outcomes
@@ -643,7 +643,7 @@ def test_postgres_replace_t2_withdrawal_does_not_use_support_owner_basis(engine)
     results = _run_selection_race(
         [(replace, command), (withdraw, withdraw_command("replace-t2", assertion))]
     )
-    outcomes = [getattr(result.value, "outcome", None) for result in results]
+    outcomes = [getattr(getattr(result, "value", None), "outcome", None) for result in results]
     assert (
         SourceAssertionWithdrawalOutcome.APPLIED in outcomes
         or SelectionMutationOutcome.SUPPORT_ASSERTION_WITHDRAWN in outcomes
@@ -875,7 +875,7 @@ def test_postgres_withdrawn_support_rejects_before_recovery(engine) -> None:
     ).execute(withdraw_command("withdrawn-support", target))
     assert withdrawal.value.outcome is SourceAssertionWithdrawalOutcome.APPLIED
     place = PlaceRef("place-withdrawn-support")
-    slot = SelectionSlotKey(place, "address", _scope().type_id, _scope().equality_key or b"")
+    slot = SelectionSlotKey(place, "name", _scope().type_id, _scope().equality_key or b"")
     codec = FakeMutationBasisCodec()
     token = codec.issue(
         MutationBasisClaims(
