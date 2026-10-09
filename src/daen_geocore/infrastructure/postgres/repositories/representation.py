@@ -180,8 +180,9 @@ class PostgresRepresentationRepository:
                 .on_conflict_do_nothing(
                     index_elements=[representation_selection_record.c.selection_record_ref]
                 )
+                .returning(representation_selection_record.c.selection_record_ref)
             )
-            if self._connection.execute(statement).rowcount == 1:
+            if self._connection.execute(statement).first() is not None:
                 return PortSuccess(InsertDisposition.INSERTED)
             existing = self.get_selection_record(record.selection_record_ref)
             if isinstance(existing, PortError):
@@ -211,8 +212,9 @@ class PostgresRepresentationRepository:
                         representation_selection_support.c.source_assertion_ref,
                     ]
                 )
+                .returning(representation_selection_support.c.selection_record_ref)
             )
-            if self._connection.execute(statement).rowcount == 1:
+            if self._connection.execute(statement).first() is not None:
                 return PortSuccess(InsertDisposition.INSERTED)
             return PortSuccess(InsertDisposition.ALREADY_PRESENT_SAME)
         except SQLAlchemyError as error:
@@ -241,8 +243,9 @@ class PostgresRepresentationRepository:
                         representation_selection_slot_head.c.scope_equality_key,
                     ]
                 )
+                .returning(representation_selection_slot_head.c.place_ref)
             )
-            if self._connection.execute(statement).rowcount == 1:
+            if self._connection.execute(statement).first() is not None:
                 return PortSuccess(InsertDisposition.INSERTED)
             existing = self.get_selection_slot_head(head.slot)
             if isinstance(existing, PortError):

@@ -163,8 +163,9 @@ class PostgresAssertionsRepository:
                 .on_conflict_do_nothing(
                     index_elements=[assertions_source_assertion.c.source_assertion_ref]
                 )
+                .returning(assertions_source_assertion.c.source_assertion_ref)
             )
-            if self._connection.execute(statement).rowcount == 1:
+            if self._connection.execute(statement).first() is not None:
                 return PortSuccess(InsertDisposition.INSERTED)
             existing = self.get_assertion(record.source_assertion_ref)
             if isinstance(existing, PortError):
@@ -229,8 +230,9 @@ class PostgresAssertionsRepository:
                 pg_insert(assertions_history)
                 .values(values)
                 .on_conflict_do_nothing(index_elements=[assertions_history.c.history_fact_ref])
+                .returning(assertions_history.c.history_fact_ref)
             )
-            if self._connection.execute(statement).rowcount == 1:
+            if self._connection.execute(statement).first() is not None:
                 return PortSuccess(InsertDisposition.INSERTED)
             existing = (
                 self._connection.execute(
@@ -282,8 +284,9 @@ class PostgresAssertionsRepository:
                 .on_conflict_do_nothing(
                     index_elements=[assertions_standing_head.c.source_assertion_ref]
                 )
+                .returning(assertions_standing_head.c.source_assertion_ref)
             )
-            if self._connection.execute(statement).rowcount == 1:
+            if self._connection.execute(statement).first() is not None:
                 return PortSuccess(InsertDisposition.INSERTED)
             existing = self.get_standing_head(head.source_assertion_ref)
             if isinstance(existing, PortError):

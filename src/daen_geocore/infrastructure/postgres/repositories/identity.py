@@ -104,8 +104,9 @@ class PostgresIdentityRepository:
                 pg_insert(identity_place)
                 .values(place_ref=record.place_ref.token, recorded_at=record.recorded_at)
                 .on_conflict_do_nothing(index_elements=[identity_place.c.place_ref])
+                .returning(identity_place.c.place_ref)
             )
-            if self._connection.execute(statement).rowcount == 1:
+            if self._connection.execute(statement).first() is not None:
                 return PortSuccess(InsertDisposition.INSERTED)
             existing = self.get_place(record.place_ref)
             if isinstance(existing, PortError):
@@ -134,8 +135,9 @@ class PostgresIdentityRepository:
                 pg_insert(identity_place_history)
                 .values(values)
                 .on_conflict_do_nothing(index_elements=[identity_place_history.c.history_fact_ref])
+                .returning(identity_place_history.c.history_fact_ref)
             )
-            if self._connection.execute(statement).rowcount == 1:
+            if self._connection.execute(statement).first() is not None:
                 return PortSuccess(InsertDisposition.INSERTED)
             existing = (
                 self._connection.execute(
@@ -177,8 +179,9 @@ class PostgresIdentityRepository:
                 pg_insert(identity_place_head)
                 .values(values)
                 .on_conflict_do_nothing(index_elements=[identity_place_head.c.place_ref])
+                .returning(identity_place_head.c.place_ref)
             )
-            if self._connection.execute(statement).rowcount == 1:
+            if self._connection.execute(statement).first() is not None:
                 return PortSuccess(InsertDisposition.INSERTED)
             existing = self.get_place_head(head.place_ref)
             if isinstance(existing, PortError):
