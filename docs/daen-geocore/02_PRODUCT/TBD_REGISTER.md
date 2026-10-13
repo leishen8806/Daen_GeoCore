@@ -50,9 +50,11 @@ These items are intentionally unresolved. They must not be silently decided in a
 
 | Item | Deferred to | Reason |
 |---|---|---|
-| Execution medium | Later controlled execution decision | Phase 04 must not select technology or implementation medium |
-| Synthetic-mark recording mechanism | M1 execution preparation | Synthetic cases must be clearly marked; recording mechanism is not frozen |
-| Actual corpus Place selection | M1 corpus preparation | Humans select actual public Places later; this definition uses slots only |
+| Execution medium | Resolved in Phase 04B-1 | Markdown + CSV fixture medium; checker runtime remains TBD |
+| Synthetic-mark recording mechanism | Resolved in Phase 04B-1 | Every future state-ledger entry carries an explicit real/public or synthetic mark |
+| Actual corpus Place selection | Resolved in Phase 04C | Exact P01–P20 corpus is pre-registered; no GeoIDs or execution results are created |
+| Scenario D evaluation of frozen P04 field evidence | PENDING M1 EXECUTION | P04 field evidence already exists and is frozen; M1 must evaluate it against the Access Point model |
+| P13 correct coordinate | Later validation and governance | Public sources conflict; pre-registration does not select the correct coordinate |
 | GeoID format | Later domain and architecture work | M1 validates semantics, not identifier encoding |
 | Access Point handle | Later domain and API design | M1 validates modelability, not handle format |
 | Merge survivor policy | Later governance policy | M1 tests both survivor directions without selecting a policy |
@@ -60,6 +62,18 @@ These items are intentionally unresolved. They must not be silently decided in a
 | Quality scales | Later quality policy | `unknown` is valid for M1; numeric scales are not frozen |
 | Source trust ranking | Later governance policy | M1 tests attribution, not a ranking system |
 | Numeric tolerances | Later validation design | No numeric tolerance is justified by the frozen M1 definition |
+| Checker runtime | Resolved in Phase 04B-2 | Python 3 standard library only; checker remains disposable |
+
+## Phase 04D Scenario A review additions
+
+| Item | Status / deferred to | Reason |
+|---|---|---|
+| Representation selection scope wording | Resolved prospectively in Phase 04D | Same-Place, represented fact/purpose and explicitly equivalent scope are required for ordinary selection supersession |
+| Cross-scope migration policy | Later representation policy | General migration across language or other scopes is not defined |
+| Selection scope encoding | Later validation medium / architecture | Scope representation and algorithms remain deferred |
+| Selection attribution convention | M1 convention recorded; exact production model deferred | Operator/step attribution must remain distinct from assertion provenance; no new entity or column is introduced |
+| Scenario C/F supersession behavior | Scenario C controlled same-scope positive replacement accepted; Scenario F remains unexecuted | Cross-scope behavior, production algorithms and full correction workflow remain deferred |
+| Exact source-specific attribution for RUN-A-02 strings | Evidence limitation retained | Frozen memo support does not establish exact claim-to-URL attribution |
 
 ## Future Consumer Validation Phase
 
@@ -86,3 +100,30 @@ No phase number or design is assigned here.
 The controlled Product Constitution revision is recorded in `GEO_CORE_PRODUCT_CONSTITUTION.md` and confirmed in `DECISION_LOG.md`.
 
 Each unresolved item remains `TBD` until the relevant phase produces evidence and a reviewable decision.
+
+| Source Assertion subject reassociation / cross-subject supersession semantics | Phase 05 API Definition / later domain-policy clarification | RUN-H-01:F1 demonstrates one accepted fixture interpretation, but general cross-subject supersession semantics are not frozen. This is a narrow TBD, not a production requirement already decided. |
+
+| Withdrawal target scope / Place-GeoID versus historical-record withdrawal semantics | Phase 05 API Definition / later domain-policy clarification | RESOLVED FOR M1 DOMAIN SEMANTICS: T1 Place identity/record withdrawal and T2 historical reference/Source Assertion withdrawal are distinct. Lifecycle taxonomy, authority/removal workflow and API representation remain TBD. |
+
+
+## Phase 05 API Definition Carry-Forward Guardrails
+
+The following remain unresolved and MUST NOT be silently frozen as settled domain policy by API Definition:
+
+- cross-subject Source Assertion reassociation / supersession;
+- lifecycle taxonomy;
+- demolition/rebuild identity policy;
+- demolition → closure mapping;
+- withdrawal authority;
+- legal/privacy/security removal workflow;
+- Extent history representation;
+- containment currentness;
+- selection authority / conflict rationale;
+- merge survivor selection;
+- Quality scales;
+- source trust/ranking;
+- temporal/as-of semantics;
+- GeoID encoding;
+- resolver implementation.
+
+Withdrawal T1/T2 target scope is `RESOLVED FOR M1 DOMAIN SEMANTICS`; API representation remains unresolved.

@@ -1,0 +1,4 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-P04-AP-01,PRE-P04-PLACE,FIX-ID-P04,Place,locus=AEON Mall Phnom Penh; identity=FIX-ID-P04,P04-ANCHOR-PLACE,unknown,REAL,
+RUN-P04-AP-01,PRE-P04-REF,FIX-ID-P04-SA-REF-COORD,Source Assertion,"ref=FIX-ID-P04; fact=coordinate; purpose=general-place-reference; value=11.5479358,104.9325711",P04-FIELD-REFERENCE,unknown,REAL,
+RUN-P04-AP-01,POST-P04-AP,FIX-AP-P04-FIELD-01,Access Point,"ref=FIX-ID-P04; served_place=FIX-ID-P04; coordinate=11.548290,104.931271; access=vehicle-and-pedestrian; publicly_usable=true; differs_from_general_reference=true",P04-FIELD-AP01,unknown,REAL,

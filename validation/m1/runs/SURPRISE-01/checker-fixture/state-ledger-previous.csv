@@ -1,0 +1,5 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-SURPRISE-01,PRE-P05-PLACE,FIX-ID-P05,Place,locus=SYNTHETIC P05; identity=FIX-ID-P05,SYN-S01-P05-PLACE,unknown,SYNTHETIC,
+RUN-SURPRISE-01,PRE-P05-EXT-V1,FIX-EXT-S01-P05-V1,Extent,ref=FIX-ID-P05; geometry=VALIDATION_RECT_0_0_4_4,SYN-S01-P05-EXT-V1,unknown,SYNTHETIC,
+RUN-SURPRISE-01,PRE-P06-PLACE,FIX-ID-P06,Place,locus=SYNTHETIC P06; identity=FIX-ID-P06,SYN-S01-P06-PLACE,unknown,SYNTHETIC,
+RUN-SURPRISE-01,PRE-P06-EXT-V1,FIX-EXT-S01-P06-V1,Extent,ref=FIX-ID-P06; geometry=VALIDATION_RECT_6_0_10_4,SYN-S01-P06-EXT-V1,unknown,SYNTHETIC,

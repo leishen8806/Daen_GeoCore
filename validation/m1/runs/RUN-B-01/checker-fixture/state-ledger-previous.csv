@@ -1,0 +1,8 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-B-01,PRE-P02-PLACE,FIX-ID-P02,Place,"locus=Royal Palace Phnom Penh; identity=FIX-ID-P02",P02-E1,unknown,REAL,
+RUN-B-01,PRE-P02-SA1,FIX-ID-P02-SA1,Source Assertion,"ref=FIX-ID-P02; scope=display-name; language=en; value=Royal Palace of Cambodia",P02-E1,unknown,REAL,
+RUN-B-01,PRE-P03-PLACE,FIX-ID-P03,Place,"locus=Raffles Hotel Le Royal Phnom Penh; identity=FIX-ID-P03",P03-E1,unknown,REAL,
+RUN-B-01,PRE-P03-SA1,FIX-ID-P03-SA1,Source Assertion,"ref=FIX-ID-P03; scope=display-name; language=en; value=Raffles Hotel Le Royal Phnom Penh",P03-E1,unknown,REAL,
+RUN-B-01,PRE-P04-PLACE,FIX-ID-P04,Place,"locus=AEON Mall Phnom Penh; identity=FIX-ID-P04",P04-E1,unknown,REAL,
+RUN-B-01,PRE-P04-SA1,FIX-ID-P04-SA1,Source Assertion,"ref=FIX-ID-P04; scope=address; value=#132 Samdach Sothearos Blvd (3), Sangkat Tonle Bassac, Khan Chamkarmon, Phnom Penh, Cambodia",P04-FIELD-AP01,unknown,REAL,
+RUN-B-01,PRE-P04-SA2,FIX-ID-P04-SA2,Source Assertion,"ref=FIX-ID-P04; scope=coordinate; role=general-public-reference; value=11.5479358,104.9325711",P04-FIELD-AP01,unknown,REAL,

@@ -1,0 +1,4 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-H-01-M,PRE-P17-PLACE,FIX-ID-P17,Place,locus=SYNTHETIC P17 Locus A; identity=FIX-ID-P17,H-PLACE-P17,unknown,SYNTHETIC,
+RUN-H-01-M,PRE-P17-SA-L1,FIX-ID-P17-SA-L1,Source Assertion,ref=FIX-ID-P17; fact=address; purpose=place-address; value=SYNTHETIC ONLY — P17 Locus A,SYN-H-P17-L1,unknown,SYNTHETIC,
+RUN-H-01-M,PRE-P17-SA-L2-OLD,FIX-ID-P17-SA-L2-OLD,Source Assertion,ref=FIX-ID-P17; fact=address; purpose=place-address; value=SYNTHETIC ONLY — P17 Locus B,SYN-H-P17-L2-OLD,unknown,SYNTHETIC,

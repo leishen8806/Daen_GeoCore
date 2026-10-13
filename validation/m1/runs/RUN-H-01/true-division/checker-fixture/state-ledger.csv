@@ -1,0 +1,11 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-H-01-T,PRE-P18-PLACE,FIX-ID-P18,Place,locus=SYNTHETIC P18 Historical Unified Premises; identity=FIX-ID-P18,H-PLACE-P18,unknown,SYNTHETIC,
+RUN-H-01-T,PRE-P18-SA-HIST,FIX-ID-P18-SA-HIST,Source Assertion,ref=FIX-ID-P18; fact=address; purpose=place-address; value=SYNTHETIC ONLY — P18 Historical Unified Premises,SYN-H-P18-HIST,unknown,SYNTHETIC,
+RUN-H-01-T,POST-P18-A-PLACE,FIX-ID-H-P18-A,Place,locus=SYNTHETIC P18 Child A; identity=FIX-ID-H-P18-A,SYN-H-P18-A-PLACE,unknown,SYNTHETIC,
+RUN-H-01-T,POST-P18-A-SA,FIX-ID-H-P18-A-SA,Source Assertion,ref=FIX-ID-H-P18-A; fact=address; purpose=place-address; value=SYNTHETIC ONLY — P18 Child A,SYN-H-P18-A,unknown,SYNTHETIC,
+RUN-H-01-T,POST-P18-B-PLACE,FIX-ID-H-P18-B,Place,locus=SYNTHETIC P18 Child B; identity=FIX-ID-H-P18-B,SYN-H-P18-B-PLACE,unknown,SYNTHETIC,
+RUN-H-01-T,POST-P18-B-SA,FIX-ID-H-P18-B-SA,Source Assertion,ref=FIX-ID-H-P18-B; fact=address; purpose=place-address; value=SYNTHETIC ONLY — P18 Child B,SYN-H-P18-B,unknown,SYNTHETIC,
+RUN-H-01-T,POST-RES-P18-A,FIX-RES-H-DIV-P18-A,Resolution Link,ref=FIX-ID-P18; relationship=true-division; historical_identity=FIX-ID-P18; child_identity=FIX-ID-H-P18-A; resolution_from=FIX-ID-P18; resolution_to=FIX-ID-H-P18-A; historical_resolvable=true; child_inherits_parent_identity=false; split_group=RUN-H-01-P18-DIVISION; result_count=2,SYN-H-RES-P18-A,unknown,SYNTHETIC,
+RUN-H-01-T,POST-RES-P18-B,FIX-RES-H-DIV-P18-B,Resolution Link,ref=FIX-ID-P18; relationship=true-division; historical_identity=FIX-ID-P18; child_identity=FIX-ID-H-P18-B; resolution_from=FIX-ID-P18; resolution_to=FIX-ID-H-P18-B; historical_resolvable=true; child_inherits_parent_identity=false; split_group=RUN-H-01-P18-DIVISION; result_count=2,SYN-H-RES-P18-B,unknown,SYNTHETIC,
+RUN-H-01-T,POST-SUCC-P18-A,FIX-SUCC-H-DIV-P18-A,Succession,ref=FIX-RES-H-DIV-P18-A; predecessor=FIX-ID-P18; successor=FIX-ID-H-P18-A; relationship=true-division; history_preserved=true,SYN-H-SUCC-P18-A,unknown,SYNTHETIC,
+RUN-H-01-T,POST-SUCC-P18-B,FIX-SUCC-H-DIV-P18-B,Succession,ref=FIX-RES-H-DIV-P18-B; predecessor=FIX-ID-P18; successor=FIX-ID-H-P18-B; relationship=true-division; history_preserved=true,SYN-H-SUCC-P18-B,unknown,SYNTHETIC,

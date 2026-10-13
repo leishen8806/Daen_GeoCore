@@ -1,0 +1,11 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-A-02,PRE-P01-PLACE,FIX-ID-P01,Place,"locus=Central Post Office Phnom Penh; identity=FIX-ID-P01",P01-E1,unknown,REAL,
+RUN-A-02,PRE-P01-SA1,FIX-ID-P01-SA1,Source Assertion,"ref=FIX-ID-P01; scope=display-name; value=Central Post Office",P01-E1,unknown,REAL,
+RUN-A-02,PRE-P01-CR,FIX-ID-P01-CR,Current DAEN Representation,"ref=FIX-ID-P01-SA1; scope=display-name; current_representation=true; selection=initial",P01-E1,unknown,REAL,
+RUN-A-02,PRE-P02-PLACE,FIX-ID-P02,Place,"locus=Royal Palace Phnom Penh; identity=FIX-ID-P02",P02-E1,unknown,REAL,
+RUN-A-02,PRE-P02-SA1,FIX-ID-P02-SA1,Source Assertion,"ref=FIX-ID-P02; scope=display-name; language=en; value=Royal Palace of Cambodia",P02-E1,unknown,REAL,
+RUN-A-02,PRE-P02-CR,FIX-ID-P02-CR,Current DAEN Representation,"ref=FIX-ID-P02-SA1; scope=display-name; language=en; current_representation=true; selection=initial",P02-E1,unknown,REAL,
+RUN-A-02,POST-P01-SA2,FIX-ID-P01-SA2,Source Assertion,"ref=FIX-ID-P01; scope=display-name; language=en; value=Cambodia Post Central Post Office",P01-E2,unknown,REAL,
+RUN-A-02,POST-P01-CR,FIX-ID-P01-CR-POST,Current DAEN Representation,"ref=FIX-ID-P01-SA2; scope=display-name; language=en; current_representation=true; selection=controlled-test",P01-E2,unknown,SYNTHETIC,RUN-A-02:PRE-P01-CR
+RUN-A-02,POST-P02-SA2,FIX-ID-P02-SA2,Source Assertion,"ref=FIX-ID-P02; scope=display-name; language=km; value=ព្រះបរមរាជវាំង",P02-E2,unknown,REAL,
+RUN-A-02,POST-P02-CR,FIX-ID-P02-CR-POST,Current DAEN Representation,"ref=FIX-ID-P02-SA2; scope=display-name; language=km; current_representation=true; selection=coexisting-language-test",P02-E2,unknown,SYNTHETIC,RUN-A-02:PRE-P02-CR

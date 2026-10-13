@@ -1,0 +1,4 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-E-01,PRE-P07-PLACE,FIX-ID-P07,Place,"locus=Royal University of Phnom Penh Main Campus; identity=FIX-ID-P07",E-PLACE-P07,unknown,REAL,
+RUN-E-01,PRE-P08-PLACE,FIX-ID-P08,Place,"locus=Hun Sen Library, RUPP premises; identity=FIX-ID-P08",E-PLACE-P08,unknown,REAL,
+RUN-E-01,PRE-ACCESS-SA,SYN-E-ACCESS-SHARED,Source Assertion,"shared_access_statement=one shared pedestrian access threshold serves P07 and P08; source_text=approved RUN-E-01 synthetic fixture; coordinate=none; no_containment_inference=true; no_proximity_inference=true",SYN-E-ACCESS-SHARED,unknown,SYNTHETIC,

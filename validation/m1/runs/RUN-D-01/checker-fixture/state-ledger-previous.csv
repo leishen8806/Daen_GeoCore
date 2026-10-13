@@ -1,0 +1,12 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-D-01,PRE-P05-PLACE,FIX-ID-P05,Place,"locus=Synthetic Mall Unit A; identity=FIX-ID-P05",D-PLACE-P05,unknown,SYNTHETIC,
+RUN-D-01,PRE-P05-REF,FIX-ID-P05-REF,Source Assertion,"ref=FIX-ID-P05; fact=coordinate; purpose=place-reference; value=0.010000, 0.010000",SYN-D-REF-P05,unknown,SYNTHETIC,
+RUN-D-01,PRE-P05-SEL,FIX-ID-P05-SEL,Current DAEN Representation,"ref=FIX-ID-P05-REF; fact=coordinate; purpose=place-reference; selected_coordinate=0.010000, 0.010000; current_representation=true; selection=initial; selector=Codex/RUN-D-01/STEP-1-P05",SYN-D-REF-P05,unknown,SYNTHETIC,
+RUN-D-01,PRE-P06-PLACE,FIX-ID-P06,Place,"locus=Synthetic Mall Unit B; identity=FIX-ID-P06",D-PLACE-P06,unknown,SYNTHETIC,
+RUN-D-01,PRE-P06-REF,FIX-ID-P06-REF,Source Assertion,"ref=FIX-ID-P06; fact=coordinate; purpose=place-reference; value=0.010000, 0.012000",SYN-D-REF-P06,unknown,SYNTHETIC,
+RUN-D-01,PRE-P06-SEL,FIX-ID-P06-SEL,Current DAEN Representation,"ref=FIX-ID-P06-REF; fact=coordinate; purpose=place-reference; selected_coordinate=0.010000, 0.012000; current_representation=true; selection=initial; selector=Codex/RUN-D-01/STEP-1-P06",SYN-D-REF-P06,unknown,SYNTHETIC,
+RUN-D-01,PRE-P07-PLACE,FIX-ID-P07,Place,"locus=Royal University of Phnom Penh Main Campus; identity=FIX-ID-P07",D-PLACE-P07,unknown,REAL,
+RUN-D-01,PRE-P07-REF,FIX-ID-P07-REF,Source Assertion,"ref=FIX-ID-P07; fact=coordinate; purpose=place-reference; value=0.020000, 0.020000; synthetic_augmentation=true",SYN-D-REF-P07,unknown,SYNTHETIC,
+RUN-D-01,PRE-P07-SEL,FIX-ID-P07-SEL,Current DAEN Representation,"ref=FIX-ID-P07-REF; fact=coordinate; purpose=place-reference; selected_coordinate=0.020000, 0.020000; current_representation=true; selection=initial; selector=Codex/RUN-D-01/STEP-1-P07",SYN-D-REF-P07,unknown,SYNTHETIC,
+RUN-D-01,PRE-AP-SHARED-SA,FIX-AP-D-SHARED-SA,Source Assertion,"access_statement=SYN-D-ACCESS-SHARED; access_coordinate=0.009000, 0.011000; served_places=P05|P06; access_type=public pedestrian/vehicle threshold",SYN-D-ACCESS-SHARED,unknown,SYNTHETIC,
+RUN-D-01,PRE-AP-P07-SA,FIX-AP-D-P07-SA,Source Assertion,"access_statement=SYN-D-ACCESS-P07; access_coordinate=0.019000, 0.020500; served_place=P07; access_type=public pedestrian threshold",SYN-D-ACCESS-P07,unknown,SYNTHETIC,

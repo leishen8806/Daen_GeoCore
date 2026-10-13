@@ -1,0 +1,9 @@
+run_id,step_id,local_subject_label,frozen_concept_involved,free_text_statement,provenance_reference,quality_statement,synthetic_flag,supersedes_reference
+RUN-F-01,PRE-P04-PLACE,FIX-ID-P04,Place,"locus=AEON Mall Phnom Penh; identity=FIX-ID-P04",F-PLACE-P04,unknown,REAL,
+RUN-F-01,PRE-P04-SA-ADDR-OLD,FIX-ID-P04-SA-ADDR-OLD,Source Assertion,"ref=FIX-ID-P04; fact=address; purpose=place-address; value=SYNTHETIC ONLY — Test Address P04, Building 41",SYN-F-P04-ADDR-OLD,unknown,SYNTHETIC,
+RUN-F-01,PRE-P14-PLACE,FIX-ID-P14,Place,"locus=AEON Mall Cambodia Parking Tower building; identity=FIX-ID-P14",F-PLACE-P14,unknown,REAL,
+RUN-F-01,PRE-P14-SA-PROVIDER-OLD,FIX-ID-P14-SA-PROVIDER-OLD,Source Assertion,"ref=FIX-ID-P14; fact=provider-reference; purpose=external-location-reference; value=SYN-F-P14-PROVIDER-REF-WRONG",SYN-F-P14-PROVIDER-OLD,unknown,SYNTHETIC,
+RUN-F-01,PRE-P15-PLACE,FIX-ID-P15,Place,"locus=SYNTHETIC P15 Test Premises, Lot 15; identity=FIX-ID-P15",F-PLACE-P15,unknown,SYNTHETIC,
+RUN-F-01,PRE-P15-SA-ADDR,FIX-ID-P15-SA-ADDR,Source Assertion,"ref=FIX-ID-P15; fact=address; purpose=place-address; value=SYNTHETIC ONLY — P15 Test Premises, Lot 15",SYN-F-P15-ADDR,unknown,SYNTHETIC,
+RUN-F-01,PRE-P15-SA-COORD-OLD,FIX-ID-P15-SA-COORD-OLD,Source Assertion,"ref=FIX-ID-P15; fact=coordinate; purpose=place-reference; value=0.050000, 0.050000",SYN-F-P15-COORD-OLD,unknown,SYNTHETIC,
+RUN-F-01,PRE-P15-SA-PROVIDER,FIX-ID-P15-SA-PROVIDER,Source Assertion,"ref=FIX-ID-P15; fact=provider-reference; purpose=external-location-reference; value=SYN-F-P15-PROVIDER-REF-0015",SYN-F-P15-PROVIDER,unknown,SYNTHETIC,
